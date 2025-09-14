@@ -40,8 +40,11 @@
         "**/external/**": true
     },
     "cSpell.words": [
+        "clangd",
         "DCMAKE",
+        "dylib",
         "MSVC",
+        "Raylib",
         "rlib",
         "yvium"
     ]

@@ -1,0 +1,3 @@
+#!/bin/bash
+# Convenience script - just run `./run` from project root
+exec "$(dirname "$0")/scripts/run.sh" "$@"

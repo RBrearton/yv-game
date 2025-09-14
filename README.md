@@ -42,23 +42,33 @@ yvium_rlib/
 
 ## 🚀 Quick Start
 
-### 1. Clone and Build
+### 1. Clone and Run
 
 ```bash
 git clone <repository-url> yvium_rlib
 cd yvium_rlib
 
-# Build in release mode
-./scripts/build.sh
+# Build and run (like `cargo run`)
+./run
 
-# Or build in debug mode with tests
-./scripts/build.sh --debug --tests
+# Or use the full script with options
+./scripts/run.sh --release
 ```
 
-### 2. Run the Game
+### Development Workflow
 
 ```bash
-./build/bin/yvium-rlib
+# Quick development cycle (debug build + run)
+./run
+
+# Release build and run  
+./run --release
+
+# Clean build and run
+./run --clean
+
+# Just build (without running)
+./scripts/build.sh
 ```
 
 ## 🔧 Development
@@ -152,9 +162,11 @@ Testing framework removed for simplicity. Add your own tests if needed.
 
 ## 🎯 Getting Started
 
-1. Build the project: `./scripts/build.sh`
-2. Run the game: `./build/bin/yvium-rlib`
-3. Start coding your game in `src/main.cpp`!
+1. **Quick start**: `./run` (builds and runs in one command)
+2. **Start coding**: Edit `src/main.cpp` 
+3. **Iterate**: `./run` after each change
+
+Just like `cargo run` in Rust! 🦀
 
 ## 🤝 Contributing
 

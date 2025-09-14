@@ -45,7 +45,11 @@
         "dylib",
         "MSVC",
         "Raylib",
+        "RAYWHITE",
         "rlib",
         "yvium"
+    ],
+    "editor.rulers": [
+        100,
     ]
 }

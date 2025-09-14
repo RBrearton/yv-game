@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Code formatting script for Yvium project.
+# Code formatting script for yv project.
 
 set -e  # Exit on any error.
 

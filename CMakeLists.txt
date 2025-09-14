@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
 
 # Project configuration.
-project(yvium-rlib
+project(yv-rlib
     VERSION 0.1.0
-    DESCRIPTION "Yvium game built with C and raylib"
+    DESCRIPTION "yv game built with C and raylib"
     LANGUAGES C
 )
 

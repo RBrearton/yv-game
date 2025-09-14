@@ -89,7 +89,7 @@ print_info "Building..."
 make -j$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 4)
 
 # Run the executable.
-EXECUTABLE="$BUILD_DIR/bin/yvium-rlib"
+EXECUTABLE="$BUILD_DIR/bin/yv-rlib"
 if [ -f "$EXECUTABLE" ]; then
     print_info "Running $EXECUTABLE..."
     echo ""

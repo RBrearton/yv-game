@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Setup Git hooks for the Yvium project.
+# Setup Git hooks for the yv project.
 
 set -e  # Exit on any error.
 

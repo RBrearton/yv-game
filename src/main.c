@@ -5,7 +5,7 @@ int main(void) {
     const int screenWidth = 1280;
     const int screenHeight = 720;
     const int target_fps = 60;
-    InitWindow(screenWidth, screenHeight, "Yvium Game");
+    InitWindow(screenWidth, screenHeight, "yv Game");
 
     SetTargetFPS(target_fps);
 
@@ -16,7 +16,7 @@ int main(void) {
         // Draw everything.
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawText("Welcome to Yvium!", screenWidth / 2 - 120, screenHeight / 2 - 20, 20, DARKGRAY);
+        DrawText("Welcome to yv!", screenWidth / 2 - 120, screenHeight / 2 - 20, 20, DARKGRAY);
         DrawText("Press ESC to exit", screenWidth / 2 - 80, screenHeight / 2 + 20, 16, GRAY);
         EndDrawing();
     }

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Build script for Yvium game project.
+# Build script for yv game project.
 
 set -e  # Exit on any error.
 
@@ -83,7 +83,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 BUILD_DIR="$PROJECT_ROOT/build"
 
-print_info "Building Yvium game project..."
+print_info "Building yv game project..."
 print_info "Build type: $BUILD_TYPE"
 print_info "Tests: $BUILD_TESTS"
 print_info "Jobs: $JOBS"
@@ -116,4 +116,4 @@ if [ "$BUILD_TESTS" = "ON" ]; then
 fi
 
 print_info "Build completed successfully!"
-print_info "Executable location: $BUILD_DIR/bin/yvium-rlib"
+print_info "Executable location: $BUILD_DIR/bin/yv-rlib"

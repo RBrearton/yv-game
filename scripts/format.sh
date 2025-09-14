@@ -76,18 +76,18 @@ fi
 
 print_info "Using clang-format version: $(clang-format --version | cut -d' ' -f3)"
 
-# Find all C++ source and header files.
-CPP_FILES=$(find "$PROJECT_ROOT/src" "$PROJECT_ROOT/include" \
-    -name "*.cpp" -o -name "*.hpp" -o -name "*.c" -o -name "*.h" \
+# Find all C source and header files.
+C_FILES=$(find "$PROJECT_ROOT/src" "$PROJECT_ROOT/include" \
+    -name "*.c" -o -name "*.h" \
     2>/dev/null || true)
 
-if [ -z "$CPP_FILES" ]; then
-    print_warning "No C++ files found to format."
+if [ -z "$C_FILES" ]; then
+    print_warning "No C files found to format."
     exit 0
 fi
 
-FILE_COUNT=$(echo "$CPP_FILES" | wc -l | tr -d ' ')
-print_info "Found $FILE_COUNT C++ files to process."
+FILE_COUNT=$(echo "$C_FILES" | wc -l | tr -d ' ')
+print_info "Found $FILE_COUNT C files to process."
 
 if [ "$CHECK_ONLY" = true ]; then
     print_info "Checking code formatting..."
@@ -95,7 +95,7 @@ if [ "$CHECK_ONLY" = true ]; then
     # Check each file and collect results.
     ISSUES_FOUND=false
     
-    for file in $CPP_FILES; do
+    for file in $C_FILES; do
         if ! clang-format --dry-run --Werror "$file" &>/dev/null; then
             if [ "$ISSUES_FOUND" = false ]; then
                 print_warning "Formatting issues found in:"
@@ -117,7 +117,7 @@ else
     print_info "Formatting code..."
     
     # Format all files.
-    echo "$CPP_FILES" | xargs clang-format -i
+    echo "$C_FILES" | xargs clang-format -i
     
     print_info "Code formatting completed!"
     print_info "All $FILE_COUNT files have been formatted according to .clang-format rules."

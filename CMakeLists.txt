@@ -3,14 +3,14 @@ cmake_minimum_required(VERSION 3.20)
 # Project configuration.
 project(yvium-rlib
     VERSION 0.1.0
-    DESCRIPTION "Yvium game built with C++ and raylib"
-    LANGUAGES CXX
+    DESCRIPTION "Yvium game built with C and raylib"
+    LANGUAGES C
 )
 
-# Modern C++ standard.
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+# Modern C standard.
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
 
 # Build type configuration.
 if(NOT CMAKE_BUILD_TYPE)
@@ -19,14 +19,14 @@ endif()
 
 # Compiler-specific options.
 if(MSVC)
-    add_compile_options(/W4 /permissive-)
+    add_compile_options(/W4)
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         add_compile_options(/Od /MDd)
     else()
         add_compile_options(/O2 /MD)
     endif()
 else()
-    add_compile_options(-Wall -Wextra -Wpedantic)
+    add_compile_options(-Wall -Wextra -Wpedantic -std=c17)
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         add_compile_options(-g -O0)
     else()
@@ -104,7 +104,7 @@ endif()
 
 # Main executable.
 add_executable(${PROJECT_NAME} 
-    src/main.cpp
+    src/main.c
 )
 
 # Configure raylib linking based on detection method.

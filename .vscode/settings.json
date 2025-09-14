@@ -7,18 +7,11 @@
         "--completion-style=detailed"
     ],
     "files.associations": {
-        "*.hpp": "cpp",
-        "*.cpp": "cpp"
+        "*.h": "c",
+        "*.c": "c"
     },
     "editor.formatOnSave": true,
     "C_Cpp.formatting": "disabled",
-    "[cpp]": {
-        "editor.defaultFormatter": "xaver.clang-format",
-        "editor.tabSize": 4,
-        "editor.insertSpaces": true,
-        "editor.formatOnSave": true,
-        "editor.formatOnPaste": true
-    },
     "[c]": {
         "editor.defaultFormatter": "xaver.clang-format",
         "editor.tabSize": 4,
@@ -41,6 +34,7 @@
     },
     "cSpell.words": [
         "clangd",
+        "DARKGRAY",
         "DCMAKE",
         "dylib",
         "MSVC",

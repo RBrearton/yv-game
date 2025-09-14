@@ -1,6 +1,6 @@
 #include <raylib.h>
 
-int main() {
+int main(void) {
     // Initialize the window.
     const int screenWidth = 1280;
     const int screenHeight = 720;

@@ -1,10 +1,10 @@
 # Yvium Game
 
-A simple C++20 game built with raylib.
+A simple C17 game built with raylib.
 
 ## 🚀 Features
 
-- **Modern C++20**: Clean, efficient code
+- **Modern C17**: Clean, efficient code
 - **Cross-platform**: Works on Windows, macOS, and Linux  
 - **Modern Build System**: CMake with automatic raylib detection
 - **Code Quality**: Integrated linting and formatting
@@ -23,15 +23,15 @@ yvium_rlib/
 ├── cmake/                   # Custom CMake modules
 ├── scripts/                 # Build and utility scripts
 ├── src/                     # Source files
-│   └── main.cpp             # Application entry point
+│   └── main.c               # Application entry point
 └── tools/                   # Development tools
 ```
 
 ## 🛠️ Prerequisites
 
-- **C++20 compatible compiler**:
-  - GCC 10+ or Clang 12+ (Linux/macOS)
-  - Visual Studio 2019+ or MSVC 19.28+ (Windows)
+- **C17 compatible compiler**:
+  - GCC 7+ or Clang 6+ (Linux/macOS)
+  - Visual Studio 2017+ or MSVC 19.14+ (Windows)
 - **CMake 3.20+**
 - **Git** (for dependency fetching)
 
@@ -124,16 +124,16 @@ The project includes `.clangd` configuration for language server support in mode
 
 The project uses a straightforward approach:
 
-- **main.cpp**: Contains the complete game loop
+- **main.c**: Contains the complete game loop
 - **raylib**: Handles graphics, input, and audio
-- **Your code**: Add your game logic directly to main.cpp or create additional files as needed
+- **Your code**: Add your game logic directly to main.c or create additional files as needed
 
 ### Example Usage
 
-```cpp
+```c
 #include <raylib.h>
 
-int main() {
+int main(void) {
     InitWindow(1280, 720, "My Game");
     SetTargetFPS(60);
     
@@ -154,7 +154,7 @@ int main() {
 ## 📚 Documentation
 
 - **raylib Documentation**: [Official raylib docs](https://www.raylib.com/)
-- **C++20 Reference**: For modern C++ features
+- **C17 Reference**: For modern C features
 
 ## 🧪 Testing
 
@@ -163,7 +163,7 @@ Testing framework removed for simplicity. Add your own tests if needed.
 ## 🎯 Getting Started
 
 1. **Quick start**: `./run` (builds and runs in one command)
-2. **Start coding**: Edit `src/main.cpp` 
+2. **Start coding**: Edit `src/main.c` 
 3. **Iterate**: `./run` after each change
 
 Just like `cargo run` in Rust! 🦀

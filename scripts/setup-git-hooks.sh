@@ -52,11 +52,11 @@ fi
 # Get the project root.
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
-# Find staged C++ files.
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(cpp|hpp|c|h)$' || true)
+# Find staged C files.
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(c|h)$' || true)
 
 if [ -z "$STAGED_FILES" ]; then
-    # No C++ files staged, allow commit.
+    # No C files staged, allow commit.
     exit 0
 fi
 

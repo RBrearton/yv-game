@@ -1,0 +1,123 @@
+# Build artifacts and executables.
+*.exe
+*.out
+*.app
+*.so
+*.dll
+*.dylib
+*.a
+*.lib
+*.o
+*.obj
+
+# Debug files.
+*.dSYM/
+*.pdb
+*.ilk
+
+# Raylib specific build directories.
+build/
+bin/
+lib/
+obj/
+Debug/
+Release/
+x64/
+x86/
+
+# CMake generated files.
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# Make build files.
+*.d
+
+# IDE and editor files.
+.vs/
+*.vcxproj.user
+*.vcxproj.filters
+*.sln.docstates
+*.suo
+*.user
+*.userosscache
+*.sln.DotSettings.user
+
+# Code::Blocks files.
+*.cbp
+*.layout
+*.depend
+
+# Dev-C++ files.
+*.dev
+
+# Xcode files.
+*.xcodeproj/
+*.xcworkspace/
+DerivedData/
+*.hmap
+*.ipa
+
+
+# Temporary files.
+*~
+*.swp
+*.swo
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# OS specific files.
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Log files.
+*.log
+
+# Package files.
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Resource compilation files.
+*.res
+
+# Profiling files.
+*.prof
+*.gprof
+
+# Core dumps.
+core
+core.*
+
+# Local configuration files.
+config.local
+.env
+.env.local
+
+# Documentation build output.
+docs/_build/
+site/
+
+# Asset cache (if using asset pipeline).
+.asset_cache/
+
+# Backup files created by editors.
+*~
+\#*\#
+.\#*

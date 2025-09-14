@@ -1,50 +1,29 @@
-# Yvium Game Engine
+# Yvium Game
 
-A modern C++20 game engine built with raylib, featuring a clean Entity Component System (ECS) architecture.
+A simple C++20 game built with raylib.
 
 ## 🚀 Features
 
-- **Modern C++20**: Leveraging the latest C++ features for clean, efficient code
-- **Entity Component System**: Flexible and performant ECS architecture
-- **Cross-platform**: Works on Windows, macOS, and Linux
-- **Modern Build System**: CMake with FetchContent for dependency management
-- **Code Quality**: Integrated linting, formatting, and testing
-- **Documentation**: Comprehensive docs with Doxygen-style comments
+- **Modern C++20**: Clean, efficient code
+- **Cross-platform**: Works on Windows, macOS, and Linux  
+- **Modern Build System**: CMake with automatic raylib detection
+- **Code Quality**: Integrated linting and formatting
 
 ## 📁 Project Structure
 
 ```
 yvium_rlib/
-├── assets/                    # Game assets
-│   ├── textures/             # Image files and sprites
-│   ├── sounds/               # Audio files
-│   ├── fonts/                # Font files
-│   ├── shaders/              # Shader programs
-│   └── data/                 # Game data files
-├── build/                    # Build output (auto-generated)
-├── cmake/                    # Custom CMake modules
-├── docs/                     # Documentation
-├── external/                 # Third-party dependencies
-├── include/yvium/           # Public headers
-│   ├── core/                # Core engine systems
-│   ├── entities/            # Entity and component definitions
-│   ├── systems/             # System implementations
-│   ├── components/          # Component types
-│   ├── scenes/              # Scene management
-│   └── utils/               # Utility functions
+├── assets/                   # Game assets
+│   ├── textures/            # Image files and sprites
+│   ├── sounds/              # Audio files
+│   ├── fonts/               # Font files
+│   ├── shaders/             # Shader programs
+│   └── data/                # Game data files
+├── build/                   # Build output (auto-generated)
+├── cmake/                   # Custom CMake modules
 ├── scripts/                 # Build and utility scripts
 ├── src/                     # Source files
-│   ├── game/               # Game logic implementation
-│   │   ├── core/           # Core systems
-│   │   ├── entities/       # Entity implementations
-│   │   ├── systems/        # System implementations
-│   │   ├── components/     # Component implementations
-│   │   ├── scenes/         # Scene implementations
-│   │   └── utils/          # Utility implementations
-│   └── main.cpp            # Application entry point
-├── tests/                   # Test suite
-│   ├── unit/               # Unit tests
-│   └── integration/        # Integration tests
+│   └── main.cpp             # Application entry point
 └── tools/                   # Development tools
 ```
 
@@ -131,70 +110,51 @@ brew install clang-format
 
 The project includes `.clangd` configuration for language server support in modern editors like VS Code, Neovim, and Emacs.
 
-## 🏗️ Architecture
+## 🎮 Simple Architecture
 
-### Entity Component System (ECS)
+The project uses a straightforward approach:
 
-The engine uses a flexible ECS architecture:
-
-- **Entities**: Unique identifiers for game objects
-- **Components**: Data containers (Transform, Velocity, Sprite, etc.)
-- **Systems**: Logic processors that operate on entities with specific components
+- **main.cpp**: Contains the complete game loop
+- **raylib**: Handles graphics, input, and audio
+- **Your code**: Add your game logic directly to main.cpp or create additional files as needed
 
 ### Example Usage
 
 ```cpp
-#include "yvium/entities/entity.hpp"
-#include "yvium/components/transform.hpp"
+#include <raylib.h>
 
-// Create an entity
-yvium::entities::Entity player(1);
-
-// Add components
-auto& transform = player.addComponent<yvium::components::Transform>(
-    Vector2{100.0f, 100.0f}  // position
-);
-
-auto& velocity = player.addComponent<yvium::components::Velocity>(
-    Vector2{50.0f, 0.0f}     // velocity
-);
-
-// Check for components
-if (player.hasComponent<yvium::components::Transform>()) {
-    auto* t = player.getComponent<yvium::components::Transform>();
-    t->position.x += 10.0f;
+int main() {
+    InitWindow(1280, 720, "My Game");
+    SetTargetFPS(60);
+    
+    while (!WindowShouldClose()) {
+        // Your game logic here
+        
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawText("Hello World!", 190, 200, 20, LIGHTGRAY);
+        EndDrawing();
+    }
+    
+    CloseWindow();
+    return 0;
 }
 ```
 
 ## 📚 Documentation
 
-- **Code Documentation**: All public APIs are documented with Doxygen-style comments
-- **Architecture Guide**: See `/docs/architecture.md` (TODO)
-- **API Reference**: Generated with Doxygen (TODO)
+- **raylib Documentation**: [Official raylib docs](https://www.raylib.com/)
+- **C++20 Reference**: For modern C++ features
 
 ## 🧪 Testing
 
-The project uses Catch2 for unit and integration testing:
+Testing framework removed for simplicity. Add your own tests if needed.
 
-```bash
-# Run all tests
-./scripts/build.sh --tests
+## 🎯 Getting Started
 
-# Run specific test categories
-./build/bin/yvium-rlib-tests [entity]
-./build/bin/yvium-rlib-tests [component]
-```
-
-## 🎯 Roadmap
-
-- [ ] Complete ECS implementation
-- [ ] Scene management system
-- [ ] Asset loading and management
-- [ ] Audio system integration
-- [ ] Input handling system
-- [ ] Physics integration
-- [ ] Rendering pipeline improvements
-- [ ] Scripting support (Lua)
+1. Build the project: `./scripts/build.sh`
+2. Run the game: `./build/bin/yvium-rlib`
+3. Start coding your game in `src/main.cpp`!
 
 ## 🤝 Contributing
 

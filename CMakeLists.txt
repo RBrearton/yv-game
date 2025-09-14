@@ -102,26 +102,15 @@ if(NOT RAYLIB_FOUND)
     set(RAYLIB_FOUND TRUE)
 endif()
 
-# Include directories.
-include_directories(include)
-
-# Collect source files.
-file(GLOB_RECURSE SOURCES "src/game/*.cpp")
-file(GLOB_RECURSE HEADERS "include/yvium/*.h" "include/yvium/*.hpp")
-
 # Main executable.
 add_executable(${PROJECT_NAME} 
     src/main.cpp
-    ${SOURCES}
 )
 
 # Configure raylib linking based on detection method.
 if(RAYLIB_INCLUDE_DIRS AND RAYLIB_LIBRARIES)
     # Using pkg-config or manual detection.
-    target_include_directories(${PROJECT_NAME} PRIVATE 
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
-        ${RAYLIB_INCLUDE_DIRS}
-    )
+    target_include_directories(${PROJECT_NAME} PRIVATE ${RAYLIB_INCLUDE_DIRS})
     
     # Add library directories if specified.
     if(RAYLIB_LIBRARY_DIRS)
@@ -139,9 +128,6 @@ if(RAYLIB_INCLUDE_DIRS AND RAYLIB_LIBRARIES)
     endif()
 else()
     # Using CMake target or FetchContent.
-    target_include_directories(${PROJECT_NAME} PRIVATE 
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
-    )
     target_link_libraries(${PROJECT_NAME} raylib)
 endif()
 
@@ -152,57 +138,9 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/assets
 )
 
-# Testing configuration.
-option(BUILD_TESTS "Build tests" OFF)
-if(BUILD_TESTS)
-    enable_testing()
-    
-    # Find or fetch Catch2.
-    find_package(Catch2 QUIET)
-    if(NOT Catch2_FOUND)
-        FetchContent_Declare(
-            Catch2
-            GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-            GIT_TAG v3.4.0
-        )
-        FetchContent_MakeAvailable(Catch2)
-    endif()
-    
-    # Test executable.
-    file(GLOB_RECURSE TEST_SOURCES "tests/*.cpp")
-    add_executable(${PROJECT_NAME}-tests ${TEST_SOURCES} ${SOURCES})
-    
-    # Configure test linking the same way as main executable.
-    if(RAYLIB_INCLUDE_DIRS AND RAYLIB_LIBRARIES)
-        target_include_directories(${PROJECT_NAME}-tests PRIVATE 
-            ${CMAKE_CURRENT_SOURCE_DIR}/include
-            ${RAYLIB_INCLUDE_DIRS}
-        )
-        
-        # Add library directories if specified.
-        if(RAYLIB_LIBRARY_DIRS)
-            target_link_directories(${PROJECT_NAME}-tests PRIVATE ${RAYLIB_LIBRARY_DIRS})
-        endif()
-        
-        target_link_libraries(${PROJECT_NAME}-tests Catch2::Catch2WithMain ${RAYLIB_LIBRARIES})
-        
-        if(RAYLIB_CFLAGS_OTHER)
-            target_compile_options(${PROJECT_NAME}-tests PRIVATE ${RAYLIB_CFLAGS_OTHER})
-        endif()
-        if(RAYLIB_LDFLAGS_OTHER)
-            target_link_options(${PROJECT_NAME}-tests PRIVATE ${RAYLIB_LDFLAGS_OTHER})
-        endif()
-    else()
-        target_include_directories(${PROJECT_NAME}-tests PRIVATE 
-            ${CMAKE_CURRENT_SOURCE_DIR}/include
-        )
-        target_link_libraries(${PROJECT_NAME}-tests Catch2::Catch2WithMain raylib)
-    endif()
-    
-    include(CTest)
-    include(Catch)
-    catch_discover_tests(${PROJECT_NAME}-tests)
-endif()
+# Optional: Testing configuration (disabled by default).
+# Uncomment and add tests in tests/ directory if needed.
+# option(BUILD_TESTS "Build tests" OFF)
 
 # Installation configuration.
 install(TARGETS ${PROJECT_NAME}

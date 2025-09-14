@@ -1,17 +1,39 @@
-#include <iostream>
-
-#include "yvium/core/game.hpp"
+#include <raylib.h>
 
 int main() {
-    auto& game = yvium::core::Game::getInstance();
-
-    if (!game.initialize()) {
-        std::cerr << "Failed to initialize game!" << std::endl;
-        return -1;
+    // Initialize the window.
+    const int screenWidth = 1280;
+    const int screenHeight = 720;
+    InitWindow(screenWidth, screenHeight, "Yvium Game");
+    
+    SetTargetFPS(60);
+    
+    // Main game loop.
+    while (!WindowShouldClose()) {
+        // Update game logic here.
+        
+        // Draw everything.
+        BeginDrawing();
+        
+        ClearBackground(RAYWHITE);
+        
+        DrawText("Welcome to Yvium!", 
+                 screenWidth / 2 - 120, 
+                 screenHeight / 2 - 20, 
+                 20, 
+                 DARKGRAY);
+        
+        DrawText("Press ESC to exit", 
+                 screenWidth / 2 - 80, 
+                 screenHeight / 2 + 20, 
+                 16, 
+                 GRAY);
+        
+        EndDrawing();
     }
-
-    game.run();
-    game.shutdown();
-
+    
+    // Cleanup.
+    CloseWindow();
+    
     return 0;
 }

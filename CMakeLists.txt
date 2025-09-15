@@ -102,10 +102,11 @@ if(NOT RAYLIB_FOUND)
     set(RAYLIB_FOUND TRUE)
 endif()
 
+# Collect all source files automatically.
+file(GLOB_RECURSE SOURCES "src/*.c")
+
 # Main executable.
-add_executable(${PROJECT_NAME} 
-    src/main.c
-)
+add_executable(${PROJECT_NAME} ${SOURCES})
 
 # Configure raylib linking based on detection method.
 if(RAYLIB_INCLUDE_DIRS AND RAYLIB_LIBRARIES)

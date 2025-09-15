@@ -108,6 +108,9 @@ file(GLOB_RECURSE SOURCES "src/*.c")
 # Main executable.
 add_executable(${PROJECT_NAME} ${SOURCES})
 
+# Explicitly set source files as C language.
+set_source_files_properties(${SOURCES} PROPERTIES LANGUAGE C)
+
 # Configure raylib linking based on detection method.
 if(RAYLIB_INCLUDE_DIRS AND RAYLIB_LIBRARIES)
     # Using pkg-config or manual detection.

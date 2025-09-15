@@ -7,6 +7,7 @@
 //
 // A representation of a full Scene in the game.
 typedef struct {
+    // Every scene has a camera.
     Camera3D camera;
 } yv_Scene;
 

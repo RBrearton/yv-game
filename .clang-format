@@ -73,3 +73,4 @@ KeepEmptyLinesAtTheStartOfBlocks: false
 MaxEmptyLinesToKeep: 1
 NamespaceIndentation: None
 ReflowComments: true
+InsertNewlineAtEOF: true

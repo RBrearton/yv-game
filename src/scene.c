@@ -21,7 +21,7 @@ Camera3D yv_default_camera(void) {
                       .projection = yv_DEFAULT_CAMERA_PROJECTION};
 }
 
-yv_Scene yv_create_main_scene(void) {
+yv_Scene yv_CreateMainScene(void) {
     yv_Scene scene;
     scene.camera = yv_default_camera();
     return scene;

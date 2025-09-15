@@ -1,5 +1,6 @@
 #include <raylib.h>
 
+#include "camera_utils.h"
 #include "scene.h"
 
 int main(void) {
@@ -11,22 +12,25 @@ int main(void) {
     SetTargetFPS(target_fps);
 
     // Initialize the main scene.
-    yv_Scene main_scene = yv_create_main_scene();
+    yv_Scene mainScene = yv_CreateMainScene();
     Vector3 cubePosition = {0.0f, 0.0f, 0.0f};
+    Vector3 capsuleStartPos = {0.0f, 5.0f, 10.0f};
+    Vector3 capsuleEndPos = {0.0f, 5.0f, -10.0f};
 
     // Main game loop.
     while (!WindowShouldClose()) {
         // Update game logic here.
-        UpdateCamera(&main_scene.camera, CAMERA_FREE);
+        yv_UpdateFreeCamera(&mainScene.camera);
 
         // Start drawing this frame.
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
         // Draw all 3d objects.
-        BeginMode3D(main_scene.camera);
+        BeginMode3D(mainScene.camera);
         DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
         DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
+        DrawCapsule(capsuleStartPos, capsuleEndPos, 1.0f, 10, 10, RED);
         DrawGrid(10, 1.0f);
         EndMode3D();
 

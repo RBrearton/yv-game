@@ -15,4 +15,4 @@ typedef struct {
 // ---------
 //
 // Creates the main scene for the game.
-yv_Scene yv_create_main_scene(void);
+yv_Scene yv_CreateMainScene(void);

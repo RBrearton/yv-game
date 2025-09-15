@@ -3,7 +3,7 @@
 #include "raylib.h"
 
 // Default camera values.
-const Vector3 yv_DEFAULT_CAMERA_POSITION = {0, 0, 0};
+const Vector3 yv_DEFAULT_CAMERA_POSITION = {10, 10, 10};
 const Vector3 yv_DEFAULT_CAMERA_TARGET = {0, 0, 0};
 const Vector3 yv_DEFAULT_CAMERA_UP = {0, 1, 0};
 const float yv_DEFAULT_CAMERA_FOVY = 45.0F;

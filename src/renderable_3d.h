@@ -16,7 +16,5 @@ typedef enum {
 // A representation of a 3D renderable object.
 typedef struct {
     yv_ModelType modelType;
-    Vector3 position;
-    Vector3 rotation;
-    Vector3 scale;
+    Transform transform;
 } yv_Renderable3D;

@@ -41,6 +41,8 @@
         "MSVC",
         "Raylib",
         "RAYWHITE",
+        "Renderable",
+        "renderables",
         "rlib",
         "yv"
     ],

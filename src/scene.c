@@ -13,7 +13,7 @@ const int yv_DEFAULT_CAMERA_PROJECTION = CAMERA_PERSPECTIVE;
 // --------------
 //
 // Creates the default camera for the main scene.
-Camera3D yv_default_camera(void) {
+Camera3D yv_DefaultCamera(void) {
     return (Camera3D){.position = yv_DEFAULT_CAMERA_POSITION,
                       .target = yv_DEFAULT_CAMERA_TARGET,
                       .up = yv_DEFAULT_CAMERA_UP,
@@ -23,6 +23,21 @@ Camera3D yv_default_camera(void) {
 
 yv_Scene yv_CreateMainScene(void) {
     yv_Scene scene;
-    scene.camera = yv_default_camera();
+    scene.camera = yv_DefaultCamera();
     return scene;
+}
+
+void yv_AddActor(yv_Scene* scene, yv_Renderable3D renderable) {
+    // The next actor id is equal to the max actor id + 1.
+    size_t nextActorId = scene->maxActorId + 1;
+
+    // Wrap the renderable in an actor.
+    yv_Actor actor;
+    actor.renderable = renderable;
+    actor.id = nextActorId;
+
+    // Add the actor to the scene.
+    scene->actors[scene->numActors] = actor;
+    scene->numActors++;
+    scene->maxActorId = nextActorId;
 }

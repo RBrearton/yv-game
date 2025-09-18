@@ -4,18 +4,12 @@
 
 #include "renderable_3d.h"
 
-// Actor
-// ------
-//
 // A representation of an actor in the game.
 typedef struct {
     yv_Renderable3D renderable;
     size_t id;
 } yv_Actor;
 
-// Scene
-// -----
-//
 // A representation of a full Scene in the game.
 typedef struct {
     // Every scene has a camera.
@@ -34,14 +28,11 @@ typedef struct {
     size_t capacity;
 } yv_Scene;
 
-// Main scene
-// ---------
-//
 // Creates the main scene for the game.
 yv_Scene yv_CreateMainScene(void);
 
-// Add renderable
-// --------------
-//
 // Adds a renderable to the scene.
 void yv_AddActor(yv_Scene* scene, yv_Renderable3D renderable);
+
+// Renders the scene.
+void yv_RenderScene(yv_Scene* scene);

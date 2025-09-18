@@ -1,5 +1,8 @@
 #include "scene.h"
 
+#include <stddef.h>
+#include <stdlib.h>
+
 #include "raylib.h"
 
 // Default camera values.
@@ -8,6 +11,7 @@ const Vector3 yv_DEFAULT_CAMERA_TARGET = {0, 0, 0};
 const Vector3 yv_DEFAULT_CAMERA_UP = {0, 1, 0};
 const float yv_DEFAULT_CAMERA_FOVY = 45.0F;
 const int yv_DEFAULT_CAMERA_PROJECTION = CAMERA_PERSPECTIVE;
+const int yv_DEFAULT_SCENE_CAPACITY = 2048;
 
 // Default camera
 // --------------
@@ -24,6 +28,10 @@ Camera3D yv_DefaultCamera(void) {
 yv_Scene yv_CreateMainScene(void) {
     yv_Scene scene;
     scene.camera = yv_DefaultCamera();
+    scene.actors = malloc(sizeof(yv_Actor) * yv_DEFAULT_SCENE_CAPACITY);
+    scene.maxActorId = 0;
+    scene.numActors = 0;
+    scene.capacity = yv_DEFAULT_SCENE_CAPACITY;
     return scene;
 }
 
@@ -40,4 +48,10 @@ void yv_AddActor(yv_Scene* scene, yv_Renderable3D renderable) {
     scene->actors[scene->numActors] = actor;
     scene->numActors++;
     scene->maxActorId = nextActorId;
+}
+
+void yv_RenderScene(yv_Scene* scene) {
+    for (size_t i = 0; i < scene->numActors; i++) {
+        yv_Render(scene->actors[i].renderable);
+    }
 }

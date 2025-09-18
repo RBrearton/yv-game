@@ -13,9 +13,21 @@ int main(void) {
 
     // Initialize the main scene.
     yv_Scene mainScene = yv_CreateMainScene();
-    Vector3 cubePosition = {0.0f, 0.0f, 0.0f};
-    Vector3 capsuleStartPos = {0.0f, 5.0f, 10.0f};
-    Vector3 capsuleEndPos = {0.0f, 5.0f, -10.0f};
+    yv_Renderable3D cube = yv_CreateCube((yv_CubeData){.position = {0.0f, 0.0f, 0.0f},
+                                                       .width = 2.0f,
+                                                       .height = 2.0f,
+                                                       .depth = 2.0f,
+                                                       .color = RED});
+    yv_Renderable3D capsule = yv_CreateCapsule((yv_CapsuleData){
+        .startPos = {0.0f, 5.0F, 0.0F},
+        .endPos = {0.0f, 5.0F, 10.0F},
+        .radius = 1.0f,
+        .slices = 10,
+        .rings = 10,
+        .color = RED,
+    });
+    yv_AddActor(&mainScene, cube);
+    yv_AddActor(&mainScene, capsule);
 
     // Main game loop.
     while (!WindowShouldClose()) {
@@ -28,9 +40,7 @@ int main(void) {
 
         // Draw all 3d objects.
         BeginMode3D(mainScene.camera);
-        DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
-        DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
-        DrawCapsule(capsuleStartPos, capsuleEndPos, 1.0f, 10, 10, RED);
+        yv_RenderScene(&mainScene);
         DrawGrid(10, 1.0f);
         EndMode3D();
 

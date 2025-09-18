@@ -3,35 +3,51 @@
 #include <raylib.h>
 #include <stddef.h>
 
-// Model type
-// ----------
-//
-// A representation of a 3D model.
+// The different kinds of models that can be rendered.
 typedef enum {
     CAPSULE,
     CUBE,
 } yv_ModelType;
 
-// Renderable3D
-// ------------
-//
+// The data required to render a cube.
+typedef struct {
+    float width;
+    float height;
+    float depth;
+    Vector3 position;
+    Color color;
+} yv_CubeData;
+
+// The data required to render a capsule.
+typedef struct {
+    Vector3 startPos;
+    Vector3 endPos;
+    float radius;
+    int slices;
+    int rings;
+    Color color;
+} yv_CapsuleData;
+
+// The union of all data that could be required to render a model.
+typedef union {
+    yv_CubeData cubeData;
+    yv_CapsuleData capsuleData;
+} yv_Renderable3DData;
+
 // A representation of a 3D renderable object.
 typedef struct {
     // The type of model that we use to render the object.
     yv_ModelType modelType;
 
-    // The transform of the object.
-    Transform transform;
+    // The data required to render this model type.
+    yv_Renderable3DData data;
 } yv_Renderable3D;
 
-// Create cube
-// ------------
-//
 // Creates a cube renderable.
-yv_Renderable3D yv_CreateCube(Transform transform);
+yv_Renderable3D yv_CreateCube(yv_CubeData cubeData);
 
-// Create capsule
-// --------------
-//
 // Creates a capsule renderable.
-yv_Renderable3D yv_CreateCapsule(Transform transform);
+yv_Renderable3D yv_CreateCapsule(yv_CapsuleData capsuleData);
+
+// Renders a renderable.
+void yv_Render(yv_Renderable3D renderable);

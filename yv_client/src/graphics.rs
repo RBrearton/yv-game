@@ -8,14 +8,12 @@
 
 use bevy::prelude::*;
 use hashbrown::HashMap;
-use yv_core::{
-    terrain::{Biome, ChunkType, TerrainChunkSpawned},
-    well_known_terms::TERRAIN_CHUNK_SIZE,
-};
+use yv_core::terrain::{Biome, ChunkType, TerrainChunkSpawned};
 
 use crate::well_known_terms::{
     TERRAIN_MATERIAL_COLOR_MEADOW_GRASS, TERRAIN_MATERIAL_COLOR_MEADOW_WATER,
-    TERRAIN_MATERIAL_COLOR_SNOW_GRASS, TERRAIN_MATERIAL_COLOR_SNOW_WATER, TERRAIN_THICKNESS,
+    TERRAIN_MATERIAL_COLOR_SNOW_GRASS, TERRAIN_MATERIAL_COLOR_SNOW_WATER, TERRAIN_MESH_THICKNESS,
+    TERRAIN_MESH_WIDTH,
 };
 
 /// Resource that caches mesh and material handles to avoid creating duplicate assets.
@@ -76,14 +74,14 @@ fn get_or_create_terrain_mesh(
     // Create mesh based on chunk type.
     let mesh = match chunk_type {
         ChunkType::Grass => meshes.add(Cuboid::new(
-            TERRAIN_CHUNK_SIZE,
-            TERRAIN_CHUNK_SIZE,
-            TERRAIN_THICKNESS,
+            TERRAIN_MESH_WIDTH,
+            TERRAIN_MESH_WIDTH,
+            TERRAIN_MESH_THICKNESS,
         )),
         ChunkType::Water => meshes.add(Cuboid::new(
-            TERRAIN_CHUNK_SIZE,
-            TERRAIN_CHUNK_SIZE,
-            TERRAIN_THICKNESS,
+            TERRAIN_MESH_WIDTH,
+            TERRAIN_MESH_WIDTH,
+            TERRAIN_MESH_THICKNESS,
         )),
     };
 

@@ -10,6 +10,7 @@ impl Plugin for TerrainPlugin {
         app.init_resource::<TerrainChunks>();
         app.add_event::<AddTerrainChunk>();
         app.add_event::<RemoveTerrainChunk>();
+        app.add_event::<TerrainChunkSpawned>();
         app.add_systems(
             Update,
             add_terrain_chunks.run_if(on_event::<AddTerrainChunk>),

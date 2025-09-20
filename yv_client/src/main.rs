@@ -8,8 +8,10 @@ use scenes::ScenesPlugin;
 use ui::UIPlugin;
 
 mod camera;
+mod graphics;
 mod scenes;
 mod ui;
+mod well_known_terms;
 
 fn main() {
     App::new()

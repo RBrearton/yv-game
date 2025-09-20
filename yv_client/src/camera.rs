@@ -135,6 +135,7 @@ fn update_camera_system(
 fn free_camera_update(
     mut free_camera_state: ResMut<FreeCameraState>,
     keyboard_input: Res<ButtonInput<KeyCode>>,
+    mouse_input: Res<ButtonInput<MouseButton>>,
     mut evr_mouse_motion: EventReader<MouseMotion>,
     input_map: Res<InputMap>,
     time: Res<Time>,
@@ -150,14 +151,16 @@ fn free_camera_update(
     // Handle pitch and yaw.
     let sensitivity = free_camera_state.sensitivity;
     let dt = time.delta_secs();
-    for event in evr_mouse_motion.read() {
-        free_camera_state.pitch -= event.delta.y * sensitivity * dt;
-        free_camera_state.yaw -= event.delta.x * sensitivity * dt;
+    if mouse_input.pressed(MouseButton::Right) {
+        for event in evr_mouse_motion.read() {
+            free_camera_state.pitch -= event.delta.y * sensitivity * dt;
+            free_camera_state.yaw -= event.delta.x * sensitivity * dt;
 
-        // Make sure to clamp the pitch to avoid gimbal lock!
-        free_camera_state.pitch = free_camera_state
-            .pitch
-            .clamp(-consts::PI / 2.1, consts::PI / 2.1);
+            // Make sure to clamp the pitch to avoid gimbal lock!
+            free_camera_state.pitch = free_camera_state
+                .pitch
+                .clamp(-consts::PI / 2.1, consts::PI / 2.1);
+        }
     }
 
     // Handle movement.

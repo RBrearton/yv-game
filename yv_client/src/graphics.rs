@@ -77,13 +77,13 @@ fn get_or_create_terrain_mesh(
     let mesh = match chunk_type {
         ChunkType::Grass => meshes.add(Cuboid::new(
             TERRAIN_CHUNK_SIZE,
-            TERRAIN_THICKNESS,
             TERRAIN_CHUNK_SIZE,
+            TERRAIN_THICKNESS,
         )),
         ChunkType::Water => meshes.add(Cuboid::new(
             TERRAIN_CHUNK_SIZE,
-            TERRAIN_THICKNESS,
             TERRAIN_CHUNK_SIZE,
+            TERRAIN_THICKNESS,
         )),
     };
 

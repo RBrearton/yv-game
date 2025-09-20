@@ -51,6 +51,7 @@
         "renderables",
         "rlib",
         "serde",
+        "srgb",
         "winit",
         "yv"
     ],

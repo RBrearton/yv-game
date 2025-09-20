@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 yv_core = { path = "../yv_core" }
 bevy = "0.16"
+hashbrown = "0.16"
 
 # UI dependencies.
 bevy_egui = "0.36"

@@ -32,7 +32,7 @@ fn add_terrain_chunks(
         let new_chunk_id = commands.spawn(event.get_chunk()).id();
         terrain_chunks.chunks.insert(event.index, new_chunk_id);
         spawned_events.write(TerrainChunkSpawned {
-            index: event.index,
+            data: event.get_chunk(),
             entity: new_chunk_id,
         });
     }
@@ -89,7 +89,7 @@ pub struct RemoveTerrainChunk {
 /// Event fired whenever a terrain chunk is spawned.
 #[derive(Event, Debug, Clone)]
 pub struct TerrainChunkSpawned {
-    pub index: TerrainIndex,
+    pub data: TerrainChunk,
     pub entity: Entity,
 }
 
@@ -127,7 +127,7 @@ pub enum Biome {
 }
 
 #[derive(Component, Clone, Debug, Eq, PartialEq)]
-struct TerrainChunk {
+pub struct TerrainChunk {
     index: TerrainIndex,
     chunk_type: ChunkType,
     biome: Biome,

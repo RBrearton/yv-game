@@ -5,7 +5,7 @@ use bevy::prelude::*;
 use yv_core::well_known_terms::TERRAIN_CHUNK_SIZE;
 
 pub const TERRAIN_MESH_THICKNESS: f32 = 1.0;
-const TERRAIN_EPSILON: f32 = 0.01;
+const TERRAIN_EPSILON: f32 = 0.1;
 pub const TERRAIN_MESH_WIDTH: f32 = TERRAIN_CHUNK_SIZE - TERRAIN_EPSILON;
 pub const TERRAIN_MATERIAL_COLOR_MEADOW_GRASS: Color = Color::srgb(0.3, 0.8, 0.3);
 pub const TERRAIN_MATERIAL_COLOR_MEADOW_WATER: Color = Color::srgb(0.1, 0.1, 0.9);

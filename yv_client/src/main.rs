@@ -8,8 +8,11 @@ use graphics::GraphicsPlugin;
 use scenes::ScenesPlugin;
 use ui::UIPlugin;
 
+use crate::inputs::InputsPlugin;
+
 mod camera;
 mod graphics;
+mod inputs;
 mod scenes;
 mod ui;
 mod well_known_terms;
@@ -23,5 +26,6 @@ fn main() {
         .add_plugins(ScenesPlugin)
         .add_plugins(UIPlugin)
         .add_plugins(CameraPlugin)
+        .add_plugins(InputsPlugin)
         .run();
 }

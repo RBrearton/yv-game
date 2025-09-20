@@ -58,8 +58,9 @@ impl UiExtensions for egui::Ui {
         mut next_camera_mode: ResMut<NextState<CameraMode>>,
     ) {
         self.heading("Camera");
+        self.label(format!("Current camera mode: {}", camera_mode.get()));
         self.horizontal(|ui| {
-            ui.label("Camera mode:");
+            ui.label("Select camera mode");
             if ui.button("Free").clicked() {
                 next_camera_mode.set(CameraMode::Free);
             }
@@ -67,7 +68,10 @@ impl UiExtensions for egui::Ui {
                 next_camera_mode.set(CameraMode::FollowPlayer);
             }
         });
+
         if *camera_mode == CameraMode::Free {
+            self.add_space(8.0);
+            self.heading("Camera details");
             self.horizontal(|ui| {
                 ui.label("X");
                 ui.add(DragValue::new(&mut free_camera_state.translation.x));

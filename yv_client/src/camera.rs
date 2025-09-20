@@ -1,6 +1,5 @@
-use std::f32::consts;
-
 use bevy::{input::mouse::MouseMotion, prelude::*};
+use std::f32::consts;
 
 use crate::{inputs::InputMap, well_known_terms::camera};
 
@@ -41,6 +40,11 @@ pub enum CameraMode {
     #[default]
     Free,
     FollowPlayer,
+}
+impl std::fmt::Display for CameraMode {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
 }
 
 #[derive(Resource)]

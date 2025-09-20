@@ -13,7 +13,7 @@ pub mod camera {
     //! Constants associated with the camera.
     use bevy::prelude::*;
     pub const DEFAULT_SPEED: f32 = 1.0;
-    pub const SPRINT_MODIFIER: f32 = 2.0; // Factor by which we increase speed.
+    pub const DEFAULT_SPRINT_MODIFIER: f32 = 2.0; // Factor by which we increase speed.
     pub const SENSITIVITY: f32 = 0.001; // How quickly we yaw and pitch.
     pub const DEFAULT_PITCH: f32 = 0.0;
     pub const DEFAULT_YAW: f32 = 0.0;

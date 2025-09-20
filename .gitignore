@@ -1,125 +1,203 @@
-# Build artifacts and executables.
-*.exe
-*.out
-*.app
-*.so
-*.dll
-*.dylib
-*.a
-*.lib
-*.o
-*.obj
+/target
+Cargo.lock
 
-.cache
+# VS Code
+launch.json
 
-# Debug files.
-*.dSYM/
-*.pdb
-*.ilk
+uv.lock
 
-# Raylib specific build directories.
-build/
-bin/
-lib/
-obj/
-Debug/
-Release/
-x64/
-x86/
-
-# CMake generated files.
-CMakeCache.txt
-CMakeFiles/
-cmake_install.cmake
-Makefile
-*.cmake
-!CMakeLists.txt
-
-# Make build files.
-*.d
-
-# IDE and editor files.
-.vs/
-*.vcxproj.user
-*.vcxproj.filters
-*.sln.docstates
+# C# specific
+## User-specific files
+*.rsuser
 *.suo
 *.user
 *.userosscache
-*.sln.DotSettings.user
+*.sln.docstates
 
-# Code::Blocks files.
-*.cbp
-*.layout
-*.depend
+## Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
 
-# Dev-C++ files.
-*.dev
+## Visual Studio cache/options directory
+.vs/
 
-# Xcode files.
-*.xcodeproj/
-*.xcworkspace/
-DerivedData/
-*.hmap
-*.ipa
+## NuGet Packages
+*.nupkg
+## NuGet Symbol Packages
+*.snupkg
+## The packages folder can be ignored because of Package Restore
+**/[Pp]ackages/*
+## except build/, which is used as an MSBuild target
+!**/[Pp]ackages/build/
 
+## ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
 
-# Temporary files.
-*~
-*.swp
-*.swo
+# Jit compiler fun
+*.asm
+*.clif
+
+# Some specific lock files.
+core/pybindings/Cargo.lock
+core/pybindings/uv.lock
+core/oxphys_numerics/Cargo.lock
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+.pytest_cache/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+.venv/
+env/
+bin/
+build/
+develop-eggs/
+dist/
+eggs/
+lib64/
+parts/
+sdist/
+var/
+include/
+man/
+venv/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+pip-selfcheck.json
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Rope
+.ropeproject
+
+# Django stuff:
+*.log
+*.pot
+
+.DS_Store
+
+# Sphinx documentation
+docs/_build/
+
+# PyCharm
+.idea/
+
+# Pyenv
+.python-version
+
+# =============== #
+# Unity generated #
+# =============== #
+
+# Unity project folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+Logs/
+UserSettings/
+MemoryCaptures/
+CrashReports/
+
+# ==================== #
+# Auto-generated files #
+# ==================== #
+
+# Visual Studio / MonoDevelop
+*.unityproj
+*.suo
 *.tmp
-*.temp
-*.bak
-*.orig
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+objects/
+refs/
+exclude/
 
-# OS specific files.
+
+# Rider
+.idea/
+*.sln.iml
+
+# =================== #
+# OS generated files #
+# =================== #
+
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-ehthumbs.db
 Thumbs.db
-Desktop.ini
 
-# Log files.
-*.log
+# ================================ #
+# Build outputs and packages      #
+# ================================ #
 
-# Package files.
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
+# Android / iOS / WebGL builds
+*.apk
+*.aab
+*.ipa
+*.unitypackage
+*.xcodeproj/
+*.xcworkspace/
+build/
 
-# Resource compilation files.
-*.res
+# =================== #
+# Others you may add #
+# =================== #
 
-# Profiling files.
-*.prof
-*.gprof
+# Asset Store Tools
+AssetStoreTools*
 
-# Core dumps.
-core
-core.*
+# JetBrains Rider caches
+.idea/
 
-# Local configuration files.
-config.local
-.env
-.env.local
-
-# Documentation build output.
-docs/_build/
-site/
-
-# Asset cache (if using asset pipeline).
-.asset_cache/
-
-# Backup files created by editors.
-*~
-\#*\#
-.\#*
+# Uncomment if you have any certificate/key files
+# *.pfx
+# *.key

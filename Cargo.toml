@@ -1,0 +1,3 @@
+[workspace]
+members = ["yv_core", "yv_client"]
+resolver = "2"

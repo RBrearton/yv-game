@@ -37,14 +37,20 @@
         "DARKGRAY",
         "DCMAKE",
         "dylib",
+        "egui",
         "fovy",
         "MSVC",
+        "QUIC",
+        "quinnet",
         "Raylib",
         "RAYWHITE",
         "Renderable",
         "renderables",
         "rlib",
-        "yv"
+        "serde",
+        "winit",
+        "yv",
+        "yvium"
     ],
     "editor.rulers": [
         100,

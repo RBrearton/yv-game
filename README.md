@@ -1,3 +1,3 @@
-# yv
+# `yv`
 
-A simple C17 game built with raylib.
+Building a video game with no editor, no external assets - everything is procedural.

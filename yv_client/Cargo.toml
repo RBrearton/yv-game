@@ -1,0 +1,22 @@
+[package]
+name = "yv_client"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+yv_core = { path = "../yv_core" }
+bevy = "0.16"
+
+# UI dependencies.
+bevy_egui = "0.36"
+egui = "0.32"
+
+# Should be in the standard library...
+uuid = "1"
+
+# All networking is done using the QUIC protocol via bevy_quinnet.
+bevy_quinnet = "0.17"
+
+[dependencies.winit]
+version = "=0.30"
+features = ["default"]

@@ -54,6 +54,7 @@ pub struct FreeCameraState {
     pub base_speed: f32,
     pub is_sprinting: bool,
     pub sprint_modifier: f32,
+    pub sensitivity: f32,
     pub translation: Vec3,
 }
 impl Default for FreeCameraState {
@@ -64,6 +65,7 @@ impl Default for FreeCameraState {
             base_speed: camera::DEFAULT_SPEED,
             is_sprinting: false,
             sprint_modifier: camera::DEFAULT_SPRINT_MODIFIER,
+            sensitivity: camera::SENSITIVITY,
             translation: camera::DEFAULT_POSITION,
         }
     }
@@ -77,11 +79,15 @@ impl FreeCameraState {
             self.pitch.sin(),
         )
     }
-    pub fn speed(&self) -> f32 {
+
+    /// Returns the speed of the camera.
+    /// Of course, this isn't actually speed - it's the amount of distance that we want to move
+    /// this frame - but the code is easier to understand if we call this "speed".
+    pub fn speed(&self, delta_time: f32) -> f32 {
         if self.is_sprinting {
-            self.base_speed * self.sprint_modifier
+            self.base_speed * self.sprint_modifier * delta_time
         } else {
-            self.base_speed
+            self.base_speed * delta_time
         }
     }
 
@@ -131,6 +137,7 @@ fn free_camera_update(
     keyboard_input: Res<ButtonInput<KeyCode>>,
     mut evr_mouse_motion: EventReader<MouseMotion>,
     input_map: Res<InputMap>,
+    time: Res<Time>,
     mut update_camera: EventWriter<SetCamera>,
 ) {
     // Handle the sprint modifier.
@@ -141,32 +148,39 @@ fn free_camera_update(
     }
 
     // Handle pitch and yaw.
+    let sensitivity = free_camera_state.sensitivity;
+    let dt = time.delta_secs();
     for event in evr_mouse_motion.read() {
-        free_camera_state.pitch -= event.delta.y * camera::SENSITIVITY;
-        free_camera_state.yaw -= event.delta.x * camera::SENSITIVITY;
+        free_camera_state.pitch -= event.delta.y * sensitivity * dt;
+        free_camera_state.yaw -= event.delta.x * sensitivity * dt;
 
         // Make sure to clamp the pitch to avoid gimbal lock!
         free_camera_state.pitch = free_camera_state
             .pitch
-            .clamp(-consts::PI / 2.0, consts::PI / 2.0);
+            .clamp(-consts::PI / 1.99, consts::PI / 1.99);
     }
 
     // Handle movement.
     let forward = free_camera_state.forward();
     let up = Vec3::Z;
     let right = forward.cross(up);
-    let speed = free_camera_state.speed();
-    if keyboard_input.just_pressed(input_map.free_camera.forward) {
+    let speed = free_camera_state.speed(dt);
+    if keyboard_input.pressed(input_map.free_camera.forward) {
         free_camera_state.translation += forward * speed;
-    } else if keyboard_input.just_pressed(input_map.free_camera.backward) {
+    }
+    if keyboard_input.pressed(input_map.free_camera.backward) {
         free_camera_state.translation -= forward * speed;
-    } else if keyboard_input.just_pressed(input_map.free_camera.left) {
+    }
+    if keyboard_input.pressed(input_map.free_camera.left) {
         free_camera_state.translation -= right * speed;
-    } else if keyboard_input.just_pressed(input_map.free_camera.right) {
+    }
+    if keyboard_input.pressed(input_map.free_camera.right) {
         free_camera_state.translation += right * speed;
-    } else if keyboard_input.just_pressed(input_map.free_camera.up) {
+    }
+    if keyboard_input.pressed(input_map.free_camera.up) {
         free_camera_state.translation += up * speed;
-    } else if keyboard_input.just_pressed(input_map.free_camera.down) {
+    }
+    if keyboard_input.pressed(input_map.free_camera.down) {
         free_camera_state.translation -= up * speed;
     }
 

@@ -125,8 +125,8 @@ fn update_camera_system(
     // Iterate over all events.
     // We permit multiple events to be fired in a single frame and just take the last one.
     for event in update_camera.read() {
-        camera.look_at(event.target, event.up);
         camera.translation = event.translation;
+        camera.look_at(event.target, event.up);
     }
 }
 
@@ -157,13 +157,13 @@ fn free_camera_update(
         // Make sure to clamp the pitch to avoid gimbal lock!
         free_camera_state.pitch = free_camera_state
             .pitch
-            .clamp(-consts::PI / 1.99, consts::PI / 1.99);
+            .clamp(-consts::PI / 2.1, consts::PI / 2.1);
     }
 
     // Handle movement.
     let forward = free_camera_state.forward();
     let up = Vec3::Z;
-    let right = forward.cross(up);
+    let right = forward.cross(up).normalize();
     let speed = free_camera_state.speed(dt);
     if keyboard_input.pressed(input_map.free_camera.forward) {
         free_camera_state.translation += forward * speed;

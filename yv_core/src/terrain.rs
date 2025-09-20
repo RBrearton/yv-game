@@ -25,11 +25,16 @@ fn add_terrain_chunks(
     mut commands: Commands,
     mut terrain_chunks: ResMut<TerrainChunks>,
     mut chunk_events: EventReader<AddTerrainChunk>,
+    mut spawned_events: EventWriter<TerrainChunkSpawned>,
 ) {
     for event in chunk_events.read() {
         // Spawn the chunk, and add its ID to the TerrainChunks resource.
         let new_chunk_id = commands.spawn(event.get_chunk()).id();
         terrain_chunks.chunks.insert(event.index, new_chunk_id);
+        spawned_events.write(TerrainChunkSpawned {
+            index: event.index,
+            entity: new_chunk_id,
+        });
     }
 }
 
@@ -79,6 +84,13 @@ impl AddTerrainChunk {
 #[derive(Event, Debug, Clone)]
 pub struct RemoveTerrainChunk {
     index: TerrainIndex,
+}
+
+/// Event fired whenever a terrain chunk is spawned.
+#[derive(Event, Debug, Clone)]
+pub struct TerrainChunkSpawned {
+    pub index: TerrainIndex,
+    pub entity: Entity,
 }
 
 /// A 2D index that uniquely specifies a chunk of terrain.

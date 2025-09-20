@@ -92,12 +92,26 @@ pub struct TerrainChunkSpawned {
     pub data: TerrainChunk,
     pub entity: Entity,
 }
+impl TerrainChunkSpawned {
+    pub fn chunk_type(&self) -> ChunkType {
+        self.data.chunk_type
+    }
+    pub fn biome(&self) -> Biome {
+        self.data.biome
+    }
+    pub fn index(&self) -> TerrainIndex {
+        self.data.index
+    }
+    pub fn transform(&self) -> Transform {
+        self.data.index.to_transform()
+    }
+}
 
 /// A 2D index that uniquely specifies a chunk of terrain.
 #[derive(Hash, Eq, PartialEq, Debug, Clone, Copy)]
 pub struct TerrainIndex {
-    x: i32,
-    y: i32,
+    pub x: i32,
+    pub y: i32,
 }
 impl TerrainIndex {
     /// Get the terrain index from a 2D position.
@@ -110,17 +124,27 @@ impl TerrainIndex {
     pub fn new(x: i32, y: i32) -> Self {
         Self { x, y }
     }
+    pub fn to_position(self) -> Vec3 {
+        Vec3::new(
+            self.x as f32 * TERRAIN_CHUNK_SIZE,
+            self.y as f32 * TERRAIN_CHUNK_SIZE,
+            0.0,
+        )
+    }
+    pub fn to_transform(self) -> Transform {
+        Transform::from_translation(self.to_position())
+    }
 }
 
 /// The type of terrain in a chunk.
-#[derive(Clone, Debug, Copy, Eq, PartialEq)]
+#[derive(Clone, Debug, Copy, Eq, PartialEq, Hash)]
 pub enum ChunkType {
     Grass,
     Water,
 }
 
 /// The biome of a chunk.
-#[derive(Clone, Debug, Copy, Eq, PartialEq)]
+#[derive(Clone, Debug, Copy, Eq, PartialEq, Hash)]
 pub enum Biome {
     Meadow,
     Snow,
@@ -128,7 +152,7 @@ pub enum Biome {
 
 #[derive(Component, Clone, Debug, Eq, PartialEq)]
 pub struct TerrainChunk {
-    index: TerrainIndex,
-    chunk_type: ChunkType,
-    biome: Biome,
+    pub index: TerrainIndex,
+    pub chunk_type: ChunkType,
+    pub biome: Biome,
 }

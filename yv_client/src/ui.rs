@@ -86,6 +86,8 @@ impl UiExtensions for egui::Ui {
                 ui.add(DragValue::new(&mut free_camera_state.pitch));
                 ui.label("Yaw");
                 ui.add(DragValue::new(&mut free_camera_state.yaw));
+                ui.label("Sensitivity");
+                ui.add(DragValue::new(&mut free_camera_state.sensitivity));
             });
             self.add_space(4.0);
             self.horizontal(|ui| {

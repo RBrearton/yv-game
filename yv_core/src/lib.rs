@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 
+pub mod noise;
 pub mod terrain;
 pub mod well_known_terms;
 

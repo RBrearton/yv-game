@@ -9,3 +9,4 @@ bevy_quinnet = "0.17"
 uuid = { version = "1", features = ["v4"] }
 bevy = "0.16"
 hashbrown = "0.16"
+rand = "0.9"

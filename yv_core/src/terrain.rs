@@ -7,6 +7,9 @@ pub struct TerrainPlugin;
 
 impl Plugin for TerrainPlugin {
     fn build(&self, app: &mut App) {
+        app.init_resource::<TerrainChunks>();
+        app.add_event::<AddTerrainChunk>();
+        app.add_event::<RemoveTerrainChunk>();
         app.add_systems(
             Update,
             add_terrain_chunks.run_if(on_event::<AddTerrainChunk>),
@@ -43,7 +46,7 @@ fn remove_terrain_chunks(
 }
 
 /// The resource that contains references to all terrain chunks.
-#[derive(Resource)]
+#[derive(Resource, Default)]
 struct TerrainChunks {
     chunks: HashMap<TerrainIndex, Entity>,
 }

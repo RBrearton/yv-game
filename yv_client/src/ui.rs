@@ -81,14 +81,19 @@ impl UiExtensions for egui::Ui {
             );
         });
         if self.button("Add terrain chunk").clicked() {
-            add_terrain.write(AddTerrainChunk::new(
-                TerrainIndex::new(
-                    ingame_debug_data.add_terrain_chunk_x.parse().unwrap(),
-                    ingame_debug_data.add_terrain_chunk_y.parse().unwrap(),
-                ),
-                ingame_debug_data.add_terrain_chunk_chunk_type,
-                ingame_debug_data.add_terrain_chunk_biome,
-            ));
+            // Only try to add terrain chunk if both x and y can be parsed as integers.
+            if let (Ok(x), Ok(y)) = (
+                ingame_debug_data.add_terrain_chunk_x.parse::<i32>(),
+                ingame_debug_data.add_terrain_chunk_y.parse::<i32>(),
+            ) {
+                add_terrain.write(AddTerrainChunk::new(
+                    TerrainIndex::new(x, y),
+                    ingame_debug_data.add_terrain_chunk_chunk_type,
+                    ingame_debug_data.add_terrain_chunk_biome,
+                ));
+            } else {
+                warn!("Failed to parse x or y as integers");
+            }
         }
     }
 }

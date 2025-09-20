@@ -36,9 +36,12 @@
         "clangd",
         "DARKGRAY",
         "DCMAKE",
+        "despawn",
         "dylib",
         "egui",
         "fovy",
+        "hashbrown",
+        "Ingame",
         "MSVC",
         "QUIC",
         "quinnet",
@@ -49,7 +52,7 @@
         "rlib",
         "serde",
         "winit",
-        "yv",
+        "yv"
     ],
     "editor.rulers": [
         100,

@@ -49,6 +49,7 @@ pub struct FreeCameraState {
     pub yaw: f32,
     pub base_speed: f32,
     pub is_sprinting: bool,
+    pub sprint_modifier: f32,
     pub translation: Vec3,
 }
 impl Default for FreeCameraState {
@@ -58,6 +59,7 @@ impl Default for FreeCameraState {
             yaw: camera::DEFAULT_YAW,
             base_speed: camera::DEFAULT_SPEED,
             is_sprinting: false,
+            sprint_modifier: camera::DEFAULT_SPRINT_MODIFIER,
             translation: camera::DEFAULT_POSITION,
         }
     }
@@ -73,7 +75,7 @@ impl FreeCameraState {
     }
     pub fn speed(&self) -> f32 {
         if self.is_sprinting {
-            self.base_speed * camera::SPRINT_MODIFIER
+            self.base_speed * self.sprint_modifier
         } else {
             self.base_speed
         }

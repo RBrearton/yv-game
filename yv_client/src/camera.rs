@@ -1,15 +1,29 @@
-use bevy::prelude::*;
+use std::f32::consts;
+
+use bevy::{input::mouse::MouseMotion, prelude::*};
+
+use crate::{inputs::InputMap, well_known_terms::camera};
 
 pub struct CameraPlugin;
-
 impl Plugin for CameraPlugin {
     fn build(&self, app: &mut App) {
         app.add_event::<SetCamera>();
+        app.init_state::<CameraMode>();
+        app.init_resource::<FreeCameraState>();
         app.add_systems(Startup, setup_camera_system);
-        app.add_systems(Update, update_camera_system.in_set(UpdateCameraSystems));
+        app.add_systems(
+            Update,
+            (
+                free_camera_update.run_if(in_state(CameraMode::Free)),
+                update_camera_system,
+            )
+                .chain()
+                .in_set(UpdateCameraSystems),
+        );
     }
 }
 
+/// This system sets up the camera.
 fn setup_camera_system(mut commands: Commands) {
     commands.spawn(Camera3d::default());
 }
@@ -22,11 +36,68 @@ pub struct SetCamera {
     pub target: Vec3,
 }
 
+#[derive(States, Default, Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum CameraMode {
+    #[default]
+    Free,
+    FollowPlayer,
+}
+
+#[derive(Resource)]
+pub struct FreeCameraState {
+    pub pitch: f32,
+    pub yaw: f32,
+    pub base_speed: f32,
+    pub is_sprinting: bool,
+    pub translation: Vec3,
+}
+impl Default for FreeCameraState {
+    fn default() -> Self {
+        Self {
+            pitch: camera::DEFAULT_PITCH,
+            yaw: camera::DEFAULT_YAW,
+            base_speed: camera::DEFAULT_SPEED,
+            is_sprinting: false,
+            translation: camera::DEFAULT_POSITION,
+        }
+    }
+}
+impl FreeCameraState {
+    /// Returns the normal parallel to the camera's direction.
+    pub fn forward(&self) -> Vec3 {
+        Vec3::new(
+            self.yaw.cos() * self.pitch.cos(),
+            self.yaw.sin() * self.pitch.cos(),
+            self.pitch.sin(),
+        )
+    }
+    pub fn speed(&self) -> f32 {
+        if self.is_sprinting {
+            self.base_speed * camera::SPRINT_MODIFIER
+        } else {
+            self.base_speed
+        }
+    }
+
+    /// Return a SetCamera event that requests that we update the camera's transform to match the
+    /// current state of the free camera.
+    pub fn set_camera(&self) -> SetCamera {
+        SetCamera {
+            translation: self.translation,
+            up: Vec3::Z,
+            target: self.translation + self.forward(),
+        }
+    }
+}
+
 /// All camera update systems run in the update camera systems set.
 /// This should run after the core game logic updates.
 #[derive(SystemSet, Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct UpdateCameraSystems;
 
+/// This is the fundamental system that actually updates the camera.
+/// To update the camera, you should always fire a SetCamera event.
+/// Any other camera mutation systems should eventually end up calling this system.
 fn update_camera_system(
     mut camera: Query<&mut Transform, With<Camera3d>>,
     mut update_camera: EventReader<SetCamera>,
@@ -45,4 +116,54 @@ fn update_camera_system(
         camera.look_at(event.target, event.up);
         camera.translation = event.translation;
     }
+}
+
+/// This system updates the camera while we're in free camera mode.
+/// Free camera modes are characterized by cameras that pitch and yaw, but never roll.
+fn free_camera_update(
+    mut free_camera_state: ResMut<FreeCameraState>,
+    keyboard_input: Res<ButtonInput<KeyCode>>,
+    mut evr_mouse_motion: EventReader<MouseMotion>,
+    input_map: Res<InputMap>,
+    mut update_camera: EventWriter<SetCamera>,
+) {
+    // Handle the sprint modifier.
+    if keyboard_input.just_pressed(input_map.free_camera.sprint_modifier) {
+        free_camera_state.is_sprinting = true;
+    } else if keyboard_input.just_released(input_map.free_camera.sprint_modifier) {
+        free_camera_state.is_sprinting = false;
+    }
+
+    // Handle pitch and yaw.
+    for event in evr_mouse_motion.read() {
+        free_camera_state.pitch -= event.delta.y * camera::SENSITIVITY;
+        free_camera_state.yaw -= event.delta.x * camera::SENSITIVITY;
+
+        // Make sure to clamp the pitch to avoid gimbal lock!
+        free_camera_state.pitch = free_camera_state
+            .pitch
+            .clamp(-consts::PI / 2.0, consts::PI / 2.0);
+    }
+
+    // Handle movement.
+    let forward = free_camera_state.forward();
+    let up = Vec3::Z;
+    let right = forward.cross(up);
+    let speed = free_camera_state.speed();
+    if keyboard_input.just_pressed(input_map.free_camera.forward) {
+        free_camera_state.translation += forward * speed;
+    } else if keyboard_input.just_pressed(input_map.free_camera.backward) {
+        free_camera_state.translation -= forward * speed;
+    } else if keyboard_input.just_pressed(input_map.free_camera.left) {
+        free_camera_state.translation -= right * speed;
+    } else if keyboard_input.just_pressed(input_map.free_camera.right) {
+        free_camera_state.translation += right * speed;
+    } else if keyboard_input.just_pressed(input_map.free_camera.up) {
+        free_camera_state.translation += up * speed;
+    } else if keyboard_input.just_pressed(input_map.free_camera.down) {
+        free_camera_state.translation -= up * speed;
+    }
+
+    // Request a camera update using the SetCamera event.
+    update_camera.write(free_camera_state.set_camera());
 }

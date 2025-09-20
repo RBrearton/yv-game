@@ -1,4 +1,12 @@
+use bevy::prelude::*;
+
 pub mod terrain;
 pub mod well_known_terms;
 
-pub fn hello_world() {}
+pub struct YvCorePlugins;
+
+impl Plugin for YvCorePlugins {
+    fn build(&self, app: &mut App) {
+        app.add_plugins(terrain::TerrainPlugin);
+    }
+}

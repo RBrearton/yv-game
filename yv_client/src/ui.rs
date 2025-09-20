@@ -1,8 +1,12 @@
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts, EguiPrimaryContextPass};
+use egui::DragValue;
 use yv_core::terrain::{AddTerrainChunk, Biome, ChunkType, TerrainIndex};
 
-use crate::scenes::YvScene;
+use crate::{
+    camera::{CameraMode, FreeCameraState},
+    scenes::YvScene,
+};
 
 pub struct UIPlugin;
 
@@ -30,6 +34,14 @@ pub(super) trait UiExtensions {
         ingame_debug_data: &mut IngameDebugData,
         add_terrain: &mut EventWriter<AddTerrainChunk>,
     );
+
+    /// The entire camera section of the ingame debug window.
+    fn camera_section(
+        &mut self,
+        camera_state: &mut FreeCameraState,
+        camera_mode: Res<State<CameraMode>>,
+        next_camera_mode: ResMut<NextState<CameraMode>>,
+    );
 }
 impl UiExtensions for egui::Ui {
     fn big_button(&mut self, text: &str) -> egui::Response {
@@ -37,6 +49,50 @@ impl UiExtensions for egui::Ui {
             [self.available_width() * 0.8, 36.0],
             egui::Button::new(egui::RichText::new(text).size(16.0).strong()),
         )
+    }
+
+    fn camera_section(
+        &mut self,
+        free_camera_state: &mut FreeCameraState,
+        camera_mode: Res<State<CameraMode>>,
+        mut next_camera_mode: ResMut<NextState<CameraMode>>,
+    ) {
+        self.heading("Camera");
+        self.horizontal(|ui| {
+            ui.label("Camera mode:");
+            if ui.button("Free").clicked() {
+                next_camera_mode.set(CameraMode::Free);
+            }
+            if ui.button("Follow player").clicked() {
+                next_camera_mode.set(CameraMode::FollowPlayer);
+            }
+        });
+        if *camera_mode == CameraMode::Free {
+            self.horizontal(|ui| {
+                ui.label("X");
+                ui.add(DragValue::new(&mut free_camera_state.translation.x));
+                ui.label("Y");
+                ui.add(DragValue::new(&mut free_camera_state.translation.y));
+                ui.label("Z");
+                ui.add(DragValue::new(&mut free_camera_state.translation.z));
+            });
+            self.add_space(4.0);
+            self.horizontal(|ui| {
+                ui.label("Pitch");
+                ui.add(DragValue::new(&mut free_camera_state.pitch));
+                ui.label("Yaw");
+                ui.add(DragValue::new(&mut free_camera_state.yaw));
+            });
+            self.add_space(4.0);
+            self.horizontal(|ui| {
+                ui.label("Base speed");
+                ui.add(DragValue::new(&mut free_camera_state.base_speed));
+                ui.label("Sprint modifier");
+                ui.add(DragValue::new(&mut free_camera_state.sprint_modifier));
+                ui.label("Is sprinting");
+                ui.checkbox(&mut free_camera_state.is_sprinting, "Sprint");
+            });
+        }
     }
 
     fn terrain_chunk_input_section(
@@ -139,12 +195,17 @@ fn ingame_debug_window(
     mut contexts: EguiContexts,
     mut add_terrain: EventWriter<AddTerrainChunk>,
     mut ingame_debug_data: ResMut<IngameDebugData>,
+    mut free_camera_state: ResMut<FreeCameraState>,
+    camera_mode: Res<State<CameraMode>>,
+    next_camera_mode: ResMut<NextState<CameraMode>>,
 ) -> Result {
     let ingame_debug_window = egui::Window::new("Debug")
         .resizable(false)
         .collapsible(true);
 
     ingame_debug_window.show(contexts.ctx_mut()?, |ui| {
+        ui.camera_section(&mut free_camera_state, camera_mode, next_camera_mode);
+        ui.separator();
         ui.terrain_chunk_input_section(&mut ingame_debug_data, &mut add_terrain);
     });
 

@@ -50,7 +50,6 @@
         "serde",
         "winit",
         "yv",
-        "yvium"
     ],
     "editor.rulers": [
         100,

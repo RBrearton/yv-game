@@ -63,6 +63,13 @@ impl AddTerrainChunk {
             biome: self.biome,
         }
     }
+    pub fn new(index: TerrainIndex, chunk_type: ChunkType, biome: Biome) -> Self {
+        Self {
+            index,
+            chunk_type,
+            biome,
+        }
+    }
 }
 
 /// The event that, when fired, removes a terrain chunk from the world.
@@ -85,23 +92,26 @@ impl TerrainIndex {
             y: (y / TERRAIN_CHUNK_SIZE).floor() as i32,
         }
     }
+    pub fn new(x: i32, y: i32) -> Self {
+        Self { x, y }
+    }
 }
 
 /// The type of terrain in a chunk.
-#[derive(Clone, Debug, Copy)]
+#[derive(Clone, Debug, Copy, Eq, PartialEq)]
 pub enum ChunkType {
     Grass,
     Water,
 }
 
 /// The biome of a chunk.
-#[derive(Clone, Debug, Copy)]
+#[derive(Clone, Debug, Copy, Eq, PartialEq)]
 pub enum Biome {
     Meadow,
     Snow,
 }
 
-#[derive(Component, Clone, Debug)]
+#[derive(Component, Clone, Debug, Eq, PartialEq)]
 struct TerrainChunk {
     index: TerrainIndex,
     chunk_type: ChunkType,

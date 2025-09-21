@@ -106,7 +106,7 @@ impl UiExtensions for egui::Ui {
 
     fn terrain_chunk_input_section(
         &mut self,
-        ingame_debug_data: &mut IngameDebugData,
+        data: &mut IngameDebugData,
         add_terrain: &mut EventWriter<AddTerrainChunk>,
         generate_terrain: &mut EventWriter<ProcedurallyGenerateTerrain>,
     ) {
@@ -116,20 +116,18 @@ impl UiExtensions for egui::Ui {
         // Batch generation.
         self.horizontal(|ui| {
             ui.label("Generate terrain (start x, start y, end x, end y):");
-            let start_x_drag = DragValue::new(&mut ingame_debug_data.bulk_add_terrain_start_x);
-            let start_y_drag = DragValue::new(&mut ingame_debug_data.bulk_add_terrain_start_y);
-            let end_x_drag = DragValue::new(&mut ingame_debug_data.bulk_add_terrain_end_x);
-            let end_y_drag = DragValue::new(&mut ingame_debug_data.bulk_add_terrain_end_y);
-            ui.add(start_x_drag);
-            ui.add(start_y_drag);
-            ui.add(end_x_drag);
-            ui.add(end_y_drag);
+        });
+        self.horizontal(|ui| {
+            ui.add(DragValue::new(&mut data.bulk_add_terrain_start_x));
+            ui.add(DragValue::new(&mut data.bulk_add_terrain_start_y));
+            ui.add(DragValue::new(&mut data.bulk_add_terrain_end_x));
+            ui.add(DragValue::new(&mut data.bulk_add_terrain_end_y));
             if ui.button("Generate terrain").clicked() {
                 generate_terrain.write(ProcedurallyGenerateTerrain::new_range(
-                    ingame_debug_data.bulk_add_terrain_start_x,
-                    ingame_debug_data.bulk_add_terrain_end_x,
-                    ingame_debug_data.bulk_add_terrain_start_y,
-                    ingame_debug_data.bulk_add_terrain_end_y,
+                    data.bulk_add_terrain_start_x,
+                    data.bulk_add_terrain_end_x,
+                    data.bulk_add_terrain_start_y,
+                    data.bulk_add_terrain_end_y,
                 ));
             }
         });
@@ -138,53 +136,35 @@ impl UiExtensions for egui::Ui {
         self.add_space(8.0);
         self.heading("Specific chunk generation");
         self.horizontal(|ui| {
-            ui.label("X index (enter an integer):");
-            ui.text_edit_singleline(&mut ingame_debug_data.add_terrain_chunk_x);
-        });
-        self.horizontal(|ui| {
-            ui.label("Y index (enter an integer):");
-            ui.text_edit_singleline(&mut ingame_debug_data.add_terrain_chunk_y);
+            ui.label("X");
+            ui.add(DragValue::new(&mut data.add_terrain_chunk_x));
+            ui.label("Y");
+            ui.add(DragValue::new(&mut data.add_terrain_chunk_y));
         });
         self.horizontal(|ui| {
             ui.label("Chunk type:");
             ui.selectable_value(
-                &mut ingame_debug_data.add_terrain_chunk_chunk_type,
+                &mut data.add_terrain_chunk_chunk_type,
                 ChunkType::Grass,
                 "Grass",
             );
             ui.selectable_value(
-                &mut ingame_debug_data.add_terrain_chunk_chunk_type,
+                &mut data.add_terrain_chunk_chunk_type,
                 ChunkType::Water,
                 "Water",
             );
         });
         self.horizontal(|ui| {
             ui.label("Biome:");
-            ui.selectable_value(
-                &mut ingame_debug_data.add_terrain_chunk_biome,
-                Biome::Meadow,
-                "Meadow",
-            );
-            ui.selectable_value(
-                &mut ingame_debug_data.add_terrain_chunk_biome,
-                Biome::Snow,
-                "Snow",
-            );
+            ui.selectable_value(&mut data.add_terrain_chunk_biome, Biome::Meadow, "Meadow");
+            ui.selectable_value(&mut data.add_terrain_chunk_biome, Biome::Snow, "Snow");
         });
         if self.button("Add terrain chunk").clicked() {
-            // Only try to add terrain chunk if both x and y can be parsed as integers.
-            if let (Ok(x), Ok(y)) = (
-                ingame_debug_data.add_terrain_chunk_x.parse::<i32>(),
-                ingame_debug_data.add_terrain_chunk_y.parse::<i32>(),
-            ) {
-                add_terrain.write(AddTerrainChunk::new(
-                    TerrainIndex::new(x, y),
-                    ingame_debug_data.add_terrain_chunk_chunk_type,
-                    ingame_debug_data.add_terrain_chunk_biome,
-                ));
-            } else {
-                warn!("Failed to parse x or y as integers");
-            }
+            add_terrain.write(AddTerrainChunk::new(
+                TerrainIndex::new(data.add_terrain_chunk_x, data.add_terrain_chunk_y),
+                data.add_terrain_chunk_chunk_type,
+                data.add_terrain_chunk_biome,
+            ));
         }
     }
 }
@@ -213,8 +193,8 @@ pub(super) struct IngameDebugData {
     bulk_add_terrain_start_y: i32,
     bulk_add_terrain_end_x: i32,
     bulk_add_terrain_end_y: i32,
-    add_terrain_chunk_x: String,
-    add_terrain_chunk_y: String,
+    add_terrain_chunk_x: i32,
+    add_terrain_chunk_y: i32,
     add_terrain_chunk_chunk_type: ChunkType,
     add_terrain_chunk_biome: Biome,
 }

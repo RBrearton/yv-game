@@ -12,7 +12,7 @@ pub const TERRAIN_MATERIAL_COLOR_MEADOW_WATER: Color = Color::srgb(0.1, 0.1, 0.9
 pub const TERRAIN_MATERIAL_COLOR_MEADOW_SAND: Color = Color::srgb(0.99, 0.93, 0.44);
 pub const TERRAIN_MATERIAL_COLOR_SNOW_GRASS: Color = Color::srgb(0.9, 0.9, 0.9);
 pub const TERRAIN_MATERIAL_COLOR_SNOW_SAND: Color =
-    Color::srgb(210.0 / 255, 170.0 / 255.0, 109.0 / 255.0);
+    Color::srgb(210.0 / 255.0, 170.0 / 255.0, 109.0 / 255.0);
 pub const TERRAIN_MATERIAL_COLOR_SNOW_WATER: Color = Color::srgb(0.7, 0.7, 0.9);
 
 pub mod camera {

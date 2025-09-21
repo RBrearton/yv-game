@@ -1,7 +1,9 @@
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts, EguiPrimaryContextPass};
 use egui::DragValue;
-use yv_core::terrain::{AddTerrainChunk, Biome, ChunkType, TerrainIndex};
+use yv_core::terrain::{
+    AddTerrainChunk, Biome, ChunkType, ProcedurallyGenerateTerrain, TerrainIndex,
+};
 
 use crate::{
     camera::{CameraMode, FreeCameraState},
@@ -33,6 +35,7 @@ pub(super) trait UiExtensions {
         &mut self,
         ingame_debug_data: &mut IngameDebugData,
         add_terrain: &mut EventWriter<AddTerrainChunk>,
+        generate_terrain: &mut EventWriter<ProcedurallyGenerateTerrain>,
     );
 
     /// The entire camera section of the ingame debug window.
@@ -105,9 +108,35 @@ impl UiExtensions for egui::Ui {
         &mut self,
         ingame_debug_data: &mut IngameDebugData,
         add_terrain: &mut EventWriter<AddTerrainChunk>,
+        generate_terrain: &mut EventWriter<ProcedurallyGenerateTerrain>,
     ) {
         // Terrain chunk debugging.
         self.heading("Terrain chunk");
+
+        // Batch generation.
+        self.horizontal(|ui| {
+            ui.label("Generate terrain (start x, start y, end x, end y):");
+            let start_x_drag = DragValue::new(&mut ingame_debug_data.bulk_add_terrain_start_x);
+            let start_y_drag = DragValue::new(&mut ingame_debug_data.bulk_add_terrain_start_y);
+            let end_x_drag = DragValue::new(&mut ingame_debug_data.bulk_add_terrain_end_x);
+            let end_y_drag = DragValue::new(&mut ingame_debug_data.bulk_add_terrain_end_y);
+            ui.add(start_x_drag);
+            ui.add(start_y_drag);
+            ui.add(end_x_drag);
+            ui.add(end_y_drag);
+            if ui.button("Generate terrain").clicked() {
+                generate_terrain.write(ProcedurallyGenerateTerrain::new_range(
+                    ingame_debug_data.bulk_add_terrain_start_x,
+                    ingame_debug_data.bulk_add_terrain_end_x,
+                    ingame_debug_data.bulk_add_terrain_start_y,
+                    ingame_debug_data.bulk_add_terrain_end_y,
+                ));
+            }
+        });
+
+        // Single specific chunk generation.
+        self.add_space(8.0);
+        self.heading("Specific chunk generation");
         self.horizontal(|ui| {
             ui.label("X index (enter an integer):");
             ui.text_edit_singleline(&mut ingame_debug_data.add_terrain_chunk_x);
@@ -178,28 +207,23 @@ fn login_window(mut contexts: EguiContexts, mut scene_state: ResMut<NextState<Yv
     Ok(())
 }
 
-#[derive(Resource)]
+#[derive(Resource, Default)]
 pub(super) struct IngameDebugData {
+    bulk_add_terrain_start_x: i32,
+    bulk_add_terrain_start_y: i32,
+    bulk_add_terrain_end_x: i32,
+    bulk_add_terrain_end_y: i32,
     add_terrain_chunk_x: String,
     add_terrain_chunk_y: String,
     add_terrain_chunk_chunk_type: ChunkType,
     add_terrain_chunk_biome: Biome,
-}
-impl Default for IngameDebugData {
-    fn default() -> Self {
-        Self {
-            add_terrain_chunk_x: String::new(),
-            add_terrain_chunk_y: String::new(),
-            add_terrain_chunk_chunk_type: ChunkType::Grass,
-            add_terrain_chunk_biome: Biome::Meadow,
-        }
-    }
 }
 
 /// Ingame debug window.
 fn ingame_debug_window(
     mut contexts: EguiContexts,
     mut add_terrain: EventWriter<AddTerrainChunk>,
+    mut generate_terrain: EventWriter<ProcedurallyGenerateTerrain>,
     mut ingame_debug_data: ResMut<IngameDebugData>,
     mut free_camera_state: ResMut<FreeCameraState>,
     camera_mode: Res<State<CameraMode>>,
@@ -212,7 +236,11 @@ fn ingame_debug_window(
     ingame_debug_window.show(contexts.ctx_mut()?, |ui| {
         ui.camera_section(&mut free_camera_state, camera_mode, next_camera_mode);
         ui.separator();
-        ui.terrain_chunk_input_section(&mut ingame_debug_data, &mut add_terrain);
+        ui.terrain_chunk_input_section(
+            &mut ingame_debug_data,
+            &mut add_terrain,
+            &mut generate_terrain,
+        );
     });
 
     Ok(())

@@ -11,8 +11,9 @@ use hashbrown::HashMap;
 use yv_core::terrain::{Biome, ChunkType, TerrainChunkSpawned};
 
 use crate::well_known_terms::{
-    TERRAIN_MATERIAL_COLOR_MEADOW_GRASS, TERRAIN_MATERIAL_COLOR_MEADOW_WATER,
-    TERRAIN_MATERIAL_COLOR_SNOW_GRASS, TERRAIN_MATERIAL_COLOR_SNOW_WATER, TERRAIN_MESH_THICKNESS,
+    TERRAIN_MATERIAL_COLOR_MEADOW_GRASS, TERRAIN_MATERIAL_COLOR_MEADOW_SAND,
+    TERRAIN_MATERIAL_COLOR_MEADOW_WATER, TERRAIN_MATERIAL_COLOR_SNOW_GRASS,
+    TERRAIN_MATERIAL_COLOR_SNOW_SAND, TERRAIN_MATERIAL_COLOR_SNOW_WATER, TERRAIN_MESH_THICKNESS,
     TERRAIN_MESH_WIDTH,
 };
 
@@ -78,6 +79,11 @@ fn get_or_create_terrain_mesh(
             TERRAIN_MESH_WIDTH,
             TERRAIN_MESH_THICKNESS,
         )),
+        ChunkType::Sand => meshes.add(Cuboid::new(
+            TERRAIN_MESH_WIDTH,
+            TERRAIN_MESH_WIDTH,
+            TERRAIN_MESH_THICKNESS,
+        )),
         ChunkType::Water => meshes.add(Cuboid::new(
             TERRAIN_MESH_WIDTH,
             TERRAIN_MESH_WIDTH,
@@ -110,6 +116,10 @@ fn get_or_create_terrain_material(
                 base_color: TERRAIN_MATERIAL_COLOR_MEADOW_GRASS,
                 ..default()
             }),
+            ChunkType::Sand => materials.add(StandardMaterial {
+                base_color: TERRAIN_MATERIAL_COLOR_MEADOW_SAND,
+                ..default()
+            }),
             ChunkType::Water => materials.add(StandardMaterial {
                 base_color: TERRAIN_MATERIAL_COLOR_MEADOW_WATER,
                 ..default()
@@ -118,6 +128,10 @@ fn get_or_create_terrain_material(
         Biome::Snow => match chunk_type {
             ChunkType::Grass => materials.add(StandardMaterial {
                 base_color: TERRAIN_MATERIAL_COLOR_SNOW_GRASS,
+                ..default()
+            }),
+            ChunkType::Sand => materials.add(StandardMaterial {
+                base_color: TERRAIN_MATERIAL_COLOR_SNOW_SAND,
                 ..default()
             }),
             ChunkType::Water => materials.add(StandardMaterial {

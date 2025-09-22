@@ -28,10 +28,7 @@ fn spawn_actor_system(
     mut evw_actor_spawned: EventWriter<ActorSpawned>,
 ) {
     for event in actor_events.read() {
-        let entity = commands.spawn((
-            event.actor_type,
-            Transform::from_translation(event.position),
-        ));
+        let entity = commands.spawn((event.actor_type, event.transform));
         evw_actor_spawned.write(ActorSpawned {
             actor_type: event.actor_type,
             entity: entity.id(),
@@ -55,7 +52,7 @@ pub enum ActorType {
 #[derive(Event, Clone, Debug)]
 pub struct SpawnActor {
     pub actor_type: ActorType,
-    pub position: Vec3,
+    pub transform: Transform,
 }
 
 #[derive(Event, Clone, Debug)]

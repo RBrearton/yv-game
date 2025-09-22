@@ -42,9 +42,10 @@ fn despawn_actor_system(mut commands: Commands, mut actor_events: EventReader<De
     }
 }
 
-#[derive(Component, Copy, Clone, Debug, Eq, PartialEq)]
+#[derive(Component, Copy, Clone, Default, Debug, Eq, PartialEq)]
 #[require(Transform)]
 pub enum ActorType {
+    #[default]
     Tree,
     Player,
 }

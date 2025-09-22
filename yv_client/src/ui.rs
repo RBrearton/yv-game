@@ -1,8 +1,9 @@
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts, EguiPrimaryContextPass};
 use egui::DragValue;
-use yv_core::terrain::{
-    AddTerrainChunk, Biome, ChunkType, ProcedurallyGenerateTerrain, TerrainIndex,
+use yv_core::{
+    actor::{ActorType, SpawnActor},
+    terrain::{AddTerrainChunk, Biome, ChunkType, ProcedurallyGenerateTerrain, TerrainIndex},
 };
 
 use crate::{
@@ -36,6 +37,12 @@ pub(super) trait UiExtensions {
         ingame_debug_data: &mut IngameDebugData,
         add_terrain: &mut EventWriter<AddTerrainChunk>,
         generate_terrain: &mut EventWriter<ProcedurallyGenerateTerrain>,
+    );
+
+    fn actor_input_section(
+        &mut self,
+        data: &mut IngameDebugData,
+        add_actor: &mut EventWriter<SpawnActor>,
     );
 
     /// The entire camera section of the ingame debug window.
@@ -100,6 +107,34 @@ impl UiExtensions for egui::Ui {
                 ui.add(DragValue::new(&mut free_camera_state.sprint_modifier));
                 ui.label("Is sprinting");
                 ui.checkbox(&mut free_camera_state.is_sprinting, "Sprint");
+            });
+        }
+    }
+
+    fn actor_input_section(
+        &mut self,
+        data: &mut IngameDebugData,
+        add_actor: &mut EventWriter<SpawnActor>,
+    ) {
+        self.heading("Actor");
+
+        self.horizontal(|ui| {
+            ui.label("X");
+            ui.add(DragValue::new(&mut data.add_actor_x));
+            ui.label("Y");
+            ui.add(DragValue::new(&mut data.add_actor_y));
+            ui.label("Actor type:");
+            ui.selectable_value(&mut data.add_actor_actor_type, ActorType::Tree, "Tree");
+            ui.selectable_value(&mut data.add_actor_actor_type, ActorType::Player, "Player");
+        });
+        if self.button("Add actor").clicked() {
+            add_actor.write(SpawnActor {
+                actor_type: data.add_actor_actor_type,
+                transform: Transform::from_translation(Vec3::new(
+                    data.add_actor_x,
+                    data.add_actor_y,
+                    0.0, // Z axis is currently unused.
+                )),
             });
         }
     }
@@ -189,6 +224,10 @@ fn login_window(mut contexts: EguiContexts, mut scene_state: ResMut<NextState<Yv
 
 #[derive(Resource, Default)]
 pub(super) struct IngameDebugData {
+    add_actor_x: f32,
+    add_actor_y: f32,
+    add_actor_actor_type: ActorType,
+
     bulk_add_terrain_start_x: i32,
     bulk_add_terrain_start_y: i32,
     bulk_add_terrain_end_x: i32,
@@ -200,12 +239,14 @@ pub(super) struct IngameDebugData {
 }
 
 /// Ingame debug window.
+#[allow(clippy::too_many_arguments)]
 fn ingame_debug_window(
     mut contexts: EguiContexts,
     mut add_terrain: EventWriter<AddTerrainChunk>,
     mut generate_terrain: EventWriter<ProcedurallyGenerateTerrain>,
     mut ingame_debug_data: ResMut<IngameDebugData>,
     mut free_camera_state: ResMut<FreeCameraState>,
+    mut add_actor: EventWriter<SpawnActor>,
     camera_mode: Res<State<CameraMode>>,
     next_camera_mode: ResMut<NextState<CameraMode>>,
 ) -> Result {
@@ -214,6 +255,8 @@ fn ingame_debug_window(
         .collapsible(true);
 
     ingame_debug_window.show(contexts.ctx_mut()?, |ui| {
+        ui.actor_input_section(&mut ingame_debug_data, &mut add_actor);
+        ui.separator();
         ui.camera_section(&mut free_camera_state, camera_mode, next_camera_mode);
         ui.separator();
         ui.terrain_chunk_input_section(

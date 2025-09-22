@@ -9,6 +9,7 @@ pub struct YvCorePlugins;
 
 impl Plugin for YvCorePlugins {
     fn build(&self, app: &mut App) {
-        app.add_plugins(terrain::TerrainPlugin);
+        app.add_plugins(terrain::TerrainPlugin)
+            .add_plugins(actor::ActorPlugin);
     }
 }

@@ -29,11 +29,11 @@ fn spawn_actor_system(
 ) {
     for event in actor_events.read() {
         let entity = commands.spawn((
-            event.actor_type.clone(),
+            event.actor_type,
             Transform::from_translation(event.position),
         ));
         evw_actor_spawned.write(ActorSpawned {
-            actor_type: event.actor_type.clone(),
+            actor_type: event.actor_type,
             entity: entity.id(),
         });
     }
@@ -45,7 +45,7 @@ fn despawn_actor_system(mut commands: Commands, mut actor_events: EventReader<De
     }
 }
 
-#[derive(Component, Clone, Debug, Eq, PartialEq)]
+#[derive(Component, Copy, Clone, Debug, Eq, PartialEq)]
 #[require(Transform)]
 pub enum ActorType {
     Tree,

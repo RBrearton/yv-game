@@ -8,7 +8,10 @@
 
 use bevy::prelude::*;
 use hashbrown::HashMap;
-use yv_core::terrain::{Biome, ChunkType, TerrainChunkSpawned};
+use yv_core::{
+    actor::{ActorSpawned, ActorType},
+    terrain::{Biome, ChunkType, TerrainChunkSpawned},
+};
 
 use crate::well_known_terms::{
     TERRAIN_MATERIAL_COLOR_MEADOW_GRASS, TERRAIN_MATERIAL_COLOR_MEADOW_SAND,
@@ -31,7 +34,41 @@ pub struct GraphicsPlugin;
 impl Plugin for GraphicsPlugin {
     fn build(&self, app: &mut App) {
         app.init_resource::<TerrainAssets>();
-        app.add_systems(Update, attach_terrain_meshes);
+        app.add_systems(
+            Update,
+            (
+                attach_terrain_meshes.run_if(on_event::<TerrainChunkSpawned>),
+                attach_actor_meshes.run_if(on_event::<ActorSpawned>),
+            ),
+        );
+    }
+}
+
+fn attach_actor_meshes(
+    mut commands: Commands,
+    mut evr_spawned: EventReader<ActorSpawned>,
+    mut meshes: ResMut<Assets<Mesh>>,
+    mut materials: ResMut<Assets<StandardMaterial>>,
+) {
+    for event in evr_spawned.read() {
+        let actor_type = event.actor_type;
+        let mesh = match actor_type {
+            ActorType::Tree => meshes.add(Cylinder::new(2.0, 3.0)),
+            ActorType::Player => meshes.add(Capsule3d::new(0.8, 1.8)),
+        };
+        let material = match actor_type {
+            ActorType::Tree => materials.add(StandardMaterial {
+                base_color: Color::srgb(0.4, 0.8, 0.3),
+                ..default()
+            }),
+            ActorType::Player => materials.add(StandardMaterial {
+                base_color: Color::WHITE,
+                ..default()
+            }),
+        };
+        commands
+            .entity(event.entity)
+            .insert((Mesh3d(mesh), MeshMaterial3d(material)));
     }
 }
 

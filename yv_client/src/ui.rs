@@ -83,6 +83,10 @@ impl UiExtensions for egui::Ui {
             self.add_space(8.0);
             self.heading("Camera details");
             self.horizontal(|ui| {
+                ui.checkbox(&mut free_camera_state.is_sprinting, "Is sprinting");
+            });
+            self.add_space(4.0);
+            self.horizontal(|ui| {
                 ui.label("X");
                 ui.add(DragValue::new(&mut free_camera_state.translation.x));
                 ui.label("Y");
@@ -105,8 +109,6 @@ impl UiExtensions for egui::Ui {
                 ui.add(DragValue::new(&mut free_camera_state.base_speed));
                 ui.label("Sprint modifier");
                 ui.add(DragValue::new(&mut free_camera_state.sprint_modifier));
-                ui.label("Is sprinting");
-                ui.checkbox(&mut free_camera_state.is_sprinting, "Sprint");
             });
         }
     }
@@ -146,7 +148,7 @@ impl UiExtensions for egui::Ui {
         generate_terrain: &mut EventWriter<ProcedurallyGenerateTerrain>,
     ) {
         // Terrain chunk debugging.
-        self.heading("Terrain chunk");
+        self.heading("Terrain");
 
         // Batch generation.
         self.horizontal(|ui| {

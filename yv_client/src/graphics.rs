@@ -89,12 +89,16 @@ fn attach_terrain_meshes(
             &mut terrain_assets,
         );
 
-        // Attach rendering components to the existing entity.
-        commands.entity(event.entity).insert((
-            Mesh3d(mesh),
-            MeshMaterial3d(material),
-            event.transform(),
-        ));
+        // The mesh is centered at the origin, so we need to offset it down by half the thickness.
+        let mut child_transform = Transform::from_translation(Vec3::ZERO);
+        child_transform.translation.z -= TERRAIN_MESH_THICKNESS / 2.0;
+        commands.entity(event.entity).with_children(|parent| {
+            parent.spawn((
+                Mesh3d(mesh),             // The mesh to render for this terrain chunk.
+                MeshMaterial3d(material), // The material to use for rendering.
+                child_transform,          // The transform for positioning the mesh.
+            ));
+        });
     }
 }
 

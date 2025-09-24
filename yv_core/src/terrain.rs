@@ -39,7 +39,13 @@ fn add_terrain_chunks(
 ) {
     for event in chunk_events.read() {
         // Spawn the chunk, and add its ID to the TerrainChunks resource.
-        let new_chunk_id = commands.spawn(event.get_chunk()).id();
+        let new_chunk_id = commands
+            .spawn((
+                event.get_chunk(),
+                event.get_chunk().index.to_transform(),
+                InheritedVisibility::VISIBLE,
+            ))
+            .id();
         terrain_chunks.chunks.insert(event.index, new_chunk_id);
         spawned_events.write(TerrainChunkSpawned {
             data: event.get_chunk(),

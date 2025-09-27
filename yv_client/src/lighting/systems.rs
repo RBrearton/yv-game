@@ -1,3 +1,5 @@
+use bevy::pbr::CascadeShadowConfig;
+use bevy::pbr::CascadeShadowConfigBuilder;
 use bevy::prelude::*;
 
 use crate::lighting::events::*;
@@ -21,6 +23,11 @@ pub(super) fn spawn_directional_light(
                 shadow_normal_bias: config.shadow_normal_bias,
                 color: event.color,
             },
+            CascadeShadowConfigBuilder {
+                num_cascades: config.num_shadow_cascades,
+                ..default()
+            }
+            .build(),
             transform,
         ));
     }
@@ -54,6 +61,7 @@ pub(super) fn update_lighting_on_config_change(
     lighting: Res<LightingConfig>,
     mut point_lights: Query<&mut PointLight>,
     mut directional_lights: Query<&mut DirectionalLight>,
+    mut cascade_shadows: Query<&mut CascadeShadowConfig>,
 ) {
     if lighting.is_changed() {
         // Update lighting config for all point lights.
@@ -71,6 +79,15 @@ pub(super) fn update_lighting_on_config_change(
                 lighting.affect_lightmapped_mesh_diffuse;
             directional_light.shadow_depth_bias = lighting.shadow_depth_bias;
             directional_light.shadow_normal_bias = lighting.shadow_normal_bias;
+        }
+
+        // Rebuild the cascade shadows.
+        for mut cascade_shadow in cascade_shadows.iter_mut() {
+            *cascade_shadow = CascadeShadowConfigBuilder {
+                num_cascades: lighting.num_shadow_cascades,
+                ..default()
+            }
+            .build();
         }
     }
 }

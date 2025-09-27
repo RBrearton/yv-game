@@ -10,8 +10,8 @@ pub const TERRAIN_MESH_WIDTH: f32 = TERRAIN_CHUNK_SIZE - TERRAIN_EPSILON;
 pub mod materials {
     pub mod actor {
         use bevy::prelude::*;
-        pub const TREE_TRUNK_COLOR: Color = Color::srgb(0.4, 0.8, 0.3);
-        pub const TREE_TOP_COLOR: Color = Color::srgb(0.4, 0.8, 0.3);
+        pub const TREE_TRUNK_COLOR: Color = Color::srgb(0.54, 0.27, 0.08);
+        pub const TREE_TOP_COLOR: Color = Color::srgb(0.38, 0.54, 0.24);
         pub const HUMAN_COLOR: Color = Color::WHITE;
     }
 

@@ -55,10 +55,23 @@ fn render_actors(
             }
             ActorType::Tree => {
                 // Create a child entity of the tree entity.
+                let trunk_height = meshes::TREE_TRUNK_HEIGHT;
+                let top_section_height = meshes::TREE_TOP_RADIUS * 2.0;
+                let mut trunk_transform = Transform::from_translation(Vec3::ZERO);
+                trunk_transform.translation.z += trunk_height / 2.0;
+                trunk_transform.rotate_x(-PI / 2.0);
+                let mut top_transform = Transform::from_translation(Vec3::ZERO);
+                top_transform.translation.z += trunk_height + top_section_height / 2.0;
                 entity.with_children(|parent| {
                     parent.spawn((
                         Mesh3d(actor_meshes.tree_trunk.clone()),
                         MeshMaterial3d(actor_materials.tree_trunk.clone()),
+                        trunk_transform,
+                    ));
+                    parent.spawn((
+                        Mesh3d(actor_meshes.tree_top.clone()),
+                        MeshMaterial3d(actor_materials.tree_top.clone()),
+                        top_transform,
                     ));
                 });
             }

@@ -25,3 +25,11 @@ pub mod camera {
     pub const DEFAULT_YAW: f32 = 0.0;
     pub const DEFAULT_POSITION: Vec3 = Vec3::ZERO;
 }
+
+pub mod meshes {
+    pub const HUMAN_RADIUS: f32 = 0.8;
+    pub const HUMAN_HEIGHT: f32 = 1.8;
+    pub const TREE_TRUNK_RADIUS: f32 = 0.4;
+    pub const TREE_TRUNK_HEIGHT: f32 = 2.0;
+    pub const TREE_TOP_RADIUS: f32 = 1.5;
+}

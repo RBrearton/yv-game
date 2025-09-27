@@ -125,6 +125,35 @@ impl UiExtensions for egui::Ui {
                 intensity: data.add_directional_light_intensity,
             });
         }
+        self.add_space(8.0);
+        self.heading("Add point light");
+        self.horizontal(|ui| {
+            ui.label("X");
+            ui.add(DragValue::new(&mut data.add_point_light_position.x));
+            ui.label("Y");
+            ui.add(DragValue::new(&mut data.add_point_light_position.y));
+            ui.label("Z");
+            ui.add(DragValue::new(&mut data.add_point_light_position.z));
+            ui.label("Radius");
+            ui.add(DragValue::new(&mut data.add_point_light_radius));
+        });
+        self.horizontal(|ui| {
+            ui.label("Range");
+            ui.add(DragValue::new(&mut data.add_point_light_range));
+            ui.label("Color");
+            ui.color_edit_button_rgb(&mut data.add_point_light_color);
+            ui.label("Intensity");
+            ui.add(DragValue::new(&mut data.add_point_light_intensity));
+        });
+        if self.button("Add").clicked() {
+            add_point_light.write(AddPointLight {
+                position: data.add_point_light_position,
+                range: data.add_point_light_range,
+                radius: data.add_point_light_radius,
+                color: Color::srgb_from_array(data.add_point_light_color),
+                intensity: data.add_point_light_intensity,
+            });
+        }
     }
 
     fn camera_section(
@@ -324,10 +353,10 @@ impl Default for IngameDebugData {
             add_directional_light_color: Color::WHITE.to_srgba().to_f32_array_no_alpha(),
             add_directional_light_intensity: light_consts::lux::OVERCAST_DAY,
             add_point_light_position: Vec3::ZERO,
-            add_point_light_range: 10.0,
+            add_point_light_range: 100.0,
             add_point_light_radius: 1.0,
             add_point_light_color: Color::WHITE.to_srgba().to_f32_array_no_alpha(),
-            add_point_light_intensity: light_consts::lux::HALLWAY,
+            add_point_light_intensity: light_consts::lux::OVERCAST_DAY,
 
             add_actor_x: 0.0,
             add_actor_y: 0.0,

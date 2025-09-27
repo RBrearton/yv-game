@@ -17,8 +17,8 @@ impl Plugin for LightingPlugin {
             Update,
             (
                 update_lighting_on_config_change,
-                spawn_directional_light,
-                spawn_point_light,
+                spawn_directional_light.run_if(on_event::<AddDirectionalLight>),
+                spawn_point_light.run_if(on_event::<AddPointLight>),
             )
                 .in_set(LightingUpdateSystems),
         );

@@ -6,14 +6,16 @@
 //! This reduces memory usage and improves rendering performance through Bevy's automatic
 //! instancing.
 
+use std::f32::consts::PI;
+
 use bevy::prelude::*;
 use yv_core::{
     actor::{ActorSpawned, ActorType},
     terrain::{Biome, ChunkType, TerrainChunkSpawned},
 };
 
-use crate::meshes::Meshes;
 use crate::{materials::resources::*, well_known_terms::TERRAIN_MESH_THICKNESS};
+use crate::{meshes::Meshes, well_known_terms::meshes};
 
 pub struct GraphicsPlugin;
 impl Plugin for GraphicsPlugin {
@@ -39,10 +41,15 @@ fn render_actors(
         match event.actor_type {
             ActorType::Player => {
                 // Create a child entity of the player entity.
+                let mut child_transform = Transform::from_translation(Vec3::ZERO);
+                let human_mesh_height = meshes::HUMAN_HEIGHT + 2.0 * meshes::HUMAN_RADIUS;
+                child_transform.translation.z += human_mesh_height / 2.0;
+                child_transform.rotate_x(-PI / 2.0); // Because mesh goes along y by default.
                 entity.with_children(|parent| {
                     parent.spawn((
                         Mesh3d(actor_meshes.player.clone()),
                         MeshMaterial3d(actor_materials.human.clone()),
+                        child_transform,
                     ));
                 });
             }

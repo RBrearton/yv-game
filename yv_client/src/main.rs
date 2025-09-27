@@ -8,11 +8,15 @@ use graphics::GraphicsPlugin;
 use scenes::ScenesPlugin;
 use ui::UIPlugin;
 
-use crate::{inputs::InputsPlugin, materials::MaterialsPlugin, meshes::MeshesPlugin};
+use crate::{
+    inputs::InputsPlugin, lighting::plugin::LightingPlugin, materials::MaterialsPlugin,
+    meshes::MeshesPlugin,
+};
 
 mod camera;
 mod graphics;
 mod inputs;
+mod lighting;
 mod materials;
 mod meshes;
 mod scenes;
@@ -24,6 +28,7 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugins(EguiPlugin::default())
         .add_plugins(YvCorePlugins)
+        .add_plugins(LightingPlugin)
         .add_plugins(MaterialsPlugin)
         .add_plugins(MeshesPlugin)
         .add_plugins(GraphicsPlugin)

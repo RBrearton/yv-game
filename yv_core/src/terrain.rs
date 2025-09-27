@@ -267,6 +267,7 @@ impl Biome {
 }
 
 #[derive(Component, Clone, Debug, Eq, PartialEq)]
+#[require(Transform, InheritedVisibility)]
 pub struct TerrainChunk {
     pub index: TerrainIndex,
     pub chunk_type: ChunkType,

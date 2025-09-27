@@ -7,87 +7,79 @@
 //! instancing.
 
 use bevy::prelude::*;
-use hashbrown::HashMap;
 use yv_core::{
     actor::{ActorSpawned, ActorType},
     terrain::{Biome, ChunkType, TerrainChunkSpawned},
 };
 
-use crate::well_known_terms::{
-    TERRAIN_MATERIAL_COLOR_MEADOW_GRASS, TERRAIN_MATERIAL_COLOR_MEADOW_SAND,
-    TERRAIN_MATERIAL_COLOR_MEADOW_WATER, TERRAIN_MATERIAL_COLOR_SNOW_GRASS,
-    TERRAIN_MATERIAL_COLOR_SNOW_SAND, TERRAIN_MATERIAL_COLOR_SNOW_WATER, TERRAIN_MESH_THICKNESS,
-    TERRAIN_MESH_WIDTH,
-};
-
-/// Resource that caches mesh and material handles to avoid creating duplicate assets.
-/// This enables Bevy's automatic instancing for better performance.
-#[derive(Resource, Default)]
-struct TerrainAssets {
-    /// Cached mesh handles for different terrain chunk types.
-    meshes: HashMap<ChunkType, Handle<Mesh>>,
-    /// Cached material handles for different biome-chunk combinations.
-    materials: HashMap<(Biome, ChunkType), Handle<StandardMaterial>>,
-}
+use crate::meshes::Meshes;
+use crate::{materials::resources::*, well_known_terms::TERRAIN_MESH_THICKNESS};
 
 pub struct GraphicsPlugin;
 impl Plugin for GraphicsPlugin {
     fn build(&self, app: &mut App) {
-        app.init_resource::<TerrainAssets>();
         app.add_systems(
             Update,
             (
-                attach_terrain_meshes.run_if(on_event::<TerrainChunkSpawned>),
-                attach_actor_meshes.run_if(on_event::<ActorSpawned>),
+                render_terrain.run_if(on_event::<TerrainChunkSpawned>),
+                render_actors.run_if(on_event::<ActorSpawned>),
             ),
         );
     }
 }
 
-fn attach_actor_meshes(
+fn render_actors(
     mut commands: Commands,
     mut evr_spawned: EventReader<ActorSpawned>,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<StandardMaterial>>,
+    actor_meshes: Res<Meshes>,
+    actor_materials: Res<ActorMaterials>,
 ) {
     for event in evr_spawned.read() {
-        let actor_type = event.actor_type;
-        let mesh = match actor_type {
-            ActorType::Tree => meshes.add(Cylinder::new(2.0, 3.0)),
-            ActorType::Player => meshes.add(Capsule3d::new(0.8, 1.8)),
-        };
-        let material = match actor_type {
-            ActorType::Tree => materials.add(StandardMaterial {
-                base_color: Color::srgb(0.4, 0.8, 0.3),
-                ..default()
-            }),
-            ActorType::Player => materials.add(StandardMaterial {
-                base_color: Color::WHITE,
-                ..default()
-            }),
-        };
-        commands
-            .entity(event.entity)
-            .insert((Mesh3d(mesh), MeshMaterial3d(material)));
+        let mut entity = commands.entity(event.entity);
+        match event.actor_type {
+            ActorType::Player => {
+                // Create a child entity of the player entity.
+                entity.with_children(|parent| {
+                    parent.spawn((
+                        Mesh3d(actor_meshes.player.clone()),
+                        MeshMaterial3d(actor_materials.human.clone()),
+                    ));
+                });
+            }
+            ActorType::Tree => {
+                // Create a child entity of the tree entity.
+                entity.with_children(|parent| {
+                    parent.spawn((
+                        Mesh3d(actor_meshes.tree_trunk.clone()),
+                        MeshMaterial3d(actor_materials.tree_trunk.clone()),
+                    ));
+                });
+            }
+        }
     }
 }
 
-fn attach_terrain_meshes(
+fn render_terrain(
     mut commands: Commands,
     mut spawned_events: EventReader<TerrainChunkSpawned>,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<StandardMaterial>>,
-    mut terrain_assets: ResMut<TerrainAssets>,
+    meshes: Res<Meshes>,
+    materials: Res<TerrainMaterials>,
 ) {
     for event in spawned_events.read() {
         // Get or create the appropriate mesh and material based on chunk type and biome.
-        let mesh = get_or_create_terrain_mesh(event.chunk_type(), &mut meshes, &mut terrain_assets);
-        let material = get_or_create_terrain_material(
-            event.chunk_type(),
-            event.biome(),
-            &mut materials,
-            &mut terrain_assets,
-        );
+        let mesh = meshes.terrain.clone();
+        let material = match event.biome() {
+            Biome::Meadow => match event.chunk_type() {
+                ChunkType::Grass => materials.meadow_grass.clone(),
+                ChunkType::Sand => materials.meadow_sand.clone(),
+                ChunkType::Water => materials.meadow_water.clone(),
+            },
+            Biome::Snow => match event.chunk_type() {
+                ChunkType::Grass => materials.snow_grass.clone(),
+                ChunkType::Sand => materials.snow_sand.clone(),
+                ChunkType::Water => materials.snow_water.clone(),
+            },
+        };
 
         // The mesh is centered at the origin, so we need to offset it down by half the thickness.
         let mut child_transform = Transform::from_translation(Vec3::ZERO);
@@ -100,89 +92,4 @@ fn attach_terrain_meshes(
             ));
         });
     }
-}
-
-/// Gets or creates a cached mesh handle for the given chunk type.
-/// This ensures that identical terrain chunks share the same mesh asset.
-fn get_or_create_terrain_mesh(
-    chunk_type: ChunkType,
-    meshes: &mut ResMut<Assets<Mesh>>,
-    terrain_assets: &mut ResMut<TerrainAssets>,
-) -> Handle<Mesh> {
-    if let Some(handle) = terrain_assets.meshes.get(&chunk_type) {
-        return handle.clone();
-    }
-
-    // Create mesh based on chunk type.
-    let mesh = match chunk_type {
-        ChunkType::Grass => meshes.add(Cuboid::new(
-            TERRAIN_MESH_WIDTH,
-            TERRAIN_MESH_WIDTH,
-            TERRAIN_MESH_THICKNESS,
-        )),
-        ChunkType::Sand => meshes.add(Cuboid::new(
-            TERRAIN_MESH_WIDTH,
-            TERRAIN_MESH_WIDTH,
-            TERRAIN_MESH_THICKNESS,
-        )),
-        ChunkType::Water => meshes.add(Cuboid::new(
-            TERRAIN_MESH_WIDTH,
-            TERRAIN_MESH_WIDTH,
-            TERRAIN_MESH_THICKNESS,
-        )),
-    };
-
-    // Cache the handle for future use.
-    terrain_assets.meshes.insert(chunk_type, mesh.clone());
-    mesh
-}
-
-/// Gets or creates a cached material handle for the given biome and chunk type combination.
-/// This ensures that terrain chunks with identical appearance share the same material asset.
-fn get_or_create_terrain_material(
-    chunk_type: ChunkType,
-    biome: Biome,
-    materials: &mut ResMut<Assets<StandardMaterial>>,
-    terrain_assets: &mut ResMut<TerrainAssets>,
-) -> Handle<StandardMaterial> {
-    let key = (biome, chunk_type);
-    if let Some(handle) = terrain_assets.materials.get(&key) {
-        return handle.clone();
-    }
-
-    // Create material based on biome and chunk type.
-    let material = match biome {
-        Biome::Meadow => match chunk_type {
-            ChunkType::Grass => materials.add(StandardMaterial {
-                base_color: TERRAIN_MATERIAL_COLOR_MEADOW_GRASS,
-                ..default()
-            }),
-            ChunkType::Sand => materials.add(StandardMaterial {
-                base_color: TERRAIN_MATERIAL_COLOR_MEADOW_SAND,
-                ..default()
-            }),
-            ChunkType::Water => materials.add(StandardMaterial {
-                base_color: TERRAIN_MATERIAL_COLOR_MEADOW_WATER,
-                ..default()
-            }),
-        },
-        Biome::Snow => match chunk_type {
-            ChunkType::Grass => materials.add(StandardMaterial {
-                base_color: TERRAIN_MATERIAL_COLOR_SNOW_GRASS,
-                ..default()
-            }),
-            ChunkType::Sand => materials.add(StandardMaterial {
-                base_color: TERRAIN_MATERIAL_COLOR_SNOW_SAND,
-                ..default()
-            }),
-            ChunkType::Water => materials.add(StandardMaterial {
-                base_color: TERRAIN_MATERIAL_COLOR_SNOW_WATER,
-                ..default()
-            }),
-        },
-    };
-
-    // Cache the handle for future use.
-    terrain_assets.materials.insert(key, material.clone());
-    material
 }

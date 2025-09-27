@@ -8,11 +8,6 @@ use graphics::GraphicsPlugin;
 use scenes::ScenesPlugin;
 use ui::UIPlugin;
 
-use crate::{
-    inputs::InputsPlugin, lighting::plugin::LightingPlugin, materials::MaterialsPlugin,
-    meshes::MeshesPlugin,
-};
-
 mod camera;
 mod graphics;
 mod inputs;
@@ -22,6 +17,11 @@ mod meshes;
 mod scenes;
 mod ui;
 mod well_known_terms;
+
+use crate::{
+    inputs::InputsPlugin, lighting::plugin::LightingPlugin, materials::MaterialsPlugin,
+    meshes::MeshesPlugin,
+};
 
 fn main() {
     App::new()

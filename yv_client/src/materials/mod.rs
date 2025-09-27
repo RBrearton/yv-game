@@ -5,3 +5,5 @@ pub mod plugin;
 pub mod resources;
 pub mod system_sets;
 pub mod systems;
+
+pub use plugin::MaterialsPlugin;

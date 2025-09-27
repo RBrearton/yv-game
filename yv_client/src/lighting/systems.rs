@@ -11,7 +11,7 @@ pub(super) fn spawn_directional_light(
     for event in evr_add_directional_light.read() {
         let mut transform = Transform::default();
         transform.rotate_z(event.yaw);
-        transform.rotate_x(event.pitch);
+        transform.rotate_y(event.pitch);
         commands.spawn((
             DirectionalLight {
                 illuminance: event.intensity,

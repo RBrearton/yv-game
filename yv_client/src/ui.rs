@@ -224,7 +224,7 @@ fn login_window(mut contexts: EguiContexts, mut scene_state: ResMut<NextState<Yv
     Ok(())
 }
 
-#[derive(Resource, Default)]
+#[derive(Resource)]
 pub(super) struct IngameDebugData {
     add_actor_x: f32,
     add_actor_y: f32,
@@ -238,6 +238,25 @@ pub(super) struct IngameDebugData {
     add_terrain_chunk_y: i32,
     add_terrain_chunk_chunk_type: ChunkType,
     add_terrain_chunk_biome: Biome,
+}
+impl Default for IngameDebugData {
+    /// Set the default values for the UI state.
+    fn default() -> Self {
+        Self {
+            add_actor_x: 0.0,
+            add_actor_y: 0.0,
+            add_actor_actor_type: ActorType::Tree,
+
+            bulk_add_terrain_start_x: -50,
+            bulk_add_terrain_start_y: -50,
+            bulk_add_terrain_end_x: 50,
+            bulk_add_terrain_end_y: 50,
+            add_terrain_chunk_x: 0,
+            add_terrain_chunk_y: 0,
+            add_terrain_chunk_chunk_type: ChunkType::Grass,
+            add_terrain_chunk_biome: Biome::Meadow,
+        }
+    }
 }
 
 /// Ingame debug window.

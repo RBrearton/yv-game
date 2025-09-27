@@ -17,7 +17,6 @@ mod materials;
 mod meshes;
 mod scenes;
 mod ui;
-mod utils;
 mod well_known_terms;
 
 fn main() {

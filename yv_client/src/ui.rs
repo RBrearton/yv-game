@@ -1,3 +1,5 @@
+use std::f32::consts::PI;
+
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts, EguiPrimaryContextPass};
 use egui::DragValue;
@@ -8,6 +10,10 @@ use yv_core::{
 
 use crate::{
     camera::{CameraMode, FreeCameraState},
+    lighting::{
+        events::{AddDirectionalLight, AddPointLight},
+        resources::LightingConfig,
+    },
     scenes::YvScene,
 };
 
@@ -45,6 +51,14 @@ pub(super) trait UiExtensions {
         add_actor: &mut EventWriter<SpawnActor>,
     );
 
+    fn lighting_section(
+        &mut self,
+        lighting_config: ResMut<LightingConfig>,
+        data: &mut IngameDebugData,
+        add_directional_light: &mut EventWriter<AddDirectionalLight>,
+        add_point_light: &mut EventWriter<AddPointLight>,
+    );
+
     /// The entire camera section of the ingame debug window.
     fn camera_section(
         &mut self,
@@ -59,6 +73,58 @@ impl UiExtensions for egui::Ui {
             [self.available_width() * 0.8, 36.0],
             egui::Button::new(egui::RichText::new(text).size(16.0).strong()),
         )
+    }
+
+    fn lighting_section(
+        &mut self,
+        mut lighting_config: ResMut<LightingConfig>,
+        data: &mut IngameDebugData,
+        add_directional_light: &mut EventWriter<AddDirectionalLight>,
+        add_point_light: &mut EventWriter<AddPointLight>,
+    ) {
+        self.heading("Lighting");
+        self.horizontal(|ui| {
+            ui.checkbox(&mut lighting_config.shadows_enabled, "Shadows enabled");
+            ui.checkbox(
+                &mut lighting_config.affect_lightmapped_mesh_diffuse,
+                "Affect lightmapped mesh diffuse",
+            );
+        });
+        self.horizontal(|ui| {
+            ui.label("Shadow map near Z");
+            ui.add(DragValue::new(&mut lighting_config.shadow_map_near_z));
+            ui.label("Depth bias");
+            ui.add(DragValue::new(&mut lighting_config.shadow_depth_bias));
+            ui.label("Normal bias");
+            ui.add(DragValue::new(&mut lighting_config.shadow_normal_bias));
+        });
+        self.horizontal(|ui| {
+            ui.label("Num cascades");
+            ui.add(DragValue::new(&mut lighting_config.num_shadow_cascades));
+            ui.label("Shadow map size");
+            ui.add(DragValue::new(
+                &mut lighting_config.directional_shadow_map_size,
+            ));
+        });
+        self.heading("Add directional light");
+        self.horizontal(|ui| {
+            ui.label("Yaw");
+            ui.add(DragValue::new(&mut data.add_directional_light_yaw));
+            ui.label("Pitch");
+            ui.add(DragValue::new(&mut data.add_directional_light_pitch));
+            ui.label("Color");
+            ui.color_edit_button_rgb(&mut data.add_directional_light_color);
+            ui.label("Intensity");
+            ui.add(DragValue::new(&mut data.add_directional_light_intensity));
+        });
+        if self.button("Add").clicked() {
+            add_directional_light.write(AddDirectionalLight {
+                yaw: data.add_directional_light_yaw,
+                pitch: data.add_directional_light_pitch,
+                color: Color::srgb_from_array(data.add_directional_light_color),
+                intensity: data.add_directional_light_intensity,
+            });
+        }
     }
 
     fn camera_section(
@@ -226,6 +292,16 @@ fn login_window(mut contexts: EguiContexts, mut scene_state: ResMut<NextState<Yv
 
 #[derive(Resource)]
 pub(super) struct IngameDebugData {
+    add_directional_light_yaw: f32,
+    add_directional_light_pitch: f32,
+    add_directional_light_color: [f32; 3],
+    add_directional_light_intensity: f32,
+    add_point_light_position: Vec3,
+    add_point_light_range: f32,
+    add_point_light_radius: f32,
+    add_point_light_color: [f32; 3],
+    add_point_light_intensity: f32,
+
     add_actor_x: f32,
     add_actor_y: f32,
     add_actor_actor_type: ActorType,
@@ -243,6 +319,16 @@ impl Default for IngameDebugData {
     /// Set the default values for the UI state.
     fn default() -> Self {
         Self {
+            add_directional_light_yaw: PI / 4.0,
+            add_directional_light_pitch: PI / 4.0,
+            add_directional_light_color: Color::WHITE.to_srgba().to_f32_array_no_alpha(),
+            add_directional_light_intensity: light_consts::lux::OVERCAST_DAY,
+            add_point_light_position: Vec3::ZERO,
+            add_point_light_range: 10.0,
+            add_point_light_radius: 1.0,
+            add_point_light_color: Color::WHITE.to_srgba().to_f32_array_no_alpha(),
+            add_point_light_intensity: light_consts::lux::HALLWAY,
+
             add_actor_x: 0.0,
             add_actor_y: 0.0,
             add_actor_actor_type: ActorType::Tree,
@@ -268,6 +354,9 @@ fn ingame_debug_window(
     mut ingame_debug_data: ResMut<IngameDebugData>,
     mut free_camera_state: ResMut<FreeCameraState>,
     mut add_actor: EventWriter<SpawnActor>,
+    lighting_config: ResMut<LightingConfig>,
+    mut add_directional_light: EventWriter<AddDirectionalLight>,
+    mut add_point_light: EventWriter<AddPointLight>,
     camera_mode: Res<State<CameraMode>>,
     next_camera_mode: ResMut<NextState<CameraMode>>,
 ) -> Result {
@@ -277,6 +366,13 @@ fn ingame_debug_window(
 
     ingame_debug_window.show(contexts.ctx_mut()?, |ui| {
         ui.actor_input_section(&mut ingame_debug_data, &mut add_actor);
+        ui.separator();
+        ui.lighting_section(
+            lighting_config,
+            &mut ingame_debug_data,
+            &mut add_directional_light,
+            &mut add_point_light,
+        );
         ui.separator();
         ui.camera_section(&mut free_camera_state, camera_mode, next_camera_mode);
         ui.separator();

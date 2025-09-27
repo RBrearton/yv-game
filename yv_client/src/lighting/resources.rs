@@ -10,6 +10,7 @@ pub struct LightingConfig {
     pub shadow_map_near_z: f32,
     pub shadow_depth_bias: f32,
     pub shadow_normal_bias: f32,
+    pub directional_shadow_map_size: usize,
 }
 impl Default for LightingConfig {
     fn default() -> Self {
@@ -20,6 +21,7 @@ impl Default for LightingConfig {
             shadow_map_near_z: DEFAULT_SHADOW_MAP_NEAR_Z,
             shadow_depth_bias: DEFAULT_SHADOW_DEPTH_BIAS,
             shadow_normal_bias: DEFAULT_SHADOW_NORMAL_BIAS,
+            directional_shadow_map_size: DEFAULT_DIRECTIONAL_SHADOW_MAP_SIZE,
         }
     }
 }

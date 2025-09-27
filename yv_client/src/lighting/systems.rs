@@ -1,5 +1,6 @@
 use bevy::pbr::CascadeShadowConfig;
 use bevy::pbr::CascadeShadowConfigBuilder;
+use bevy::pbr::DirectionalLightShadowMap;
 use bevy::prelude::*;
 
 use crate::lighting::events::*;
@@ -59,11 +60,15 @@ pub(super) fn spawn_point_light(
 /// This system updates lighting after a lighting config change.
 pub(super) fn update_lighting_on_config_change(
     lighting: Res<LightingConfig>,
+    mut directional_light_shadow_map: ResMut<DirectionalLightShadowMap>,
     mut point_lights: Query<&mut PointLight>,
     mut directional_lights: Query<&mut DirectionalLight>,
     mut cascade_shadows: Query<&mut CascadeShadowConfig>,
 ) {
     if lighting.is_changed() {
+        // Set the shadow map size for directional lights.
+        directional_light_shadow_map.size = lighting.directional_shadow_map_size;
+
         // Update lighting config for all point lights.
         for mut point_light in point_lights.iter_mut() {
             point_light.shadows_enabled = lighting.shadows_enabled;

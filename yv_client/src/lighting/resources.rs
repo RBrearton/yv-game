@@ -1,0 +1,23 @@
+use bevy::prelude::*;
+
+use crate::lighting::well_known_terms::*;
+
+#[derive(Resource, Clone, Debug)]
+pub struct LightingConfig {
+    pub shadows_enabled: bool,
+    pub affect_lightmapped_mesh_diffuse: bool,
+    pub shadow_map_near_z: f32,
+    pub shadow_depth_bias: f32,
+    pub shadow_normal_bias: f32,
+}
+impl Default for LightingConfig {
+    fn default() -> Self {
+        Self {
+            shadows_enabled: true,
+            affect_lightmapped_mesh_diffuse: true,
+            shadow_map_near_z: DEFAULT_SHADOW_MAP_NEAR_Z,
+            shadow_depth_bias: DEFAULT_SHADOW_DEPTH_BIAS,
+            shadow_normal_bias: DEFAULT_SHADOW_NORMAL_BIAS,
+        }
+    }
+}

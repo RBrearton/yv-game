@@ -356,7 +356,7 @@ impl Default for IngameDebugData {
             add_point_light_range: 100.0,
             add_point_light_radius: 1.0,
             add_point_light_color: Color::WHITE.to_srgba().to_f32_array_no_alpha(),
-            add_point_light_intensity: light_consts::lux::OVERCAST_DAY,
+            add_point_light_intensity: light_consts::lux::FULL_DAYLIGHT,
 
             add_actor_x: 0.0,
             add_actor_y: 0.0,

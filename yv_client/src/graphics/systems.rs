@@ -89,22 +89,12 @@ pub fn render_terrain(
         let mut child_transform = Transform::from_translation(Vec3::ZERO);
         child_transform.translation.z -= TERRAIN_MESH_THICKNESS / 2.0;
         commands.entity(event.entity).with_children(|parent| {
-            parent
-                .spawn((
-                    Mesh3d(mesh),             // The mesh to render for this terrain chunk.
-                    MeshMaterial3d(material), // The material to use for rendering.
-                    child_transform,          // The transform for positioning the mesh.
-                ))
-                .observe(|mut trigger: Trigger<Pointer<Click>>| {
-                    println!("I was just clicked!");
-
-                    // Get the underlying pointer event data
-                    let click_event: &Pointer<Click> = trigger.event();
-                    println!("Click event: {:?}", click_event);
-
-                    // Stop the event from bubbling up the entity hierarchy
-                    trigger.propagate(false);
-                });
+            parent.spawn((
+                Pickable::default(),
+                Mesh3d(mesh),             // The mesh to render for this terrain chunk.
+                MeshMaterial3d(material), // The material to use for rendering.
+                child_transform,          // The transform for positioning the mesh.
+            ));
         });
     }
 }

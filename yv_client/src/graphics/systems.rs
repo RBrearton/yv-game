@@ -1,11 +1,3 @@
-//! # Graphics
-//! This module attached graphics to entities that are primarily controlled by yv_core.
-//!
-//! The graphics system optimizes asset usage by caching mesh and material handles
-//! rather than creating new assets for each terrain chunk.
-//! This reduces memory usage and improves rendering performance through Bevy's automatic
-//! instancing.
-
 use std::f32::consts::PI;
 
 use bevy::prelude::*;
@@ -14,23 +6,14 @@ use yv_core::{
     terrain::{Biome, ChunkType, TerrainChunkSpawned},
 };
 
-use crate::{materials::resources::*, well_known_terms::TERRAIN_MESH_THICKNESS};
-use crate::{meshes::Meshes, well_known_terms::meshes};
+use crate::{
+    materials::resources::{ActorMaterials, TerrainMaterials},
+    meshes::Meshes,
+    well_known_terms::*,
+};
 
-pub struct GraphicsPlugin;
-impl Plugin for GraphicsPlugin {
-    fn build(&self, app: &mut App) {
-        app.add_systems(
-            Update,
-            (
-                render_terrain.run_if(on_event::<TerrainChunkSpawned>),
-                render_actors.run_if(on_event::<ActorSpawned>),
-            ),
-        );
-    }
-}
-
-fn render_actors(
+/// The system ultimately responsible for attaching meshes and materials to actors.
+pub fn render_actors(
     mut commands: Commands,
     mut evr_spawned: EventReader<ActorSpawned>,
     actor_meshes: Res<Meshes>,
@@ -79,7 +62,8 @@ fn render_actors(
     }
 }
 
-fn render_terrain(
+/// The system ultimately responsible for attaching meshes and materials to terrain chunks.
+pub fn render_terrain(
     mut commands: Commands,
     mut spawned_events: EventReader<TerrainChunkSpawned>,
     meshes: Res<Meshes>,
@@ -105,11 +89,22 @@ fn render_terrain(
         let mut child_transform = Transform::from_translation(Vec3::ZERO);
         child_transform.translation.z -= TERRAIN_MESH_THICKNESS / 2.0;
         commands.entity(event.entity).with_children(|parent| {
-            parent.spawn((
-                Mesh3d(mesh),             // The mesh to render for this terrain chunk.
-                MeshMaterial3d(material), // The material to use for rendering.
-                child_transform,          // The transform for positioning the mesh.
-            ));
+            parent
+                .spawn((
+                    Mesh3d(mesh),             // The mesh to render for this terrain chunk.
+                    MeshMaterial3d(material), // The material to use for rendering.
+                    child_transform,          // The transform for positioning the mesh.
+                ))
+                .observe(|mut trigger: Trigger<Pointer<Click>>| {
+                    println!("I was just clicked!");
+
+                    // Get the underlying pointer event data
+                    let click_event: &Pointer<Click> = trigger.event();
+                    println!("Click event: {:?}", click_event);
+
+                    // Stop the event from bubbling up the entity hierarchy
+                    trigger.propagate(false);
+                });
         });
     }
 }

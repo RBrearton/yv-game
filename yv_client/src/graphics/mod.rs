@@ -7,7 +7,10 @@
 //! instancing.
 
 pub mod components;
+mod observers;
 pub mod plugin;
-pub mod systems;
+pub mod resources;
+mod systems;
+mod well_known_terms;
 
 pub use plugin::GraphicsPlugin;

@@ -27,6 +27,7 @@ fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
         .add_plugins(EguiPlugin::default())
+        .add_plugins(MeshPickingPlugin)
         .add_plugins(YvCorePlugins)
         .add_plugins(LightingPlugin)
         .add_plugins(MaterialsPlugin)
@@ -36,5 +37,9 @@ fn main() {
         .add_plugins(UIPlugin)
         .add_plugins(CameraPlugin)
         .add_plugins(InputsPlugin)
+        .insert_resource(MeshPickingSettings {
+            require_markers: true, // only pick things explicitly marked
+            ..default()
+        })
         .run();
 }

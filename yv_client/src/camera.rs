@@ -1,4 +1,8 @@
-use bevy::{input::mouse::MouseMotion, prelude::*};
+use bevy::{
+    core_pipeline::{bloom::Bloom, tonemapping::Tonemapping},
+    input::mouse::MouseMotion,
+    prelude::*,
+};
 use std::f32::consts;
 
 use crate::{inputs::InputMap, well_known_terms::camera};
@@ -24,7 +28,16 @@ impl Plugin for CameraPlugin {
 
 /// This system sets up the camera.
 fn setup_camera_system(mut commands: Commands) {
-    commands.spawn(Camera3d::default());
+    commands.spawn((
+        MeshPickingCamera,
+        Camera3d::default(),
+        Camera {
+            hdr: true,
+            ..default()
+        },
+        Tonemapping::TonyMcMapface,
+        Bloom::NATURAL,
+    ));
 }
 
 /// Fire this event to directly update the camera.

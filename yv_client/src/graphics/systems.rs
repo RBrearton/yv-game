@@ -7,6 +7,7 @@ use yv_core::{
 };
 
 use crate::{
+    graphics::components::HighlightOnHover,
     materials::resources::{ActorMaterials, TerrainMaterials},
     meshes::Meshes,
     well_known_terms::*,
@@ -90,7 +91,7 @@ pub fn render_terrain(
         child_transform.translation.z -= TERRAIN_MESH_THICKNESS / 2.0;
         commands.entity(event.entity).with_children(|parent| {
             parent.spawn((
-                Pickable::default(),
+                HighlightOnHover,
                 Mesh3d(mesh),             // The mesh to render for this terrain chunk.
                 MeshMaterial3d(material), // The material to use for rendering.
                 child_transform,          // The transform for positioning the mesh.

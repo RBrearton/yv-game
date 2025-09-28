@@ -11,8 +11,10 @@
         "**/external/**": true
     },
     "cSpell.words": [
+        "backfaces",
         "cerp",
         "clangd",
+        "colour",
         "DARKGRAY",
         "DCMAKE",
         "despawn",
@@ -24,8 +26,10 @@
         "lengthscale",
         "lerp",
         "lightmapped",
+        "Mapface",
         "MSVC",
         "Perlin",
+        "Pickable",
         "QUIC",
         "quinnet",
         "Raylib",
@@ -36,6 +40,7 @@
         "serde",
         "srgb",
         "srgba",
+        "Tonemapping",
         "winit",
         "yv"
     ],

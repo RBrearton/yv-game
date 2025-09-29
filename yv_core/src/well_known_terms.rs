@@ -9,3 +9,10 @@ pub const TERRAIN_SAND_CUTOFF: f32 = TERRAIN_WATER_CUTOFF + TERRAIN_SAND_EPSILON
 pub const TERRAIN_CHUNK_VARIATION_SCALE: f32 = 15.0;
 pub const TERRAIN_BIOME_VARIATION_SCALE: f32 = 15.0;
 pub const TERRAIN_BIOME_MEADOW_CUTOFF: f32 = 0.8;
+
+pub mod actors {
+    pub const TREE_TOTAL_RADIUS: f32 = 1.0;
+    pub const TREE_TOTAL_HEIGHT: f32 = 2.0;
+    pub const HUMAN_TOTAL_RADIUS: f32 = 0.8;
+    pub const HUMAN_TOTAL_HEIGHT: f32 = 1.8;
+}

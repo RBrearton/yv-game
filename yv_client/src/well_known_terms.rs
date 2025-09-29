@@ -38,9 +38,11 @@ pub mod camera {
 }
 
 pub mod meshes {
-    pub const HUMAN_RADIUS: f32 = 0.8;
-    pub const HUMAN_HEIGHT: f32 = 1.8;
+    use yv_core::well_known_terms::actors::*;
+
+    pub const HUMAN_RADIUS: f32 = HUMAN_TOTAL_RADIUS;
+    pub const HUMAN_HEIGHT: f32 = HUMAN_TOTAL_HEIGHT;
     pub const TREE_TRUNK_RADIUS: f32 = 0.4;
-    pub const TREE_TRUNK_HEIGHT: f32 = 2.0;
-    pub const TREE_TOP_RADIUS: f32 = 1.5;
+    pub const TREE_TRUNK_HEIGHT: f32 = TREE_TOTAL_HEIGHT - TREE_TOTAL_RADIUS;
+    pub const TREE_TOP_RADIUS: f32 = TREE_TOTAL_RADIUS;
 }

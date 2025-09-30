@@ -1,14 +1,14 @@
 use bevy::prelude::*;
 
-use crate::actor::events::*;
+use super::{components::*, events::*};
 
-pub fn spawn_actor_system(
+pub(super) fn spawn_actor_system(
     mut commands: Commands,
     mut actor_events: EventReader<SpawnActor>,
     mut evw_actor_spawned: EventWriter<ActorSpawned>,
 ) {
     for event in actor_events.read() {
-        let entity = commands.spawn((event.actor_type, event.transform));
+        let entity = commands.spawn((Actor::new(event.actor_type), event.transform));
         evw_actor_spawned.write(ActorSpawned {
             actor_type: event.actor_type,
             entity: entity.id(),
@@ -16,7 +16,10 @@ pub fn spawn_actor_system(
     }
 }
 
-pub fn despawn_actor_system(mut commands: Commands, mut actor_events: EventReader<DespawnActor>) {
+pub(super) fn despawn_actor_system(
+    mut commands: Commands,
+    mut actor_events: EventReader<DespawnActor>,
+) {
     for event in actor_events.read() {
         commands.entity(event.entity).despawn();
     }

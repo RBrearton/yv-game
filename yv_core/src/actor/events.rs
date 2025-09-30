@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::actor::components::*;
+use super::ActorType;
 
 #[derive(Event, Clone, Debug)]
 pub struct SpawnActor {

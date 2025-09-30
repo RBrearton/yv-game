@@ -52,26 +52,26 @@ impl Geometry {
             relative_transform,
         }
     }
-    pub fn new_cylinder(radius: f32, height: f32) -> Self {
+    pub fn new_cylinder(radius: f32, height: f32, relative_transform: Transform) -> Self {
         Self::new(
             GeometryType::Cylinder(Cylinder::new(radius, height)),
-            Transform::default(),
+            relative_transform,
         )
     }
-    pub fn new_sphere(radius: f32) -> Self {
+    pub fn new_sphere(radius: f32, relative_transform: Transform) -> Self {
         Self::new(
             GeometryType::Sphere(Sphere::new(radius)),
-            Transform::default(),
+            relative_transform,
         )
     }
-    pub fn new_capsule(radius: f32, height: f32) -> Self {
+    pub fn new_capsule(radius: f32, height: f32, relative_transform: Transform) -> Self {
         Self::new(
             GeometryType::Capsule(Capsule::new(radius, height)),
-            Transform::default(),
+            relative_transform,
         )
     }
-    pub fn new_box(size: Vec3) -> Self {
-        Self::new(GeometryType::Box(Box::new(size)), Transform::default())
+    pub fn new_box(size: Vec3, relative_transform: Transform) -> Self {
+        Self::new(GeometryType::Box(Box::new(size)), relative_transform)
     }
 }
 impl HasGeometryType for Geometry {

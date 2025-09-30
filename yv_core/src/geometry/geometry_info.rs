@@ -1,8 +1,6 @@
-use bevy::transform::components::Transform;
+use bevy::{math::Vec3, transform::components::Transform};
 
-use super::traits::*;
-
-use super::shapes::*;
+use super::{shapes::*, traits::*};
 
 /// The type of geometry that the object has.
 /// This is the local geometry of the object.
@@ -53,6 +51,27 @@ impl Geometry {
             geometry_type,
             relative_transform,
         }
+    }
+    pub fn new_cylinder(radius: f32, height: f32) -> Self {
+        Self::new(
+            GeometryType::Cylinder(Cylinder::new(radius, height)),
+            Transform::default(),
+        )
+    }
+    pub fn new_sphere(radius: f32) -> Self {
+        Self::new(
+            GeometryType::Sphere(Sphere::new(radius)),
+            Transform::default(),
+        )
+    }
+    pub fn new_capsule(radius: f32, height: f32) -> Self {
+        Self::new(
+            GeometryType::Capsule(Capsule::new(radius, height)),
+            Transform::default(),
+        )
+    }
+    pub fn new_box(size: Vec3) -> Self {
+        Self::new(GeometryType::Box(Box::new(size)), Transform::default())
     }
 }
 impl HasGeometryType for Geometry {

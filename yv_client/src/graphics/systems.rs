@@ -13,6 +13,17 @@ use crate::{
     well_known_terms::*,
 };
 
+// pub fn render_physical(
+//     mut commands: Commands,
+//     mut evr_spawned: EventReader<RenderableSpawned>,
+//     meshes: Res<Meshes>,
+//     materials: Res<AllMaterials>,
+// ) {
+//     for event in evr_spawned.read() {
+//         // ...
+//     }
+// }
+
 /// The system ultimately responsible for attaching meshes and materials to actors.
 pub fn render_actors(
     mut commands: Commands,

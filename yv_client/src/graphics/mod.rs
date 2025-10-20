@@ -11,6 +11,7 @@ mod observers;
 pub mod plugin;
 pub mod resources;
 mod systems;
+pub mod traits;
 mod well_known_terms;
 
 pub use plugin::GraphicsPlugin;

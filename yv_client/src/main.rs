@@ -14,13 +14,14 @@ mod inputs;
 mod lighting;
 mod materials;
 mod meshes;
+mod player;
 mod scenes;
 mod ui;
 mod well_known_terms;
 
 use crate::{
     inputs::InputsPlugin, lighting::plugin::LightingPlugin, materials::MaterialsPlugin,
-    meshes::MeshesPlugin,
+    meshes::MeshesPlugin, player::plugin::PlayerPlugin,
 };
 
 fn main() {
@@ -32,6 +33,7 @@ fn main() {
         .add_plugins(LightingPlugin)
         .add_plugins(MaterialsPlugin)
         .add_plugins(MeshesPlugin)
+        .add_plugins(PlayerPlugin)
         .add_plugins(GraphicsPlugin)
         .add_plugins(ScenesPlugin)
         .add_plugins(UIPlugin)

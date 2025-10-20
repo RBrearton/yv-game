@@ -1,5 +1,5 @@
-use avian3d::math::PI;
 use bevy::prelude::*;
+use std::f32::consts::PI;
 
 use super::traits::*;
 

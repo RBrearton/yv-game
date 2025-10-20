@@ -1,12 +1,12 @@
 use std::f32::consts::PI;
 
-use bevy::prelude::*;
-use bevy_egui::{egui, EguiContexts, EguiPrimaryContextPass};
-use egui::DragValue;
-use yv_core::{
+use crate::{
     actor::{ActorType, SpawnActor},
     terrain::{AddTerrainChunk, Biome, ChunkType, ProcedurallyGenerateTerrain, TerrainIndex},
 };
+use bevy::prelude::*;
+use bevy_egui::{egui, EguiContexts, EguiPrimaryContextPass};
+use egui::DragValue;
 
 use crate::{
     camera::{CameraMode, FreeCameraState},

@@ -1,27 +1,30 @@
 use bevy::prelude::*;
 use bevy_egui::EguiPlugin;
 
-use yv_core::YvCorePlugins;
-
 use camera::CameraPlugin;
 use graphics::GraphicsPlugin;
 use scenes::ScenesPlugin;
 use ui::UIPlugin;
 
+mod actor;
 mod camera;
+mod geometry;
 mod graphics;
 mod inputs;
 mod lighting;
 mod materials;
 mod meshes;
+mod noise;
 mod player;
 mod scenes;
+mod terrain;
 mod ui;
 mod well_known_terms;
 
 use crate::{
-    inputs::InputsPlugin, lighting::plugin::LightingPlugin, materials::MaterialsPlugin,
-    meshes::MeshesPlugin, player::plugin::PlayerPlugin,
+    actor::plugin::ActorPlugin, inputs::InputsPlugin, lighting::plugin::LightingPlugin,
+    materials::MaterialsPlugin, meshes::MeshesPlugin, player::plugin::PlayerPlugin,
+    terrain::TerrainPlugin,
 };
 
 fn main() {
@@ -29,7 +32,8 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugins(EguiPlugin::default())
         .add_plugins(MeshPickingPlugin)
-        .add_plugins(YvCorePlugins)
+        .add_plugins(ActorPlugin)
+        .add_plugins(TerrainPlugin)
         .add_plugins(LightingPlugin)
         .add_plugins(MaterialsPlugin)
         .add_plugins(MeshesPlugin)

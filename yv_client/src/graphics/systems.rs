@@ -1,10 +1,10 @@
 use std::f32::consts::PI;
 
-use bevy::prelude::*;
-use yv_core::{
+use crate::{
     actor::{ActorSpawned, ActorType},
     terrain::{Biome, ChunkType, TerrainChunkSpawned},
 };
+use bevy::prelude::*;
 
 use crate::{
     graphics::components::HighlightOnHover,

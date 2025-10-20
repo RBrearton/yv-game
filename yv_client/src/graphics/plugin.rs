@@ -1,5 +1,5 @@
+use crate::{actor::ActorSpawned, terrain::TerrainChunkSpawned};
 use bevy::prelude::*;
-use yv_core::{actor::ActorSpawned, terrain::TerrainChunkSpawned};
 
 use super::{observers::*, resources::*, systems::*};
 

@@ -1,7 +1,8 @@
-mod actor;
+mod identity;
 mod placement;
+mod traits;
 mod vector_3;
 
 pub mod prelude {
-    pub use crate::{placement::Placement, vector_3::Vector3};
+    pub use crate::{identity::Identity, placement::Placement, traits::*, vector_3::Vector3};
 }

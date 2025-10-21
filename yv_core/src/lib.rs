@@ -1,4 +1,7 @@
 mod actor;
 mod placement;
-pub mod prelude;
 mod vector_3;
+
+pub mod prelude {
+    pub use crate::{placement::Placement, vector_3::Vector3};
+}

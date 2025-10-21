@@ -1,5 +1,7 @@
 use crate::prelude::*;
 
+/// # Has placement
+/// The trait that must be implemented by anything that exists in game world space.
 pub trait HasPlacement {
     /// # Placement
     /// Returns a reference to the placement of the object.

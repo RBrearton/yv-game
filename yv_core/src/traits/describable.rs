@@ -4,5 +4,5 @@ pub trait Describable {
     /// # Description
     /// Returns the description of the object.
     /// This is used extensively by the client to produce things like tooltips, hover text, etc.
-    fn description(&self) -> String;
+    fn description(&self) -> &str;
 }

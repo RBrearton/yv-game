@@ -1,4 +1,6 @@
-use crate::{traits::HasDisplayName, well_known_terms};
+use serde::{Deserialize, Serialize};
+
+use crate::prelude::*;
 
 /// # Stat type
 /// All the different kinds of stats that exist in the game.
@@ -10,6 +12,7 @@ use crate::{traits::HasDisplayName, well_known_terms};
 /// The real-life analogue would be that you can make yourself more powerful in melee combat both
 /// by training your strength, and by using a better weapon (e.g. a sharper sword, a heavier mace,
 /// etc.)
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub enum StatType {
     Armour,
     AttackPower,

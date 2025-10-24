@@ -5,5 +5,5 @@ pub trait HasDisplayName {
     /// Returns the display name of the object.
     /// Unlike an Identity, a DisplayName doesn't need to be unique, and it should focus on being
     /// human readable and understandable.
-    fn display_name(&self) -> String;
+    fn display_name(&self) -> &str;
 }

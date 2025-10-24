@@ -21,21 +21,6 @@ impl Stat {
     pub fn new(stat_type: StatType, value: f32) -> Self {
         Self { stat_type, value }
     }
-
-    /// # Add
-    /// Adds the two stats together.
-    pub fn add(stat1: &Stat, stat2: &Stat) -> Option<Self> {
-        // Start by making sure that the two stats are of the same type.
-        if stat1.stat_type != stat2.stat_type {
-            return None;
-        }
-
-        // If they are, then add the values together and return the result.
-        Some(Self {
-            stat_type: stat1.stat_type,
-            value: stat1.value + stat2.value,
-        })
-    }
 }
 
 impl HasDisplayName for Stat {

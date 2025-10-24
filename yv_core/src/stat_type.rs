@@ -44,3 +44,20 @@ impl HasDisplayName for StatType {
         }
     }
 }
+impl Describable for StatType {
+    fn description(&self) -> &str {
+        match self {
+            StatType::Armour => well_known_terms::descriptions::stats::ARMOUR,
+            StatType::AttackPower => well_known_terms::descriptions::stats::ATTACK_POWER,
+            StatType::BlockPoints => well_known_terms::descriptions::stats::BLOCK_POINTS,
+            StatType::MiningPower => well_known_terms::descriptions::stats::MINING_POWER,
+            StatType::Precision => well_known_terms::descriptions::stats::PRECISION,
+            StatType::RangedAccuracy => well_known_terms::descriptions::stats::RANGED_ACCURACY,
+            StatType::RangedDamage => well_known_terms::descriptions::stats::RANGED_DAMAGE,
+            StatType::Speed => well_known_terms::descriptions::stats::SPEED,
+            StatType::Warmth => well_known_terms::descriptions::stats::WARMTH,
+            StatType::WeaponSpeed => well_known_terms::descriptions::stats::WEAPON_SPEED,
+            StatType::WoodcuttingPower => well_known_terms::descriptions::stats::WOODCUTTING_POWER,
+        }
+    }
+}

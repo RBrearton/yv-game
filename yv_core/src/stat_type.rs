@@ -12,7 +12,7 @@ use crate::prelude::*;
 /// The real-life analogue would be that you can make yourself more powerful in melee combat both
 /// by training your strength, and by using a better weapon (e.g. a sharper sword, a heavier mace,
 /// etc.)
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum StatType {
     Armour,
     AttackPower,

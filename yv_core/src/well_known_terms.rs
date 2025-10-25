@@ -1,6 +1,8 @@
 //! # Well known terms
 //! This module contains some constants and terms that are used throughout the project.
 
+pub const MAX_IDENTITY_PREFIX_LEN: usize = 8;
+
 pub mod stats {
     pub const ARMOR: &str = "armour";
     pub const ATTACK_POWER: &str = "attack_power";

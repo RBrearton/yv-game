@@ -1,4 +1,5 @@
 mod identity;
+mod identity_prefix;
 mod placement;
 mod stat;
 mod stat_type;
@@ -13,7 +14,7 @@ pub mod prelude {
 
     // Every publicly visible type from the crate should be re-exported here.
     pub use crate::{
-        identity::Identity, placement::Placement, stat::Stat, stat_type::StatType, stats::Stats,
-        traits::*, vector_3::Vector3, well_known_terms,
+        identity::Identity, identity_prefix::IdentityPrefix, placement::Placement, stat::Stat,
+        stat_type::StatType, stats::Stats, traits::*, vector_3::Vector3, well_known_terms,
     };
 }

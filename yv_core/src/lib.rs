@@ -18,7 +18,8 @@ pub mod prelude {
 
     // Every publicly visible type from the crate should be re-exported here.
     pub use crate::{
-        identity::Identity, identity_prefix::IdentityPrefix, placement::Placement, stat::Stat,
-        stat_type::StatType, stats::Stats, traits::*, vector_3::Vector3, well_known_terms,
+        equipment_slot::EquipmentSlot, identity::Identity, identity_prefix::IdentityPrefix,
+        placement::Placement, stat::Stat, stat_type::StatType, stats::Stats, traits::*,
+        vector_3::Vector3, well_known_terms,
     };
 }

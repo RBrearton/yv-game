@@ -1,3 +1,4 @@
+mod equipment_slot;
 mod identity;
 mod identity_prefix;
 mod placement;

@@ -13,13 +13,19 @@ pub trait HasPlacement {
 
     /// # Position
     /// Returns the position of the object.
-    fn position(&self) -> Vector3 {
+    fn position(&self) -> Vector2 {
         self.placement().position
+    }
+
+    /// # Distance to
+    /// Returns the distance between the object and the given position.
+    fn distance_to(&self, position: Vector2) -> f32 {
+        self.position().distance_to(position)
     }
 
     /// # Position mut
     /// Returns a mutable reference to the position of the object.
-    fn position_mut(&mut self) -> &mut Vector3 {
+    fn position_mut(&mut self) -> &mut Vector2 {
         &mut self.placement_mut().position
     }
 
@@ -37,7 +43,7 @@ pub trait HasPlacement {
 
     /// # Set position
     /// Sets the position of the object.
-    fn set_position(&mut self, position: Vector3) {
+    fn set_position(&mut self, position: Vector2) {
         *self.position_mut() = position;
     }
 

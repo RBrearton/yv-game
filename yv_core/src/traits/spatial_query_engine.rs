@@ -9,5 +9,5 @@ pub trait SpatialQueryEngine {
 
     /// # Get in range
     /// Returns all of the entities that are within the requested range.
-    fn get_in_range(&self, range: f32) -> Vec<Self::EntityType>;
+    fn get_in_range(&self, range: f32, position: Vector2, out: &mut Vec<Self::EntityType>);
 }

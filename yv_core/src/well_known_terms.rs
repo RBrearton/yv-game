@@ -19,6 +19,12 @@ pub const SPATIAL_HASH_GRID_CELL_SIZE: f32 = 50.0;
 
 pub const IDENTITY_PREFIX_CAPACITY: usize = 8;
 
+pub mod skills {
+    pub const STRENGTH: &str = "strength";
+    pub const MINING: &str = "mining";
+    pub const WOODCUTTING: &str = "woodcutting";
+}
+
 pub mod stats {
     pub const ARMOR: &str = "armour";
     pub const ATTACK_POWER: &str = "attack_power";
@@ -34,6 +40,12 @@ pub mod stats {
 }
 
 pub mod descriptions {
+    pub mod skills {
+        pub const STRENGTH: &str = "A measure of a character's physical strength.";
+        pub const MINING: &str = "A measure of a character's mining skill.";
+        pub const WOODCUTTING: &str = "A measure of a character's woodcutting skill.";
+    }
+
     pub mod stats {
         pub const ARMOUR: &str =
             "The damage reduction applied by an object when the wearer is hit by an attack.";

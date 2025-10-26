@@ -9,6 +9,7 @@ mod stats;
 mod traits;
 mod vector_2;
 pub mod well_known_terms;
+mod world;
 
 pub mod prelude {
     pub use std::fmt;
@@ -24,6 +25,6 @@ pub mod prelude {
     pub use crate::{
         equipment_slot::EquipmentSlot, identity::Identity, identity_prefix::IdentityPrefix,
         placement::Placement, spatial_hash_grid::SpatialHashGrid, stat::Stat, stat_type::StatType,
-        stats::Stats, traits::*, vector_2::Vector2, well_known_terms,
+        stats::Stats, traits::*, vector_2::Vector2, well_known_terms, world::World,
     };
 }

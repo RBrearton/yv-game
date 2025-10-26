@@ -1,6 +1,7 @@
 mod actor_like;
 mod character_like;
 mod describable;
+mod equippable;
 mod has_display_name;
 mod has_placement;
 mod has_stats;
@@ -12,6 +13,7 @@ mod ownable;
 pub use actor_like::ActorLike;
 pub use character_like::CharacterLike;
 pub use describable::Describable;
+pub use equippable::Equippable;
 pub use has_display_name::HasDisplayName;
 pub use has_placement::HasPlacement;
 pub use has_stats::HasStats;

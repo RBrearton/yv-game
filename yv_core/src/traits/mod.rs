@@ -9,6 +9,7 @@ mod identifiable;
 mod item;
 mod massive;
 mod ownable;
+mod spatial_query_engine;
 
 pub use actor_like::ActorLike;
 pub use character_like::CharacterLike;
@@ -21,3 +22,4 @@ pub use identifiable::Identifiable;
 pub use item::Item;
 pub use massive::Massive;
 pub use ownable::Ownable;
+pub use spatial_query_engine::SpatialQueryEngine;

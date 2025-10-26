@@ -1,4 +1,5 @@
 mod actor_like;
+mod character_like;
 mod describable;
 mod has_display_name;
 mod has_placement;
@@ -9,6 +10,7 @@ mod massive;
 mod ownable;
 
 pub use actor_like::ActorLike;
+pub use character_like::CharacterLike;
 pub use describable::Describable;
 pub use has_display_name::HasDisplayName;
 pub use has_placement::HasPlacement;

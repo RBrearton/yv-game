@@ -1,7 +1,10 @@
-use crate::traits::{HasPlacement, Identifiable};
+use crate::prelude::*;
 
 /// # Actor like
 /// This trait is implemented by all actors in the game.
 /// An actor is the simplest kind of object that can exist in the game world.
 /// In general, it's just something that we are capable of seeing.
-pub trait ActorLike: HasPlacement + Identifiable {}
+pub trait ActorLike:
+    HasPlacement + HasDisplayName + Identifiable + Copy + Clone + Serialize + for<'a> Deserialize<'a>
+{
+}

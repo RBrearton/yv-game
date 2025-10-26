@@ -9,6 +9,9 @@ mod vector_3;
 pub mod well_known_terms;
 
 pub mod prelude {
+    pub use std::fmt;
+    pub use uuid::Uuid;
+
     // I want to use serde Serialize/Deserialize everywhere.
     pub use serde::{Deserialize, Serialize};
 

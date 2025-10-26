@@ -1,6 +1,22 @@
 //! # Well known terms
 //! This module contains some constants and terms that are used throughout the project.
 
+/// # Spatial hash grid cell size
+/// This is a fundamental lengthscale in the game.
+/// It is the cell size in all spatial hash grids used in the world.
+/// This means that no player can ever see further than this distance, that no spells can travel
+/// further than this distance etc.
+/// This is because queries over ranges larger than this will be incorrect.
+///
+/// To get more of an idea of how this works, imagine how the player's client needs to work.
+/// When the player logs in, the client needs to request information from the server about
+/// everything that the player might need to see/render.
+/// On the backend, this will involve a spatial query over the player's vicinity.
+/// If the player can see further than 50 units, then the backend will need to run queries that
+/// involve more than just the player's cell + adjacent cells.
+/// This is not supported because of the horrendous performance implications.
+pub const SPATIAL_HASH_GRID_CELL_SIZE: f32 = 50.0;
+
 pub const IDENTITY_PREFIX_CAPACITY: usize = 8;
 
 pub mod stats {

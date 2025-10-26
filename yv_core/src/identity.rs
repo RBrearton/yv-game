@@ -6,7 +6,7 @@ use crate::prelude::*;
 /// The prefix comes from a strong preference of mine - I'd much rather have something like:
 /// orc-1234-1234-1234 than just 1234-1234-1234
 /// The `orc` part really makes investigating logs etc. much more intuitive.
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Identity {
     prefix: IdentityPrefix,
     unique_id: Uuid,

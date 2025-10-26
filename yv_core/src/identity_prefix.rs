@@ -2,7 +2,7 @@ use crate::prelude::*;
 
 /// # Identity prefix
 /// The struct containing the prefix for an identity.
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct IdentityPrefix {
     prefix: [u8; well_known_terms::IDENTITY_PREFIX_CAPACITY],
 }

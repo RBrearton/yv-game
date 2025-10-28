@@ -19,6 +19,11 @@ pub const SPATIAL_HASH_GRID_CELL_SIZE: f32 = 50.0;
 
 pub const IDENTITY_PREFIX_CAPACITY: usize = 8;
 
+pub mod quests {
+    pub const TUTORIAL: &str = "Tutorial";
+    pub const EXAMPLE_QUEST: &str = "Example quest";
+}
+
 pub mod skills {
     pub const STRENGTH: &str = "strength";
     pub const MINING: &str = "mining";
@@ -40,6 +45,11 @@ pub mod stats {
 }
 
 pub mod descriptions {
+    pub mod quests {
+        pub const TUTORIAL: &str = "The tutorial quest.";
+        pub const EXAMPLE_QUEST: &str = "The example quest.";
+    }
+
     pub mod skills {
         pub const STRENGTH: &str = "A measure of a character's physical strength.";
         pub const MINING: &str = "A measure of a character's mining skill.";

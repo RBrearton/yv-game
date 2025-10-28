@@ -8,7 +8,5 @@ pub struct Equipment {
     pub chest: Option<Chest>,
     pub legs: Option<Legs>,
     pub cloak: Option<Cloak>,
-    pub one_hand: Option<OneHand>,
-    pub off_hand: Option<OffHand>,
-    pub two_hand: Option<TwoHand>,
+    pub hand_slot: Option<HandSlot>,
 }

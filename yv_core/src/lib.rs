@@ -35,7 +35,7 @@ pub mod prelude {
     // Every publicly visible type from the crate should be re-exported here.
     pub use crate::{
         accomplishment::Accomplishment, dual_wield::DualWield, equipment::Equipment,
-        identity::Identity, identity_prefix::IdentityPrefix, items::*,
+        hand_slot::HandSlot, identity::Identity, identity_prefix::IdentityPrefix, items::*,
         main_hand_wieldable::MainHandWieldable, off_hand_wieldable::OffHandWieldable,
         placement::Placement, quest::Quest, requirements::Requirements, skill::Skill,
         skill_type::SkillType, skills::Skills, spatial_hash_grid::SpatialHashGrid, stat::Stat,

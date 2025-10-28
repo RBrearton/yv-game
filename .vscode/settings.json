@@ -24,6 +24,8 @@
         "egui",
         "equippable",
         "fovy",
+        "Greatsword",
+        "handers",
         "hashbrown",
         "hashsets",
         "Ingame",
@@ -48,6 +50,7 @@
         "srgba",
         "stackable",
         "Tonemapping",
+        "wieldable",
         "winit",
         "yv"
     ],

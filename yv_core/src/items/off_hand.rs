@@ -6,3 +6,18 @@ use crate::prelude::*;
 pub enum OffHand {
     Shield(Shield),
 }
+
+impl Describable for OffHand {
+    fn description(&self) -> &str {
+        match self {
+            OffHand::Shield(shield) => shield.description(),
+        }
+    }
+}
+impl HasDisplayName for OffHand {
+    fn display_name(&self) -> &str {
+        match self {
+            OffHand::Shield(shield) => shield.display_name(),
+        }
+    }
+}

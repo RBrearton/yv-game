@@ -7,3 +7,20 @@ pub enum TwoHand {
     Greatsword(Greatsword),
     Battleaxe(Battleaxe),
 }
+
+impl Describable for TwoHand {
+    fn description(&self) -> &str {
+        match self {
+            TwoHand::Greatsword(greatsword) => greatsword.description(),
+            TwoHand::Battleaxe(battleaxe) => battleaxe.description(),
+        }
+    }
+}
+impl HasDisplayName for TwoHand {
+    fn display_name(&self) -> &str {
+        match self {
+            TwoHand::Greatsword(greatsword) => greatsword.display_name(),
+            TwoHand::Battleaxe(battleaxe) => battleaxe.display_name(),
+        }
+    }
+}

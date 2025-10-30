@@ -14,6 +14,8 @@ mod pickaxe;
 mod shield;
 mod two_hand;
 
+pub mod helmets;
+
 pub use equippable::Equippable;
 pub use item::Item;
 

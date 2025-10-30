@@ -9,5 +9,7 @@ pub trait HasStats {
 
     /// # Get stat
     /// Gets the stat with the given type.
-    fn get_stat(&self, stat_type: StatType) -> Stat;
+    fn get_stat(&self, stat_type: StatType) -> Stat {
+        self.stats().get_stat(stat_type)
+    }
 }

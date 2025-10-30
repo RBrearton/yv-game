@@ -17,10 +17,20 @@ pub struct Stats {
     pub woodcutting_power: Stat,
 }
 
+impl Default for Stats {
+    /// # Default
+    /// Creates a new set of stats with all values set to 0.
+    /// Under the hood, this is identical to calling `Stats::empty()`, but often leads to more
+    /// idiomatic rust.
+    fn default() -> Self {
+        Self::empty()
+    }
+}
+
 impl Stats {
     /// # New empty
-    /// Creates a new set of stats with all values set to 0.
-    pub fn new_empty() -> Self {
+    /// Explicitly creates a new set of stats with all values set to 0.
+    pub fn empty() -> Self {
         Self {
             armour: Stat::new(StatType::Armour, 0.0),
             attack_power: Stat::new(StatType::AttackPower, 0.0),

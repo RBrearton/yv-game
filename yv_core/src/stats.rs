@@ -87,20 +87,22 @@ impl Stats {
     }
 
     /// # Add
-    /// Adds the two stats together.
-    pub fn add(stat1: &Stat, stat2: &Stat) -> Self {
-        Self {
-            armour: Stat::new(StatType::Armour, stat1.value + stat2.value),
-            attack_power: Stat::new(StatType::AttackPower, stat1.value + stat2.value),
-            block_points: Stat::new(StatType::BlockPoints, stat1.value + stat2.value),
-            mining_power: Stat::new(StatType::MiningPower, stat1.value + stat2.value),
-            precision: Stat::new(StatType::Precision, stat1.value + stat2.value),
-            ranged_accuracy: Stat::new(StatType::RangedAccuracy, stat1.value + stat2.value),
-            ranged_damage: Stat::new(StatType::RangedDamage, stat1.value + stat2.value),
-            speed: Stat::new(StatType::Speed, stat1.value + stat2.value),
-            warmth: Stat::new(StatType::Warmth, stat1.value + stat2.value),
-            weapon_speed: Stat::new(StatType::WeaponSpeed, stat1.value + stat2.value),
-            woodcutting_power: Stat::new(StatType::WoodcuttingPower, stat1.value + stat2.value),
+    /// Adds the given stats together.
+    pub fn add(stats: impl IntoIterator<Item = Stats>) -> Self {
+        let mut total_stats = Self::empty();
+        for stat in stats {
+            total_stats.armour.value += stat.armour.value;
+            total_stats.attack_power.value += stat.attack_power.value;
+            total_stats.block_points.value += stat.block_points.value;
+            total_stats.mining_power.value += stat.mining_power.value;
+            total_stats.precision.value += stat.precision.value;
+            total_stats.ranged_accuracy.value += stat.ranged_accuracy.value;
+            total_stats.ranged_damage.value += stat.ranged_damage.value;
+            total_stats.speed.value += stat.speed.value;
+            total_stats.warmth.value += stat.warmth.value;
+            total_stats.weapon_speed.value += stat.weapon_speed.value;
+            total_stats.woodcutting_power.value += stat.woodcutting_power.value;
         }
+        total_stats
     }
 }

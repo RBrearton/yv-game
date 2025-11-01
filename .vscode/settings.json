@@ -23,6 +23,7 @@
         "dylib",
         "egui",
         "equippable",
+        "equippables",
         "fovy",
         "Greatsword",
         "greatswords",

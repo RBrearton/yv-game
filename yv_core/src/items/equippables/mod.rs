@@ -1,0 +1,27 @@
+pub mod back_slot;
+pub mod belt_slot;
+mod chest_slot;
+pub mod equippable;
+pub mod finger_slot;
+pub mod foot_slot;
+pub mod hand_slot;
+pub mod head_slot;
+pub mod leg_slot;
+pub mod pouch_slot;
+pub mod quiver_slot;
+pub mod weapon_slot;
+pub mod wrist_slot;
+
+pub use back_slot::Cloak;
+pub use belt_slot::Belt;
+pub use chest_slot::Chest;
+pub use equippable::Equippable;
+pub use finger_slot::Finger;
+pub use foot_slot::Footwear;
+pub use hand_slot::Hands;
+pub use head_slot::Helmet;
+pub use leg_slot::Legs;
+pub use pouch_slot::Pouch;
+pub use quiver_slot::Projectile;
+pub use weapon_slot::Weapon;
+pub use wrist_slot::Wrists;

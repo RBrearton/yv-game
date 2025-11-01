@@ -18,6 +18,7 @@
 pub const SPATIAL_HASH_GRID_CELL_SIZE: f32 = 50.0;
 
 pub const IDENTITY_PREFIX_CAPACITY: usize = 8;
+pub const DISPLAY_NAME_CAPACITY: usize = 16;
 
 pub mod quests {
     pub const TUTORIAL: &str = "Tutorial";

@@ -35,6 +35,6 @@ pub mod prelude {
         identity::Identity, identity_prefix::IdentityPrefix, items::*, placement::Placement,
         quest::Quest, requirements::Requirements, skill::Skill, skill_type::SkillType,
         skills::Skills, spatial_hash_grid::SpatialHashGrid, stat::Stat, stat_type::StatType,
-        stats::Stats, traits::*, vector_2::Vector2, well_known_terms::*, world::World,
+        stats::Stats, traits::*, vector_2::Vector2, well_known_terms, world::World,
     };
 }

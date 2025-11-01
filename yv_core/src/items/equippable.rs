@@ -7,10 +7,42 @@ pub enum Equippable {
     Helmet(Helmet),
     Chest(Chest),
     Legs(Legs),
+    Feet(Feet),
     Cloak(Cloak),
+    Hands(Hands),
+    Wrists(Wrists),
+    Belt(Belt),
+    Finger(Finger),
+    Pouch(Pouch),
+    Quiver(Quiver),
     OneHanded(OneHand),
     OffHand(OffHand),
     TwoHanded(TwoHand),
+}
+
+impl HasStats for Equippable {
+    fn stats(&self) -> &Stats {
+        match self {
+            Equippable::Helmet(helmet) => helmet.stats(),
+            Equippable::Chest(chest) => chest.stats(),
+            Equippable::Legs(legs) => legs.stats(),
+            Equippable::Feet(feet) => feet.stats(),
+            Equippable::Cloak(cloak) => cloak.stats(),
+            Equippable::Hands(hands) => hands.stats(),
+            Equippable::Wrists(wrists) => wrists.stats(),
+            Equippable::Belt(belt) => belt.stats(),
+            Equippable::Finger(finger) => finger.stats(),
+            Equippable::Pouch(pouch) => pouch.stats(),
+            Equippable::Quiver(quiver) => quiver.stats(),
+            Equippable::OneHanded(one_hand) => one_hand.stats(),
+            Equippable::OffHand(off_hand) => off_hand.stats(),
+            Equippable::TwoHanded(two_hand) => two_hand.stats(),
+        }
+    }
+
+    fn get_stat(&self, stat_type: StatType) -> Stat {
+        self.stats().get_stat(stat_type)
+    }
 }
 
 impl Describable for Equippable {
@@ -19,7 +51,14 @@ impl Describable for Equippable {
             Equippable::Helmet(helmet) => helmet.description(),
             Equippable::Chest(chest) => chest.description(),
             Equippable::Legs(legs) => legs.description(),
+            Equippable::Feet(feet) => feet.description(),
             Equippable::Cloak(cloak) => cloak.description(),
+            Equippable::Hands(hands) => hands.description(),
+            Equippable::Wrists(wrists) => wrists.description(),
+            Equippable::Belt(belt) => belt.description(),
+            Equippable::Finger(finger) => finger.description(),
+            Equippable::Pouch(pouch) => pouch.description(),
+            Equippable::Quiver(quiver) => quiver.description(),
             Equippable::OneHanded(one_hand) => one_hand.description(),
             Equippable::OffHand(off_hand) => off_hand.description(),
             Equippable::TwoHanded(two_hand) => two_hand.description(),
@@ -33,7 +72,14 @@ impl HasDisplayName for Equippable {
             Equippable::Helmet(helmet) => helmet.display_name(),
             Equippable::Chest(chest) => chest.display_name(),
             Equippable::Legs(legs) => legs.display_name(),
+            Equippable::Feet(feet) => feet.display_name(),
             Equippable::Cloak(cloak) => cloak.display_name(),
+            Equippable::Hands(hands) => hands.display_name(),
+            Equippable::Wrists(wrists) => wrists.display_name(),
+            Equippable::Belt(belt) => belt.display_name(),
+            Equippable::Finger(finger) => finger.display_name(),
+            Equippable::Pouch(pouch) => pouch.display_name(),
+            Equippable::Quiver(quiver) => quiver.display_name(),
             Equippable::OneHanded(one_hand) => one_hand.display_name(),
             Equippable::OffHand(off_hand) => off_hand.display_name(),
             Equippable::TwoHanded(two_hand) => two_hand.display_name(),

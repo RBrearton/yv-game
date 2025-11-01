@@ -1,32 +1,40 @@
 use crate::prelude::*;
 
-const STONE_DAGGER_DESCRIPTION: &str = "A stone dagger.";
-const IRON_DAGGER_DESCRIPTION: &str = "An iron dagger.";
-
-const STONE_DAGGER_DISPLAY_NAME: &str = "Stone dagger";
-const IRON_DAGGER_DISPLAY_NAME: &str = "Iron dagger";
-
 /// # Dagger
 /// An enum containing all dagger slot items in the game.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub enum Dagger {
-    StoneDagger,
-    IronDagger,
+    WoodenDagger(daggers::WoodenDagger),
+    StoneDagger(daggers::StoneDagger),
+    IronDagger(daggers::IronDagger),
 }
 
 impl Describable for Dagger {
     fn description(&self) -> &str {
         match self {
-            Dagger::StoneDagger => STONE_DAGGER_DESCRIPTION,
-            Dagger::IronDagger => IRON_DAGGER_DESCRIPTION,
+            Dagger::WoodenDagger(wooden_dagger) => wooden_dagger.description(),
+            Dagger::StoneDagger(stone_dagger) => stone_dagger.description(),
+            Dagger::IronDagger(iron_dagger) => iron_dagger.description(),
         }
     }
 }
+
 impl HasDisplayName for Dagger {
     fn display_name(&self) -> &str {
         match self {
-            Dagger::StoneDagger => STONE_DAGGER_DISPLAY_NAME,
-            Dagger::IronDagger => IRON_DAGGER_DISPLAY_NAME,
+            Dagger::WoodenDagger(wooden_dagger) => wooden_dagger.display_name(),
+            Dagger::StoneDagger(stone_dagger) => stone_dagger.display_name(),
+            Dagger::IronDagger(iron_dagger) => iron_dagger.display_name(),
+        }
+    }
+}
+
+impl HasStats for Dagger {
+    fn stats(&self) -> &Stats {
+        match self {
+            Dagger::WoodenDagger(wooden_dagger) => wooden_dagger.stats(),
+            Dagger::StoneDagger(stone_dagger) => stone_dagger.stats(),
+            Dagger::IronDagger(iron_dagger) => iron_dagger.stats(),
         }
     }
 }

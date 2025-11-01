@@ -1,26 +1,32 @@
 use crate::prelude::*;
 
-const RAGGED_CLOAK_DESCRIPTION: &str = "A ragged cloak made of cloth.";
-const RAGGED_CLOAK_DISPLAY_NAME: &str = "Ragged cloak";
-
 /// # Cloak
 /// An enum containing all cloak slot armour items in the game.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub enum Cloak {
-    RaggedCloak,
+    RaggedCloak(cloaks::RaggedCloak),
 }
 
 impl Describable for Cloak {
     fn description(&self) -> &str {
         match self {
-            Cloak::RaggedCloak => RAGGED_CLOAK_DESCRIPTION,
+            Cloak::RaggedCloak(ragged_cloak) => ragged_cloak.description(),
         }
     }
 }
+
 impl HasDisplayName for Cloak {
     fn display_name(&self) -> &str {
         match self {
-            Cloak::RaggedCloak => RAGGED_CLOAK_DISPLAY_NAME,
+            Cloak::RaggedCloak(ragged_cloak) => ragged_cloak.display_name(),
+        }
+    }
+}
+
+impl HasStats for Cloak {
+    fn stats(&self) -> &Stats {
+        match self {
+            Cloak::RaggedCloak(ragged_cloak) => ragged_cloak.stats(),
         }
     }
 }

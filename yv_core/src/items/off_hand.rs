@@ -21,3 +21,11 @@ impl HasDisplayName for OffHand {
         }
     }
 }
+
+impl HasStats for OffHand {
+    fn stats(&self) -> &Stats {
+        match self {
+            OffHand::Shield(shield) => shield.stats(),
+        }
+    }
+}

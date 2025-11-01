@@ -1,6 +1,6 @@
 use crate::prelude::*;
 
-const IRON_SKULLCAP_DESCRIPTION: &str = "An iron skullcap.";
+const IRON_SKULLCAP_DESCRIPTION: &str = "A simple, lightweight iron helmet with good visibility.";
 const IRON_SKULLCAP_DISPLAY_NAME: &str = "Iron skullcap";
 
 /// # Iron skullcap
@@ -14,7 +14,8 @@ impl Default for IronSkullcap {
     fn default() -> Self {
         Self {
             stats: Stats {
-                armour: Stat::new(StatType::Armour, 3.0),
+                armour: Stat::new(StatType::Armour, 5),
+                speed: Stat::new(StatType::Speed, -1),
                 ..Stats::default()
             },
         }

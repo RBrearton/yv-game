@@ -24,3 +24,12 @@ impl HasDisplayName for TwoHand {
         }
     }
 }
+
+impl HasStats for TwoHand {
+    fn stats(&self) -> &Stats {
+        match self {
+            TwoHand::Greatsword(greatsword) => greatsword.stats(),
+            TwoHand::Battleaxe(battleaxe) => battleaxe.stats(),
+        }
+    }
+}

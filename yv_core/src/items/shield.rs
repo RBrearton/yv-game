@@ -1,26 +1,32 @@
 use crate::prelude::*;
 
-const WOODEN_BUCKLER_DESCRIPTION: &str = "A wooden buckler.";
-const WOODEN_BUCKLER_DISPLAY_NAME: &str = "Wooden buckler";
-
 /// # Shield
 /// An enum containing all shield slot items in the game.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub enum Shield {
-    WoodenBuckler,
+    WoodenBuckler(shields::WoodenBuckler),
 }
 
 impl Describable for Shield {
     fn description(&self) -> &str {
         match self {
-            Shield::WoodenBuckler => WOODEN_BUCKLER_DESCRIPTION,
+            Shield::WoodenBuckler(wooden_buckler) => wooden_buckler.description(),
         }
     }
 }
+
 impl HasDisplayName for Shield {
     fn display_name(&self) -> &str {
         match self {
-            Shield::WoodenBuckler => WOODEN_BUCKLER_DISPLAY_NAME,
+            Shield::WoodenBuckler(wooden_buckler) => wooden_buckler.display_name(),
+        }
+    }
+}
+
+impl HasStats for Shield {
+    fn stats(&self) -> &Stats {
+        match self {
+            Shield::WoodenBuckler(wooden_buckler) => wooden_buckler.stats(),
         }
     }
 }

@@ -10,13 +10,13 @@ pub struct Stat {
     pub stat_type: StatType,
 
     /// The value of the stat.
-    pub value: f32,
+    pub value: i32,
 }
 
 impl Stat {
     /// # New stat
     /// Creates a new stat with the given type and value.
-    pub fn new(stat_type: StatType, value: f32) -> Self {
+    pub fn new(stat_type: StatType, value: i32) -> Self {
         Self { stat_type, value }
     }
 }

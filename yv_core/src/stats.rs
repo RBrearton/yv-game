@@ -32,17 +32,17 @@ impl Stats {
     /// Explicitly creates a new set of stats with all values set to 0.
     pub fn empty() -> Self {
         Self {
-            armour: Stat::new(StatType::Armour, 0.0),
-            attack_power: Stat::new(StatType::AttackPower, 0.0),
-            block_points: Stat::new(StatType::BlockPoints, 0.0),
-            mining_power: Stat::new(StatType::MiningPower, 0.0),
-            precision: Stat::new(StatType::Precision, 0.0),
-            ranged_accuracy: Stat::new(StatType::RangedAccuracy, 0.0),
-            ranged_damage: Stat::new(StatType::RangedDamage, 0.0),
-            speed: Stat::new(StatType::Speed, 0.0),
-            warmth: Stat::new(StatType::Warmth, 0.0),
-            weapon_speed: Stat::new(StatType::WeaponSpeed, 0.0),
-            woodcutting_power: Stat::new(StatType::WoodcuttingPower, 0.0),
+            armour: Stat::new(StatType::Armour, 0),
+            attack_power: Stat::new(StatType::AttackPower, 0),
+            block_points: Stat::new(StatType::BlockPoints, 0),
+            mining_power: Stat::new(StatType::MiningPower, 0),
+            precision: Stat::new(StatType::Precision, 0),
+            ranged_accuracy: Stat::new(StatType::RangedAccuracy, 0),
+            ranged_damage: Stat::new(StatType::RangedDamage, 0),
+            speed: Stat::new(StatType::Speed, 0),
+            warmth: Stat::new(StatType::Warmth, 0),
+            weapon_speed: Stat::new(StatType::WeaponSpeed, 0),
+            woodcutting_power: Stat::new(StatType::WoodcuttingPower, 0),
         }
     }
 
@@ -66,7 +66,7 @@ impl Stats {
 
     /// # Set stat
     /// Sets the stat with the given type to the given value.
-    pub fn set_stat(&mut self, stat_type: StatType, value: f32) {
+    pub fn set_stat(&mut self, stat_type: StatType, value: i32) {
         match stat_type {
             StatType::Armour => self.armour = Stat::new(StatType::Armour, value),
             StatType::AttackPower => self.attack_power = Stat::new(StatType::AttackPower, value),

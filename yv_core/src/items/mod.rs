@@ -21,6 +21,7 @@ mod quiver;
 mod shield;
 mod shortsword;
 mod two_hand;
+mod weapon_type;
 mod wrists;
 
 pub mod arrows;

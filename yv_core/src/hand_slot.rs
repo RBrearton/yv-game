@@ -5,6 +5,6 @@ use crate::prelude::*;
 /// This makes it easy to have two handed weapons, dual wielded weapons, etc.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub enum HandSlot {
-    TwoHand(TwoHand),
-    DualWield(DualWield),
+    TwoHand(equippables::Weapon),
+    DualWield(equippables::Weapon, equippables::Weapon),
 }

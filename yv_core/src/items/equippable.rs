@@ -15,9 +15,7 @@ pub enum Equippable {
     Finger(Finger),
     Pouch(Pouch),
     Quiver(Quiver),
-    OneHanded(OneHand),
-    OffHand(OffHand),
-    TwoHanded(TwoHand),
+    Weapon(Weapon),
 }
 
 impl HasStats for Equippable {
@@ -34,9 +32,7 @@ impl HasStats for Equippable {
             Equippable::Finger(finger) => finger.stats(),
             Equippable::Pouch(pouch) => pouch.stats(),
             Equippable::Quiver(quiver) => quiver.stats(),
-            Equippable::OneHanded(one_hand) => one_hand.stats(),
-            Equippable::OffHand(off_hand) => off_hand.stats(),
-            Equippable::TwoHanded(two_hand) => two_hand.stats(),
+            Equippable::Weapon(weapon) => weapon.stats(),
         }
     }
 
@@ -59,9 +55,7 @@ impl Describable for Equippable {
             Equippable::Finger(finger) => finger.description(),
             Equippable::Pouch(pouch) => pouch.description(),
             Equippable::Quiver(quiver) => quiver.description(),
-            Equippable::OneHanded(one_hand) => one_hand.description(),
-            Equippable::OffHand(off_hand) => off_hand.description(),
-            Equippable::TwoHanded(two_hand) => two_hand.description(),
+            Equippable::Weapon(weapon) => weapon.description(),
         }
     }
 }
@@ -80,9 +74,7 @@ impl HasDisplayName for Equippable {
             Equippable::Finger(finger) => finger.display_name(),
             Equippable::Pouch(pouch) => pouch.display_name(),
             Equippable::Quiver(quiver) => quiver.display_name(),
-            Equippable::OneHanded(one_hand) => one_hand.display_name(),
-            Equippable::OffHand(off_hand) => off_hand.display_name(),
-            Equippable::TwoHanded(two_hand) => two_hand.display_name(),
+            Equippable::Weapon(weapon) => weapon.display_name(),
         }
     }
 }

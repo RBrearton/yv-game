@@ -14,7 +14,8 @@ impl Default for LinenTunic {
     fn default() -> Self {
         Self {
             stats: Stats {
-                armour: Stat::new(StatType::Armour, 1.0),
+                armour: Stat::new(StatType::Armour, 1),
+                warmth: Stat::new(StatType::Warmth, 3),
                 ..Stats::default()
             },
         }

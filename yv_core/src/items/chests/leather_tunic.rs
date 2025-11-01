@@ -14,7 +14,7 @@ impl Default for LeatherTunic {
     fn default() -> Self {
         Self {
             stats: Stats {
-                armour: Stat::new(StatType::Armour, 2.0),
+                armour: Stat::new(StatType::Armour, 2),
                 ..Stats::default()
             },
         }

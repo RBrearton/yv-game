@@ -7,6 +7,7 @@ pub struct Stats {
     // Defensive.
     pub armour: Stat,
     pub block_points: Stat,
+    pub vitality: Stat,
 
     // General.
     pub durability: Stat,
@@ -62,6 +63,7 @@ impl Stats {
             ranged_damage: Stat::new(StatType::RangedDamage, 0),
             weapon_speed: Stat::new(StatType::WeaponSpeed, 0),
             woodcutting_power: Stat::new(StatType::WoodcuttingPower, 0),
+            vitality: Stat::new(StatType::Vitality, 0),
         }
     }
 
@@ -70,6 +72,7 @@ impl Stats {
     pub fn get_stat(&self, stat_type: StatType) -> Stat {
         match stat_type {
             StatType::Armour => self.armour,
+            StatType::Vitality => self.vitality,
             StatType::Durability => self.durability,
             StatType::AttackPower => self.attack_power,
             StatType::BlockPoints => self.block_points,
@@ -92,6 +95,7 @@ impl Stats {
     pub fn set_stat(&mut self, stat_type: StatType, value: i32) {
         match stat_type {
             StatType::Armour => self.armour = Stat::new(StatType::Armour, value),
+            StatType::Vitality => self.vitality = Stat::new(StatType::Vitality, value),
             StatType::Durability => self.durability = Stat::new(StatType::Durability, value),
             StatType::AttackPower => self.attack_power = Stat::new(StatType::AttackPower, value),
             StatType::BlockPoints => self.block_points = Stat::new(StatType::BlockPoints, value),
@@ -127,6 +131,7 @@ impl Stats {
             // Destructure to force compile-time completeness checking.
             let Stats {
                 armour,
+                vitality,
                 block_points,
                 durability,
                 speed,
@@ -144,6 +149,7 @@ impl Stats {
             } = stat;
 
             total_stats.armour.value += armour.value;
+            total_stats.vitality.value += vitality.value;
             total_stats.block_points.value += block_points.value;
             total_stats.durability.value += durability.value;
             total_stats.speed.value += speed.value;

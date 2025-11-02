@@ -10,14 +10,17 @@ pub struct Stat {
     pub stat_type: StatType,
 
     /// The value of the stat.
-    pub value: i32,
+    pub value: i16,
 }
 
 impl Stat {
     /// # New stat
     /// Creates a new stat with the given type and value.
-    pub fn new(stat_type: StatType, value: i32) -> Self {
-        Self { stat_type, value }
+    pub fn new(stat_type: StatType, value: impl TryInto<i16>) -> Self {
+        Self {
+            stat_type,
+            value: value.try_into().unwrap_or(0 as i16),
+        }
     }
 }
 

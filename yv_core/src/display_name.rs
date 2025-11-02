@@ -13,10 +13,12 @@ impl DisplayName {
     /// Creates a new display name with the given name.
     pub fn new(name: &str) -> Self {
         let mut name_bytes = [0u8; well_known_terms::DISPLAY_NAME_CAPACITY];
-        name_bytes.copy_from_slice(name.as_bytes());
+        let bytes = name.as_bytes();
+        let len = bytes.len().min(well_known_terms::DISPLAY_NAME_CAPACITY);
+        name_bytes[..len].copy_from_slice(&bytes[..len]);
         Self {
             name: name_bytes,
-            len: name.len(),
+            len,
         }
     }
 

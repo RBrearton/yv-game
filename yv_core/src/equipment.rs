@@ -53,12 +53,12 @@ impl From<Equipment> for [Option<Equippable>; 15] {
 }
 
 impl HasStats for Equipment {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         let stats = self
             .to_array()
             .iter()
             .filter_map(|item| item.as_ref().map(|item| item.stats()))
-            .collect::<Vec<&Stats>>();
+            .collect::<Vec<Stats>>();
 
         // IMPORTANT TODO: CHANGE HasStats TRAIT TO RETURN AN OWNED STATS INSTANCE, NOT A REFERENCE.
         // Note that this also fixes my memory issue (that equipment is too big, inventory is too

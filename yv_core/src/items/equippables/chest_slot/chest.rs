@@ -33,3 +33,19 @@ impl HasStats for Chest {
         }
     }
 }
+
+impl Durable for Chest {
+    fn durability(&self) -> &Durability {
+        match self {
+            Chest::LinenTunic(linen_tunic) => linen_tunic.durability(),
+            Chest::LeatherTunic(leather_tunic) => leather_tunic.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Chest::LinenTunic(linen_tunic) => linen_tunic.durability_mut(),
+            Chest::LeatherTunic(leather_tunic) => leather_tunic.durability_mut(),
+        }
+    }
+}

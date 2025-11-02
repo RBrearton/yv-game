@@ -30,3 +30,13 @@ impl HasStats for LinenTrousers {
         Stats::add([core_stats, LINEN_TROUSERS_DEFAULT_STATS])
     }
 }
+
+impl Durable for LinenTrousers {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

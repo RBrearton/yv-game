@@ -30,3 +30,17 @@ impl HasStats for Legs {
         }
     }
 }
+
+impl Durable for Legs {
+    fn durability(&self) -> &Durability {
+        match self {
+            Legs::LinenTrousers(linen_trousers) => linen_trousers.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Legs::LinenTrousers(linen_trousers) => linen_trousers.durability_mut(),
+        }
+    }
+}

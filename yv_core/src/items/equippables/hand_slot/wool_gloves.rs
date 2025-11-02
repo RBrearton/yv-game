@@ -32,3 +32,13 @@ impl HasStats for WoolGloves {
         Stats::add([core_stats, WOOL_GLOVES_DEFAULT_STATS])
     }
 }
+
+impl Durable for WoolGloves {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

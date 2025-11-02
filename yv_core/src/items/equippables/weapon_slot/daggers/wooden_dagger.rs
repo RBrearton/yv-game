@@ -36,3 +36,13 @@ impl HasStats for WoodenDagger {
         stats
     }
 }
+
+impl Durable for WoodenDagger {
+    fn durability(&self) -> &Durability {
+        &self.durability
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        &mut self.durability
+    }
+}

@@ -73,3 +73,31 @@ impl HasStats for Weapon {
         }
     }
 }
+
+impl Durable for Weapon {
+    fn durability(&self) -> &Durability {
+        match self {
+            Weapon::Dagger(dagger) => dagger.durability(),
+            Weapon::Hammer(hammer) => hammer.durability(),
+            Weapon::Hatchet(hatchet) => hatchet.durability(),
+            Weapon::Pickaxe(pickaxe) => pickaxe.durability(),
+            Weapon::Shortsword(shortsword) => shortsword.durability(),
+            Weapon::Shield(shield) => shield.durability(),
+            Weapon::Greatsword(greatsword) => greatsword.durability(),
+            Weapon::Battleaxe(battleaxe) => battleaxe.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Weapon::Dagger(dagger) => dagger.durability_mut(),
+            Weapon::Hammer(hammer) => hammer.durability_mut(),
+            Weapon::Hatchet(hatchet) => hatchet.durability_mut(),
+            Weapon::Pickaxe(pickaxe) => pickaxe.durability_mut(),
+            Weapon::Shortsword(shortsword) => shortsword.durability_mut(),
+            Weapon::Shield(shield) => shield.durability_mut(),
+            Weapon::Greatsword(greatsword) => greatsword.durability_mut(),
+            Weapon::Battleaxe(battleaxe) => battleaxe.durability_mut(),
+        }
+    }
+}

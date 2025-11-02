@@ -31,3 +31,13 @@ impl HasStats for IronDagger {
         Stats::add([core_stats, IRON_DAGGER_DEFAULT_STATS])
     }
 }
+
+impl Durable for IronDagger {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

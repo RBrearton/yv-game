@@ -32,3 +32,13 @@ impl HasStats for IronPickaxe {
         Stats::add([core_stats, IRON_PICKAXE_DEFAULT_STATS])
     }
 }
+
+impl Durable for IronPickaxe {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

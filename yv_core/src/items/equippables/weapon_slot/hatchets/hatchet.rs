@@ -42,3 +42,19 @@ impl HasStats for Hatchet {
         }
     }
 }
+
+impl Durable for Hatchet {
+    fn durability(&self) -> &Durability {
+        match self {
+            Hatchet::StoneHatchet(stone_hatchet) => stone_hatchet.durability(),
+            Hatchet::IronHatchet(iron_hatchet) => iron_hatchet.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Hatchet::StoneHatchet(stone_hatchet) => stone_hatchet.durability_mut(),
+            Hatchet::IronHatchet(iron_hatchet) => iron_hatchet.durability_mut(),
+        }
+    }
+}

@@ -30,3 +30,17 @@ impl HasStats for Cloak {
         }
     }
 }
+
+impl Durable for Cloak {
+    fn durability(&self) -> &Durability {
+        match self {
+            Cloak::RaggedCloak(ragged_cloak) => ragged_cloak.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Cloak::RaggedCloak(ragged_cloak) => ragged_cloak.durability_mut(),
+        }
+    }
+}

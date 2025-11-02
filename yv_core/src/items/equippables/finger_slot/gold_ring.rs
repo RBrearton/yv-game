@@ -11,6 +11,7 @@ const GOLD_RING_DEFAULT_STATS: Stats = Stats {
 pub struct GoldRing {
     pub enchantment_1: Option<Enchantment>,
     pub enchantment_2: Option<Enchantment>,
+    pub durability: Durability,
 }
 
 impl Describable for GoldRing {
@@ -34,5 +35,15 @@ impl HasStats for GoldRing {
             enchantment_2_stats.unwrap_or_default(),
         ]);
         stats
+    }
+}
+
+impl Durable for GoldRing {
+    fn durability(&self) -> &Durability {
+        &self.durability
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        &mut self.durability
     }
 }

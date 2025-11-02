@@ -30,3 +30,17 @@ impl HasStats for Greatsword {
         }
     }
 }
+
+impl Durable for Greatsword {
+    fn durability(&self) -> &Durability {
+        match self {
+            Greatsword::IronGreatsword(iron_greatsword) => iron_greatsword.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Greatsword::IronGreatsword(iron_greatsword) => iron_greatsword.durability_mut(),
+        }
+    }
+}

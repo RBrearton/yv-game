@@ -31,3 +31,13 @@ impl HasStats for WoodenBuckler {
         Stats::add([core_stats, WOODEN_BUCKLER_DEFAULT_STATS])
     }
 }
+
+impl Durable for WoodenBuckler {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

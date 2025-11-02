@@ -43,3 +43,19 @@ impl HasStats for Hammer {
         }
     }
 }
+
+impl Durable for Hammer {
+    fn durability(&self) -> &Durability {
+        match self {
+            Hammer::WoodenClub(wooden_club) => wooden_club.durability(),
+            Hammer::IronMace(iron_mace) => iron_mace.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Hammer::WoodenClub(wooden_club) => wooden_club.durability_mut(),
+            Hammer::IronMace(iron_mace) => iron_mace.durability_mut(),
+        }
+    }
+}

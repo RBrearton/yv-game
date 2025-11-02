@@ -30,3 +30,17 @@ impl HasStats for Finger {
         }
     }
 }
+
+impl Durable for Finger {
+    fn durability(&self) -> &Durability {
+        match self {
+            Finger::GoldRing(gold_ring) => gold_ring.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Finger::GoldRing(gold_ring) => gold_ring.durability_mut(),
+        }
+    }
+}

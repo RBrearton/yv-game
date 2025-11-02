@@ -30,3 +30,17 @@ impl HasStats for Shield {
         }
     }
 }
+
+impl Durable for Shield {
+    fn durability(&self) -> &Durability {
+        match self {
+            Shield::WoodenBuckler(wooden_buckler) => wooden_buckler.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Shield::WoodenBuckler(wooden_buckler) => wooden_buckler.durability_mut(),
+        }
+    }
+}

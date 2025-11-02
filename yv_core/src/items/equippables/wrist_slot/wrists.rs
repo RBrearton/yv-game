@@ -30,3 +30,17 @@ impl HasStats for Wrists {
         }
     }
 }
+
+impl Durable for Wrists {
+    fn durability(&self) -> &Durability {
+        match self {
+            Wrists::LeatherBracer(leather_bracer) => leather_bracer.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Wrists::LeatherBracer(leather_bracer) => leather_bracer.durability_mut(),
+        }
+    }
+}

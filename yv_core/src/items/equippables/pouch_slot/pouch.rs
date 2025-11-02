@@ -30,3 +30,17 @@ impl HasStats for Pouch {
         }
     }
 }
+
+impl Durable for Pouch {
+    fn durability(&self) -> &Durability {
+        match self {
+            Pouch::StoneIdol(stone_idol) => stone_idol.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Pouch::StoneIdol(stone_idol) => stone_idol.durability_mut(),
+        }
+    }
+}

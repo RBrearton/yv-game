@@ -32,3 +32,13 @@ impl HasStats for IronHatchet {
         Stats::add([core_stats, IRON_HATCHET_DEFAULT_STATS])
     }
 }
+
+impl Durable for IronHatchet {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

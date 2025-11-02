@@ -38,3 +38,21 @@ impl HasStats for Dagger {
         }
     }
 }
+
+impl Durable for Dagger {
+    fn durability(&self) -> &Durability {
+        match self {
+            Dagger::WoodenDagger(wooden_dagger) => wooden_dagger.durability(),
+            Dagger::StoneDagger(stone_dagger) => stone_dagger.durability(),
+            Dagger::IronDagger(iron_dagger) => iron_dagger.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Dagger::WoodenDagger(wooden_dagger) => wooden_dagger.durability_mut(),
+            Dagger::StoneDagger(stone_dagger) => stone_dagger.durability_mut(),
+            Dagger::IronDagger(iron_dagger) => iron_dagger.durability_mut(),
+        }
+    }
+}

@@ -78,3 +78,39 @@ impl HasDisplayName for Equippable {
         }
     }
 }
+
+impl Durable for Equippable {
+    fn durability(&self) -> &Durability {
+        match self {
+            Equippable::Helmet(helmet) => helmet.durability(),
+            Equippable::Chest(chest) => chest.durability(),
+            Equippable::Legs(legs) => legs.durability(),
+            Equippable::Footwear(feet) => feet.durability(),
+            Equippable::Cloak(cloak) => cloak.durability(),
+            Equippable::Hands(hands) => hands.durability(),
+            Equippable::Wrists(wrists) => wrists.durability(),
+            Equippable::Belt(belt) => belt.durability(),
+            Equippable::Finger(finger) => finger.durability(),
+            Equippable::Pouch(pouch) => pouch.durability(),
+            Equippable::Projectile(quiver) => quiver.durability(),
+            Equippable::Weapon(weapon) => weapon.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Equippable::Helmet(helmet) => helmet.durability_mut(),
+            Equippable::Chest(chest) => chest.durability_mut(),
+            Equippable::Legs(legs) => legs.durability_mut(),
+            Equippable::Footwear(feet) => feet.durability_mut(),
+            Equippable::Cloak(cloak) => cloak.durability_mut(),
+            Equippable::Hands(hands) => hands.durability_mut(),
+            Equippable::Wrists(wrists) => wrists.durability_mut(),
+            Equippable::Belt(belt) => belt.durability_mut(),
+            Equippable::Finger(finger) => finger.durability_mut(),
+            Equippable::Pouch(pouch) => pouch.durability_mut(),
+            Equippable::Projectile(quiver) => quiver.durability_mut(),
+            Equippable::Weapon(weapon) => weapon.durability_mut(),
+        }
+    }
+}

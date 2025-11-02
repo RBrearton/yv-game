@@ -30,3 +30,13 @@ impl HasStats for LeatherTunic {
         Stats::add([core_stats, LEATHER_TUNIC_DEFAULT_STATS])
     }
 }
+
+impl Durable for LeatherTunic {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

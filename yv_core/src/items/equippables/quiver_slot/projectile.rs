@@ -39,3 +39,21 @@ impl HasStats for Projectile {
         }
     }
 }
+
+impl Durable for Projectile {
+    fn durability(&self) -> &Durability {
+        match self {
+            Projectile::StoneArrow(stone_arrow) => stone_arrow.durability(),
+            Projectile::IronArrow(iron_arrow) => iron_arrow.durability(),
+            Projectile::SteelArrow(steel_arrow) => steel_arrow.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Projectile::StoneArrow(stone_arrow) => stone_arrow.durability_mut(),
+            Projectile::IronArrow(iron_arrow) => iron_arrow.durability_mut(),
+            Projectile::SteelArrow(steel_arrow) => steel_arrow.durability_mut(),
+        }
+    }
+}

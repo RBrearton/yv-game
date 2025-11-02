@@ -42,3 +42,19 @@ impl HasStats for Pickaxe {
         }
     }
 }
+
+impl Durable for Pickaxe {
+    fn durability(&self) -> &Durability {
+        match self {
+            Pickaxe::StonePickaxe(stone_pickaxe) => stone_pickaxe.durability(),
+            Pickaxe::IronPickaxe(iron_pickaxe) => iron_pickaxe.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Pickaxe::StonePickaxe(stone_pickaxe) => stone_pickaxe.durability_mut(),
+            Pickaxe::IronPickaxe(iron_pickaxe) => iron_pickaxe.durability_mut(),
+        }
+    }
+}

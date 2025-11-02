@@ -12,7 +12,7 @@ const RAGGED_CLOAK_STATS: Stats = Stats {
 
 #[derive(Clone, Copy, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct RaggedCloak {
-    pub core: equippables::EquippableCore,
+    pub durability: Durability,
 }
 
 impl Describable for RaggedCloak {
@@ -29,7 +29,16 @@ impl HasDisplayName for RaggedCloak {
 
 impl HasStats for RaggedCloak {
     fn stats(&self) -> Stats {
-        let core_stats = self.core.stats();
-        Stats::add([core_stats, RAGGED_CLOAK_STATS])
+        RAGGED_CLOAK_STATS
+    }
+}
+
+impl Durable for RaggedCloak {
+    fn durability(&self) -> &Durability {
+        &self.durability
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        &mut self.durability
     }
 }

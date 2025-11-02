@@ -31,3 +31,13 @@ impl HasStats for IronMace {
         Stats::add([core_stats, IRON_MACE_DEFAULT_STATS])
     }
 }
+
+impl Durable for IronMace {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

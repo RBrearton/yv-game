@@ -31,3 +31,13 @@ impl HasStats for StoneBattleaxe {
         Stats::add([core_stats, STONE_BATTLEAXE_DEFAULT_STATS])
     }
 }
+
+impl Durable for StoneBattleaxe {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

@@ -42,3 +42,21 @@ impl HasStats for Battleaxe {
         }
     }
 }
+
+impl Durable for Battleaxe {
+    fn durability(&self) -> &Durability {
+        match self {
+            Battleaxe::StoneBattleaxe(stone_battleaxe) => stone_battleaxe.durability(),
+            Battleaxe::RustyIronBattleaxe(rusty_iron_battleaxe) => rusty_iron_battleaxe.durability(),
+            Battleaxe::IronBattleaxe(iron_battleaxe) => iron_battleaxe.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Battleaxe::StoneBattleaxe(stone_battleaxe) => stone_battleaxe.durability_mut(),
+            Battleaxe::RustyIronBattleaxe(rusty_iron_battleaxe) => rusty_iron_battleaxe.durability_mut(),
+            Battleaxe::IronBattleaxe(iron_battleaxe) => iron_battleaxe.durability_mut(),
+        }
+    }
+}

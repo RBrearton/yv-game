@@ -30,3 +30,17 @@ impl HasStats for Hands {
         }
     }
 }
+
+impl Durable for Hands {
+    fn durability(&self) -> &Durability {
+        match self {
+            Hands::WoolGloves(wool_gloves) => wool_gloves.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Hands::WoolGloves(wool_gloves) => wool_gloves.durability_mut(),
+        }
+    }
+}

@@ -30,3 +30,19 @@ impl HasStats for Footwear {
         }
     }
 }
+
+impl Durable for Footwear {
+    fn durability(&self) -> &Durability {
+        match self {
+            Footwear::OldLeatherSandals(old_leather_sandals) => old_leather_sandals.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Footwear::OldLeatherSandals(old_leather_sandals) => {
+                old_leather_sandals.durability_mut()
+            }
+        }
+    }
+}

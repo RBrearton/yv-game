@@ -38,3 +38,13 @@ impl HasStats for OldLeatherSandals {
         stats
     }
 }
+
+impl Durable for OldLeatherSandals {
+    fn durability(&self) -> &Durability {
+        &self.durability
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        &mut self.durability
+    }
+}

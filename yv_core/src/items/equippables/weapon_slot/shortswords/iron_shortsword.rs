@@ -31,3 +31,13 @@ impl HasStats for IronShortsword {
         Stats::add([core_stats, IRON_SHORTSWORD_DEFAULT_STATS])
     }
 }
+
+impl Durable for IronShortsword {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

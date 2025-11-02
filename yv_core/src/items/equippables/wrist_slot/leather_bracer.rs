@@ -30,3 +30,13 @@ impl HasStats for LeatherBracer {
         Stats::add([core_stats, LEATHER_BRACER_DEFAULT_STATS])
     }
 }
+
+impl Durable for LeatherBracer {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

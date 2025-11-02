@@ -32,3 +32,13 @@ impl HasStats for StonePickaxe {
         Stats::add([core_stats, STONE_PICKAXE_DEFAULT_STATS])
     }
 }
+
+impl Durable for StonePickaxe {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

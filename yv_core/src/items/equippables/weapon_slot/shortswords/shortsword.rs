@@ -51,3 +51,21 @@ impl HasStats for Shortsword {
         }
     }
 }
+
+impl Durable for Shortsword {
+    fn durability(&self) -> &Durability {
+        match self {
+            Shortsword::StoneShortsword(stone_shortsword) => stone_shortsword.durability(),
+            Shortsword::RustyIronShortsword(rusty_iron_shortsword) => rusty_iron_shortsword.durability(),
+            Shortsword::IronShortsword(iron_shortsword) => iron_shortsword.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Shortsword::StoneShortsword(stone_shortsword) => stone_shortsword.durability_mut(),
+            Shortsword::RustyIronShortsword(rusty_iron_shortsword) => rusty_iron_shortsword.durability_mut(),
+            Shortsword::IronShortsword(iron_shortsword) => iron_shortsword.durability_mut(),
+        }
+    }
+}

@@ -36,3 +36,13 @@ impl HasStats for StoneShortsword {
         stats
     }
 }
+
+impl Durable for StoneShortsword {
+    fn durability(&self) -> &Durability {
+        &self.durability
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        &mut self.durability
+    }
+}

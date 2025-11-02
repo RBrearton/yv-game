@@ -36,3 +36,13 @@ impl HasStats for RustyIronShortsword {
         stats
     }
 }
+
+impl Durable for RustyIronShortsword {
+    fn durability(&self) -> &Durability {
+        &self.durability
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        &mut self.durability
+    }
+}

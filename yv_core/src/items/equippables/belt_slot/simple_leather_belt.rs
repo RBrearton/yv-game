@@ -30,3 +30,13 @@ impl HasStats for SimpleLeatherBelt {
         Stats::add([core_stats, SIMPLE_LEATHER_BELT_STATS])
     }
 }
+
+impl Durable for SimpleLeatherBelt {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

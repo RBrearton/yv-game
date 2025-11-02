@@ -9,7 +9,7 @@ const STEEL_ARROW_DEFAULT_STATS: Stats = Stats {
 
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SteelArrow {
-    pub core: equippables::EquippableCore,
+    pub durability: Durability,
 }
 
 impl Describable for SteelArrow {
@@ -26,7 +26,16 @@ impl HasDisplayName for SteelArrow {
 
 impl HasStats for SteelArrow {
     fn stats(&self) -> Stats {
-        let core_stats = self.core.stats();
-        Stats::add([core_stats, STEEL_ARROW_DEFAULT_STATS])
+        STEEL_ARROW_DEFAULT_STATS
+    }
+}
+
+impl Durable for SteelArrow {
+    fn durability(&self) -> &Durability {
+        &self.durability
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        &mut self.durability
     }
 }

@@ -30,3 +30,17 @@ impl HasStats for Belt {
         }
     }
 }
+
+impl Durable for Belt {
+    fn durability(&self) -> &Durability {
+        match self {
+            Belt::SimpleLeatherBelt(simple_leather_belt) => simple_leather_belt.durability(),
+        }
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        match self {
+            Belt::SimpleLeatherBelt(simple_leather_belt) => simple_leather_belt.durability_mut(),
+        }
+    }
+}

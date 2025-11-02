@@ -30,3 +30,13 @@ impl HasStats for StoneIdol {
         Stats::add([core_stats, STONE_IDOL_DEFAULT_STATS])
     }
 }
+
+impl Durable for StoneIdol {
+    fn durability(&self) -> &Durability {
+        self.core.durability()
+    }
+
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
+    }
+}

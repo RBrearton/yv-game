@@ -8,6 +8,15 @@ pub struct Durability {
     max_durability: u8,
 }
 
+impl Default for Durability {
+    fn default() -> Self {
+        Self {
+            durability: 20,
+            max_durability: 20,
+        }
+    }
+}
+
 impl Durability {
     /// # New durability
     /// Creates a new durability with the given durability and max durability.

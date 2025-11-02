@@ -3,7 +3,6 @@ use crate::prelude::*;
 /// # Oak
 /// An oak tree is a type of tree that can be chopped down.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, Delegate)]
-#[delegate(ActorLike)]
 #[delegate(Identifiable)]
 #[delegate(HasPlacement)]
 pub struct Oak {
@@ -21,3 +20,5 @@ impl HasDisplayName for Oak {
         well_known_terms::trees::OAK
     }
 }
+
+impl ActorLike for Oak {}

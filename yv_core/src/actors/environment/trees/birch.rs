@@ -3,7 +3,6 @@ use crate::prelude::*;
 /// # Birch
 /// A birch tree is a type of tree that can be chopped down.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, Delegate)]
-#[delegate(ActorLike)]
 #[delegate(Identifiable)]
 #[delegate(HasPlacement)]
 pub struct Birch {
@@ -21,3 +20,5 @@ impl HasDisplayName for Birch {
         well_known_terms::trees::BIRCH
     }
 }
+
+impl ActorLike for Birch {}

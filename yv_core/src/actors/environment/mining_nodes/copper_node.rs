@@ -3,7 +3,6 @@ use crate::prelude::*;
 /// # Copper node
 /// A copper node is a type of mining node that can be mined for copper ore.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, Delegate)]
-#[delegate(ActorLike)]
 #[delegate(Identifiable)]
 #[delegate(HasPlacement)]
 pub struct CopperNode {
@@ -21,3 +20,5 @@ impl HasDisplayName for CopperNode {
         well_known_terms::mining_nodes::COPPER
     }
 }
+
+impl ActorLike for CopperNode {}

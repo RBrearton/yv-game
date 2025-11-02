@@ -7,7 +7,6 @@ use crate::prelude::*;
 pub struct ActorCore {
     pub identity: Identity,
     pub placement: Placement,
-    pub display_name: DisplayName,
 }
 
 impl HasPlacement for ActorCore {
@@ -20,16 +19,8 @@ impl HasPlacement for ActorCore {
     }
 }
 
-impl HasDisplayName for ActorCore {
-    fn display_name(&self) -> &str {
-        self.display_name.as_str()
-    }
-}
-
 impl Identifiable for ActorCore {
     fn identity(&self) -> Identity {
         self.identity
     }
 }
-
-impl ActorLike for ActorCore {}

@@ -3,7 +3,6 @@ use crate::prelude::*;
 /// # Iron node
 /// An iron node is a type of mining node that can be mined for iron ore.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, Delegate)]
-#[delegate(ActorLike)]
 #[delegate(Identifiable)]
 #[delegate(HasPlacement)]
 pub struct IronNode {
@@ -21,3 +20,5 @@ impl HasDisplayName for IronNode {
         well_known_terms::mining_nodes::IRON
     }
 }
+
+impl ActorLike for IronNode {}

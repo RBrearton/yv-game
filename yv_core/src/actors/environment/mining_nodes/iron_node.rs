@@ -22,3 +22,17 @@ impl HasDisplayName for IronNode {
 }
 
 impl ActorLike for IronNode {}
+
+impl Mineable for IronNode {
+    fn mining_difficulty(&self) -> u16 {
+        4
+    }
+
+    fn minimum_mining_level(&self) -> u16 {
+        10
+    }
+
+    fn ore(&self) -> ores::Ore {
+        ores::Ore::Iron(ores::IronOre::default())
+    }
+}

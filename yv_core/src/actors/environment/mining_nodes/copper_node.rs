@@ -22,3 +22,17 @@ impl HasDisplayName for CopperNode {
 }
 
 impl ActorLike for CopperNode {}
+
+impl Mineable for CopperNode {
+    fn mining_difficulty(&self) -> u16 {
+        2
+    }
+
+    fn minimum_mining_level(&self) -> u16 {
+        5
+    }
+
+    fn ore(&self) -> ores::Ore {
+        ores::Ore::Copper(ores::CopperOre::default())
+    }
+}

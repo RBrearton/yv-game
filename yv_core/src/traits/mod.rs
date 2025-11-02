@@ -1,5 +1,6 @@
 mod actor_like;
 mod character_like;
+mod choppable;
 mod describable;
 mod durable;
 mod has_display_name;
@@ -8,11 +9,13 @@ mod has_skills;
 mod has_stats;
 mod identifiable;
 mod massive;
+mod mineable;
 mod ownable;
 mod spatial_query_engine;
 
 pub use actor_like::*;
 pub use character_like::*;
+pub use choppable::*;
 pub use describable::*;
 pub use durable::*;
 pub use has_display_name::*;
@@ -21,5 +24,6 @@ pub use has_skills::*;
 pub use has_stats::*;
 pub use identifiable::*;
 pub use massive::*;
+pub use mineable::*;
 pub use ownable::*;
 pub use spatial_query_engine::*;

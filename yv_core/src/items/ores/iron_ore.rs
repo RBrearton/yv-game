@@ -2,7 +2,7 @@ use crate::prelude::*;
 
 /// # Iron ore
 /// The main ore that we extract when mining from an iron node.
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Serialize, Deserialize)]
 pub struct IronOre {}
 
 impl Describable for IronOre {

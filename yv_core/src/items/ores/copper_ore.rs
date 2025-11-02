@@ -2,7 +2,7 @@ use crate::prelude::*;
 
 /// # Copper ore
 /// The main ore that we extract when mining from a copper node.
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Serialize, Deserialize)]
 pub struct CopperOre {}
 
 impl Describable for CopperOre {

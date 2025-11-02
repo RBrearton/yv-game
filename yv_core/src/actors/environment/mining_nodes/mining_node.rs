@@ -8,6 +8,7 @@ use crate::prelude::*;
 #[delegate(ActorLike)]
 #[delegate(Identifiable)]
 #[delegate(HasPlacement)]
+#[delegate(Mineable)]
 pub enum MiningNode {
     Copper(mining_nodes::CopperNode),
     Iron(mining_nodes::IronNode),

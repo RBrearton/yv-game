@@ -1,10 +1,14 @@
 mod accomplishment;
 mod actors;
+mod augmentation;
 mod display_name;
+mod durability;
+mod enchantment;
 mod equipment;
-mod hand_slot;
 mod identity;
 mod identity_prefix;
+mod imbuement;
+mod inventory;
 mod items;
 mod placement;
 mod quest;
@@ -33,11 +37,12 @@ pub mod prelude {
 
     // Every publicly visible type from the crate should be re-exported here.
     pub use crate::{
-        accomplishment::Accomplishment, display_name::DisplayName, equipment::Equipment,
-        hand_slot::HandSlot, identity::Identity, identity_prefix::IdentityPrefix, items::*,
-        placement::Placement, quest::Quest, requirements::Requirements, skill::Skill,
-        skill_type::SkillType, skills::Skills, spatial_hash_grid::SpatialHashGrid, stat::Stat,
-        stat_type::StatType, stats::Stats, traits::*, vector_2::Vector2, well_known_terms,
-        world::World,
+        accomplishment::Accomplishment, actors::*, augmentation::Augmentation,
+        display_name::DisplayName, durability::Durability, enchantment::Enchantment,
+        equipment::Equipment, identity::Identity, identity_prefix::IdentityPrefix,
+        imbuement::Imbuement, inventory::Inventory, items::*, placement::Placement, quest::Quest,
+        requirements::Requirements, skill::Skill, skill_type::SkillType, skills::Skills,
+        spatial_hash_grid::SpatialHashGrid, stat::Stat, stat_type::StatType, stats::Stats,
+        traits::*, vector_2::Vector2, well_known_terms, world::World,
     };
 }

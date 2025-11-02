@@ -1,12 +1,11 @@
 use crate::prelude::*;
 
-/// # Item
-/// An enum containing all items in the game.
+/// # Ore
+/// An enum where each variant is a different type of ore.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, Delegate)]
 #[delegate(Describable)]
 #[delegate(HasDisplayName)]
-pub enum Item {
-    Equippable(Equippable),
-    Ore(ores::Ore),
-    Log(wood::Log),
+pub enum Ore {
+    Copper(ores::CopperOre),
+    Iron(ores::IronOre),
 }

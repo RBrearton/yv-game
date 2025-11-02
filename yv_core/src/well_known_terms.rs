@@ -66,6 +66,17 @@ pub mod mining_nodes {
     pub const IRON: &str = "Iron";
 }
 
+pub mod ores {
+    pub const COPPER: &str = "Copper ore";
+    pub const IRON: &str = "Iron ore";
+}
+
+pub mod wood {
+    pub const BIRCH_LOG: &str = "Birch log";
+    pub const OAK_LOG: &str = "Oak log";
+    pub const WILLOW_LOG: &str = "Willow log";
+}
+
 pub mod stats {
     pub const ARMOR: &str = "armour";
     pub const ATTACK_POWER: &str = "attack_power";
@@ -101,6 +112,20 @@ pub mod descriptions {
     pub mod imbuements {
         pub const VITALITY: &str = "Increases the wearer's health.";
         pub const WARMTH: &str = "Increases the wearer's warmth.";
+    }
+
+    pub mod ores {
+        pub const COPPER: &str = "A valuable ore; can be refined into copper ingots.";
+        pub const IRON: &str = "A mineral rich in iron that can be refined into iron ingots.";
+    }
+
+    pub mod wood {
+        pub const BIRCH_LOG: &str = "A log of birch wood. \
+        It can be used to craft items.";
+        pub const OAK_LOG: &str = "A log of oak wood. \
+        It can be used to craft items.";
+        pub const WILLOW_LOG: &str = "A log of willow wood. \
+        It can be used to craft items.";
     }
 
     pub mod mining_nodes {

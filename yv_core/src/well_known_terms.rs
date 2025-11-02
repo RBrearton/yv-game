@@ -39,6 +39,10 @@ pub mod enchantments {
     pub const HASTE: &str = "Haste";
     pub const MINOR_HARVESTING: &str = "Minor harvesting";
 }
+pub mod imbuements {
+    pub const VITALITY: &str = "Vitality";
+    pub const WARMTH: &str = "Warmth";
+}
 
 pub mod quests {
     pub const TUTORIAL: &str = "Tutorial";
@@ -82,6 +86,10 @@ pub mod descriptions {
     pub mod enchantments {
         pub const HASTE: &str = "Substantially increases the wearer's speed.";
         pub const MINOR_HARVESTING: &str = "Improves the wearer's harvesting skills.";
+    }
+    pub mod imbuements {
+        pub const VITALITY: &str = "Increases the wearer's health.";
+        pub const WARMTH: &str = "Increases the wearer's warmth.";
     }
 
     pub mod quests {

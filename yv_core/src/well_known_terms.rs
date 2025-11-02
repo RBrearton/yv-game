@@ -61,6 +61,11 @@ pub mod trees {
     pub const WILLOW: &str = "Willow tree";
 }
 
+pub mod mining_nodes {
+    pub const COPPER: &str = "Copper";
+    pub const IRON: &str = "Iron";
+}
+
 pub mod stats {
     pub const ARMOR: &str = "armour";
     pub const ATTACK_POWER: &str = "attack_power";
@@ -96,6 +101,14 @@ pub mod descriptions {
     pub mod imbuements {
         pub const VITALITY: &str = "Increases the wearer's health.";
         pub const WARMTH: &str = "Increases the wearer's warmth.";
+    }
+
+    pub mod mining_nodes {
+        pub const COPPER: &str = "A copper ore deposit. \
+        It contains copper ore that can be mined.";
+        pub const IRON: &str = "An iron ore deposit. \
+        It contains iron ore that can be mined. \
+        Iron is a strong metal that is used in a variety of applications.";
     }
 
     pub mod trees {

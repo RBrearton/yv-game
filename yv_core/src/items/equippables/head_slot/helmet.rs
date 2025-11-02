@@ -31,27 +31,15 @@ impl HasStats for Helmet {
 }
 
 impl Durable for Helmet {
-    fn current_durability(&self) -> u8 {
+    fn durability(&self) -> &Durability {
         match self {
-            Helmet::IronSkullcap(iron_skullcap) => iron_skullcap.current_durability(),
+            Helmet::IronSkullcap(iron_skullcap) => iron_skullcap.durability(),
         }
     }
 
-    fn max_durability(&self) -> u8 {
+    fn durability_mut(&mut self) -> &mut Durability {
         match self {
-            Helmet::IronSkullcap(iron_skullcap) => iron_skullcap.max_durability(),
-        }
-    }
-
-    fn decrease_durability(&mut self) {
-        match self {
-            Helmet::IronSkullcap(iron_skullcap) => iron_skullcap.decrease_durability(),
-        }
-    }
-
-    fn restore_durability(&mut self) {
-        match self {
-            Helmet::IronSkullcap(iron_skullcap) => iron_skullcap.restore_durability(),
+            Helmet::IronSkullcap(iron_skullcap) => iron_skullcap.durability_mut(),
         }
     }
 }

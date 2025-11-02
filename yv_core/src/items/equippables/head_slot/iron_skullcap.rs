@@ -34,19 +34,11 @@ impl HasStats for IronSkullcap {
 }
 
 impl Durable for IronSkullcap {
-    fn current_durability(&self) -> u8 {
-        self.core.current_durability()
+    fn durability(&self) -> &Durability {
+        self.core.durability()
     }
 
-    fn max_durability(&self) -> u8 {
-        self.core.max_durability()
-    }
-
-    fn decrease_durability(&mut self) {
-        self.core.decrease_durability()
-    }
-
-    fn restore_durability(&mut self) {
-        self.core.restore_durability()
+    fn durability_mut(&mut self) -> &mut Durability {
+        self.core.durability_mut()
     }
 }

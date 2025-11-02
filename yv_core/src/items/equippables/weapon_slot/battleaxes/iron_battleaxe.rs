@@ -2,22 +2,15 @@ use crate::prelude::*;
 
 const IRON_BATTLEAXE_DESCRIPTION: &str = "A simple iron battle axe.";
 const IRON_BATTLEAXE_DISPLAY_NAME: &str = "Iron battleaxe";
+const IRON_BATTLEAXE_DEFAULT_STATS: Stats = Stats {
+    weapon_speed: Stat::new(StatType::WeaponSpeed, 38),
+    attack_power: Stat::new(StatType::AttackPower, 19),
+    ..Stats::empty()
+};
 
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct IronBattleaxe {
-    pub stats: Stats,
-}
-
-impl Default for IronBattleaxe {
-    fn default() -> Self {
-        Self {
-            stats: Stats {
-                weapon_speed: Stat::new(StatType::WeaponSpeed, 38),
-                attack_power: Stat::new(StatType::AttackPower, 19),
-                ..Stats::default()
-            },
-        }
-    }
+    pub core: equippables::EquippableCore,
 }
 
 impl Describable for IronBattleaxe {
@@ -33,7 +26,8 @@ impl HasDisplayName for IronBattleaxe {
 }
 
 impl HasStats for IronBattleaxe {
-    fn stats(&self) -> &Stats {
-        &self.stats
+    fn stats(&self) -> Stats {
+        let core_stats = self.core.stats();
+        Stats::add([core_stats, IRON_BATTLEAXE_DEFAULT_STATS])
     }
 }

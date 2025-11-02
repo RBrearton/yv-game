@@ -60,7 +60,7 @@ impl HasDisplayName for Weapon {
     }
 }
 impl HasStats for Weapon {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Weapon::Dagger(dagger) => dagger.stats(),
             Weapon::Hammer(hammer) => hammer.stats(),

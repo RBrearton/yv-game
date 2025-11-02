@@ -35,7 +35,7 @@ impl HasDisplayName for Pickaxe {
 }
 
 impl HasStats for Pickaxe {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Pickaxe::StonePickaxe(stone_pickaxe) => stone_pickaxe.stats(),
             Pickaxe::IronPickaxe(iron_pickaxe) => iron_pickaxe.stats(),

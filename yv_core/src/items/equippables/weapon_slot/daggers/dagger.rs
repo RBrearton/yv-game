@@ -30,7 +30,7 @@ impl HasDisplayName for Dagger {
 }
 
 impl HasStats for Dagger {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Dagger::WoodenDagger(wooden_dagger) => wooden_dagger.stats(),
             Dagger::StoneDagger(stone_dagger) => stone_dagger.stats(),

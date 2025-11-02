@@ -2,22 +2,16 @@ use crate::prelude::*;
 
 const WOODEN_DAGGER_DESCRIPTION: &str = "A simple wooden dagger.";
 const WOODEN_DAGGER_DISPLAY_NAME: &str = "Wooden dagger";
+const WOODEN_DAGGER_DEFAULT_STATS: Stats = Stats {
+    weapon_speed: Stat::new(StatType::WeaponSpeed, 90),
+    attack_power: Stat::new(StatType::AttackPower, 1),
+    ..Stats::empty()
+};
 
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct WoodenDagger {
-    pub stats: Stats,
-}
-
-impl Default for WoodenDagger {
-    fn default() -> Self {
-        Self {
-            stats: Stats {
-                weapon_speed: Stat::new(StatType::WeaponSpeed, 90),
-                attack_power: Stat::new(StatType::AttackPower, 1),
-                ..Stats::default()
-            },
-        }
-    }
+    pub augmentation: Option<Augmentation>,
+    pub durability: Durability,
 }
 
 impl Describable for WoodenDagger {
@@ -33,7 +27,12 @@ impl HasDisplayName for WoodenDagger {
 }
 
 impl HasStats for WoodenDagger {
-    fn stats(&self) -> &Stats {
-        &self.stats
+    fn stats(&self) -> Stats {
+        let augmentation_stats = self.augmentation.map(|augmentation| augmentation.stats());
+        let stats = Stats::add([
+            augmentation_stats.unwrap_or_default(),
+            WOODEN_DAGGER_DEFAULT_STATS,
+        ]);
+        stats
     }
 }

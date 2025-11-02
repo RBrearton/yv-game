@@ -43,7 +43,7 @@ impl HasDisplayName for Shortsword {
 }
 
 impl HasStats for Shortsword {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Shortsword::StoneShortsword(stone_shortsword) => stone_shortsword.stats(),
             Shortsword::RustyIronShortsword(rusty_iron_shortsword) => rusty_iron_shortsword.stats(),

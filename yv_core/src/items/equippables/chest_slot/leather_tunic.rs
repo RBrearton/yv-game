@@ -2,23 +2,16 @@ use crate::prelude::*;
 
 const LEATHER_TUNIC_DESCRIPTION: &str = "A simple leather tunic.";
 const LEATHER_TUNIC_DISPLAY_NAME: &str = "Leather tunic";
+const LEATHER_TUNIC_DEFAULT_STATS: Stats = Stats {
+    armour: Stat::new(StatType::Armour, 2),
+    ..Stats::empty()
+};
 
 /// # Leather tunic
 /// The struct containing the data required to represent a leather tunic.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct LeatherTunic {
-    pub stats: Stats,
-}
-
-impl Default for LeatherTunic {
-    fn default() -> Self {
-        Self {
-            stats: Stats {
-                armour: Stat::new(StatType::Armour, 2),
-                ..Stats::default()
-            },
-        }
-    }
+    pub core: equippables::EquippableCore,
 }
 
 impl Describable for LeatherTunic {
@@ -32,7 +25,8 @@ impl HasDisplayName for LeatherTunic {
     }
 }
 impl HasStats for LeatherTunic {
-    fn stats(&self) -> &Stats {
-        &self.stats
+    fn stats(&self) -> Stats {
+        let core_stats = self.core.stats();
+        Stats::add([core_stats, LEATHER_TUNIC_DEFAULT_STATS])
     }
 }

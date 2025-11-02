@@ -19,7 +19,7 @@ pub enum Equippable {
 }
 
 impl HasStats for Equippable {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Equippable::Helmet(helmet) => helmet.stats(),
             Equippable::Chest(chest) => chest.stats(),

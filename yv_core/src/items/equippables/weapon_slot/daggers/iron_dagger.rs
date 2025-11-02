@@ -2,22 +2,15 @@ use crate::prelude::*;
 
 const IRON_DAGGER_DESCRIPTION: &str = "A simple iron dagger.";
 const IRON_DAGGER_DISPLAY_NAME: &str = "Iron dagger";
+const IRON_DAGGER_DEFAULT_STATS: Stats = Stats {
+    weapon_speed: Stat::new(StatType::WeaponSpeed, 90),
+    attack_power: Stat::new(StatType::AttackPower, 6),
+    ..Stats::empty()
+};
 
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct IronDagger {
-    pub stats: Stats,
-}
-
-impl Default for IronDagger {
-    fn default() -> Self {
-        Self {
-            stats: Stats {
-                weapon_speed: Stat::new(StatType::WeaponSpeed, 90),
-                attack_power: Stat::new(StatType::AttackPower, 6),
-                ..Stats::default()
-            },
-        }
-    }
+    pub core: equippables::EquippableCore,
 }
 
 impl Describable for IronDagger {
@@ -33,7 +26,8 @@ impl HasDisplayName for IronDagger {
 }
 
 impl HasStats for IronDagger {
-    fn stats(&self) -> &Stats {
-        &self.stats
+    fn stats(&self) -> Stats {
+        let core_stats = self.core.stats();
+        Stats::add([core_stats, IRON_DAGGER_DEFAULT_STATS])
     }
 }

@@ -24,7 +24,7 @@ impl HasDisplayName for Finger {
 }
 
 impl HasStats for Finger {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Finger::GoldRing(gold_ring) => gold_ring.stats(),
         }

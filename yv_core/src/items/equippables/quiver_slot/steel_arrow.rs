@@ -2,21 +2,14 @@ use crate::prelude::*;
 
 const STEEL_ARROW_DESCRIPTION: &str = "A simple wooden arrow, with a steel head.";
 const STEEL_ARROW_DISPLAY_NAME: &str = "Steel arrow";
+const STEEL_ARROW_DEFAULT_STATS: Stats = Stats {
+    ranged_damage: Stat::new(StatType::RangedDamage, 8),
+    ..Stats::empty()
+};
 
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SteelArrow {
-    pub stats: Stats,
-}
-
-impl Default for SteelArrow {
-    fn default() -> Self {
-        Self {
-            stats: Stats {
-                ranged_damage: Stat::new(StatType::RangedDamage, 8),
-                ..Stats::default()
-            },
-        }
-    }
+    pub core: equippables::EquippableCore,
 }
 
 impl Describable for SteelArrow {
@@ -32,7 +25,8 @@ impl HasDisplayName for SteelArrow {
 }
 
 impl HasStats for SteelArrow {
-    fn stats(&self) -> &Stats {
-        &self.stats
+    fn stats(&self) -> Stats {
+        let core_stats = self.core.stats();
+        Stats::add([core_stats, STEEL_ARROW_DEFAULT_STATS])
     }
 }

@@ -35,7 +35,7 @@ impl HasDisplayName for Hatchet {
 }
 
 impl HasStats for Hatchet {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Hatchet::StoneHatchet(stone_hatchet) => stone_hatchet.stats(),
             Hatchet::IronHatchet(iron_hatchet) => iron_hatchet.stats(),

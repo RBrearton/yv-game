@@ -24,7 +24,7 @@ impl HasDisplayName for Cloak {
 }
 
 impl HasStats for Cloak {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Cloak::RaggedCloak(ragged_cloak) => ragged_cloak.stats(),
         }

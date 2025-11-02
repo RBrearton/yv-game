@@ -26,7 +26,7 @@ impl HasDisplayName for Chest {
 }
 
 impl HasStats for Chest {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Chest::LinenTunic(linen_tunic) => linen_tunic.stats(),
             Chest::LeatherTunic(leather_tunic) => leather_tunic.stats(),

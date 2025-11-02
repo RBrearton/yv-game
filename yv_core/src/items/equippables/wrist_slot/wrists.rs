@@ -24,7 +24,7 @@ impl HasDisplayName for Wrists {
 }
 
 impl HasStats for Wrists {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Wrists::LeatherBracer(leather_bracer) => leather_bracer.stats(),
         }

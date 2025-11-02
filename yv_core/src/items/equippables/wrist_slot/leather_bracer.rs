@@ -2,21 +2,14 @@ use crate::prelude::*;
 
 const LEATHER_BRACER_DESCRIPTION: &str = "A simple leather bracer.";
 const LEATHER_BRACER_DISPLAY_NAME: &str = "Leather bracer";
+const LEATHER_BRACER_DEFAULT_STATS: Stats = Stats {
+    ranged_accuracy: Stat::new(StatType::RangedAccuracy, 4),
+    ..Stats::empty()
+};
 
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct LeatherBracer {
-    pub stats: Stats,
-}
-
-impl Default for LeatherBracer {
-    fn default() -> Self {
-        Self {
-            stats: Stats {
-                ranged_accuracy: Stat::new(StatType::RangedAccuracy, 4),
-                ..Stats::default()
-            },
-        }
-    }
+    pub core: equippables::EquippableCore,
 }
 
 impl Describable for LeatherBracer {
@@ -32,7 +25,8 @@ impl HasDisplayName for LeatherBracer {
 }
 
 impl HasStats for LeatherBracer {
-    fn stats(&self) -> &Stats {
-        &self.stats
+    fn stats(&self) -> Stats {
+        let core_stats = self.core.stats();
+        Stats::add([core_stats, LEATHER_BRACER_DEFAULT_STATS])
     }
 }

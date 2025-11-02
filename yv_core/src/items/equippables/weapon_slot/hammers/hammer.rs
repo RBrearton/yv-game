@@ -36,7 +36,7 @@ impl HasDisplayName for Hammer {
 }
 
 impl HasStats for Hammer {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Hammer::WoodenClub(wooden_club) => wooden_club.stats(),
             Hammer::IronMace(iron_mace) => iron_mace.stats(),

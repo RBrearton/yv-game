@@ -24,7 +24,7 @@ impl HasDisplayName for Pouch {
 }
 
 impl HasStats for Pouch {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Pouch::StoneIdol(stone_idol) => stone_idol.stats(),
         }

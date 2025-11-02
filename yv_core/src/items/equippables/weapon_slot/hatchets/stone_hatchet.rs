@@ -2,23 +2,16 @@ use crate::prelude::*;
 
 const STONE_HATCHET_DESCRIPTION: &str = "A simple stone hatchet.";
 const STONE_HATCHET_DISPLAY_NAME: &str = "Stone hatchet";
+const STONE_HATCHET_DEFAULT_STATS: Stats = Stats {
+    weapon_speed: Stat::new(StatType::WeaponSpeed, 60),
+    attack_power: Stat::new(StatType::AttackPower, 4),
+    woodcutting_power: Stat::new(StatType::WoodcuttingPower, 2),
+    ..Stats::empty()
+};
 
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct StoneHatchet {
-    pub stats: Stats,
-}
-
-impl Default for StoneHatchet {
-    fn default() -> Self {
-        Self {
-            stats: Stats {
-                weapon_speed: Stat::new(StatType::WeaponSpeed, 60),
-                attack_power: Stat::new(StatType::AttackPower, 4),
-                woodcutting_power: Stat::new(StatType::WoodcuttingPower, 2),
-                ..Stats::default()
-            },
-        }
-    }
+    pub core: equippables::EquippableCore,
 }
 
 impl Describable for StoneHatchet {
@@ -34,7 +27,8 @@ impl HasDisplayName for StoneHatchet {
 }
 
 impl HasStats for StoneHatchet {
-    fn stats(&self) -> &Stats {
-        &self.stats
+    fn stats(&self) -> Stats {
+        let core_stats = self.core.stats();
+        Stats::add([core_stats, STONE_HATCHET_DEFAULT_STATS])
     }
 }

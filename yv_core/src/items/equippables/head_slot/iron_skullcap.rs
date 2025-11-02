@@ -2,24 +2,18 @@ use crate::prelude::*;
 
 const IRON_SKULLCAP_DESCRIPTION: &str = "A simple, lightweight iron helmet with good visibility.";
 const IRON_SKULLCAP_DISPLAY_NAME: &str = "Iron skullcap";
+const IRON_SKULLCAP_DEFAULT_STATS: Stats = Stats {
+    armour: Stat::new(StatType::Armour, 5),
+    speed: Stat::new(StatType::Speed, -1),
+    precision: Stat::new(StatType::Precision, -3),
+    ..Stats::empty()
+};
 
 /// # Iron skullcap
 /// The struct containing the data required to represent an iron skullcap.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct IronSkullcap {
-    pub stats: Stats,
-}
-
-impl Default for IronSkullcap {
-    fn default() -> Self {
-        Self {
-            stats: Stats {
-                armour: Stat::new(StatType::Armour, 5),
-                speed: Stat::new(StatType::Speed, -1),
-                ..Stats::default()
-            },
-        }
-    }
+    pub core: equippables::EquippableCore,
 }
 
 impl Describable for IronSkullcap {
@@ -33,7 +27,8 @@ impl HasDisplayName for IronSkullcap {
     }
 }
 impl HasStats for IronSkullcap {
-    fn stats(&self) -> &Stats {
-        &self.stats
+    fn stats(&self) -> Stats {
+        let core_stats = self.core.stats();
+        Stats::add([core_stats, IRON_SKULLCAP_DEFAULT_STATS])
     }
 }

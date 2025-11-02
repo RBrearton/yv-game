@@ -24,7 +24,7 @@ impl HasDisplayName for Belt {
 }
 
 impl HasStats for Belt {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Belt::SimpleLeatherBelt(simple_leather_belt) => simple_leather_belt.stats(),
         }

@@ -2,21 +2,14 @@ use crate::prelude::*;
 
 const SIMPLE_LEATHER_BELT_DESCRIPTION: &str = "A simple leather belt.";
 const SIMPLE_LEATHER_BELT_DISPLAY_NAME: &str = "Simple leather belt";
+const SIMPLE_LEATHER_BELT_STATS: Stats = Stats {
+    speed: Stat::new(StatType::Speed, 1),
+    ..Stats::empty()
+};
 
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SimpleLeatherBelt {
-    pub stats: Stats,
-}
-
-impl Default for SimpleLeatherBelt {
-    fn default() -> Self {
-        Self {
-            stats: Stats {
-                speed: Stat::new(StatType::Speed, 1),
-                ..Stats::default()
-            },
-        }
-    }
+    pub core: equippables::EquippableCore,
 }
 
 impl Describable for SimpleLeatherBelt {
@@ -32,7 +25,8 @@ impl HasDisplayName for SimpleLeatherBelt {
 }
 
 impl HasStats for SimpleLeatherBelt {
-    fn stats(&self) -> &Stats {
-        &self.stats
+    fn stats(&self) -> Stats {
+        let core_stats = self.core.stats();
+        Stats::add([core_stats, SIMPLE_LEATHER_BELT_STATS])
     }
 }

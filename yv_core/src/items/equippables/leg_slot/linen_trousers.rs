@@ -2,21 +2,14 @@ use crate::prelude::*;
 
 const LINEN_TROUSERS_DESCRIPTION: &str = "Some simple linen trousers.";
 const LINEN_TROUSERS_DISPLAY_NAME: &str = "Linen trousers";
+const LINEN_TROUSERS_DEFAULT_STATS: Stats = Stats {
+    warmth: Stat::new(StatType::Warmth, 2),
+    ..Stats::empty()
+};
 
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct LinenTrousers {
-    pub stats: Stats,
-}
-
-impl Default for LinenTrousers {
-    fn default() -> Self {
-        Self {
-            stats: Stats {
-                warmth: Stat::new(StatType::Warmth, 2),
-                ..Stats::default()
-            },
-        }
-    }
+    pub core: equippables::EquippableCore,
 }
 
 impl Describable for LinenTrousers {
@@ -32,7 +25,8 @@ impl HasDisplayName for LinenTrousers {
 }
 
 impl HasStats for LinenTrousers {
-    fn stats(&self) -> &Stats {
-        &self.stats
+    fn stats(&self) -> Stats {
+        let core_stats = self.core.stats();
+        Stats::add([core_stats, LINEN_TROUSERS_DEFAULT_STATS])
     }
 }

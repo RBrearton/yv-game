@@ -3,22 +3,16 @@ use crate::prelude::*;
 const RAGGED_CLOAK_DESCRIPTION: &str = "A simple cloak that has seen better days.";
 const RAGGED_CLOAK_DISPLAY_NAME: &str = "Ragged cloak";
 
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
-pub struct RaggedCloak {
-    pub stats: Stats,
-}
+const RAGGED_CLOAK_STATS: Stats = Stats {
+    armour: Stat::new(StatType::Armour, 1),
+    warmth: Stat::new(StatType::Warmth, 4),
+    speed: Stat::new(StatType::Speed, -3),
+    ..Stats::empty()
+};
 
-impl Default for RaggedCloak {
-    fn default() -> Self {
-        Self {
-            stats: Stats {
-                armour: Stat::new(StatType::Armour, 1),
-                warmth: Stat::new(StatType::Warmth, 4),
-                speed: Stat::new(StatType::Speed, -3),
-                ..Stats::default()
-            },
-        }
-    }
+#[derive(Clone, Copy, Default, Debug, PartialEq, Serialize, Deserialize)]
+pub struct RaggedCloak {
+    pub core: equippables::EquippableCore,
 }
 
 impl Describable for RaggedCloak {
@@ -34,7 +28,8 @@ impl HasDisplayName for RaggedCloak {
 }
 
 impl HasStats for RaggedCloak {
-    fn stats(&self) -> &Stats {
-        &self.stats
+    fn stats(&self) -> Stats {
+        let core_stats = self.core.stats();
+        Stats::add([core_stats, RAGGED_CLOAK_STATS])
     }
 }

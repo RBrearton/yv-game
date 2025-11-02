@@ -24,7 +24,7 @@ impl HasDisplayName for Hands {
 }
 
 impl HasStats for Hands {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Hands::WoolGloves(wool_gloves) => wool_gloves.stats(),
         }

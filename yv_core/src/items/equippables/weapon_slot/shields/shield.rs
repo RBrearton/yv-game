@@ -24,7 +24,7 @@ impl HasDisplayName for Shield {
 }
 
 impl HasStats for Shield {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Shield::WoodenBuckler(wooden_buckler) => wooden_buckler.stats(),
         }

@@ -31,7 +31,7 @@ impl HasDisplayName for Projectile {
 }
 
 impl HasStats for Projectile {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Projectile::StoneArrow(stone_arrow) => stone_arrow.stats(),
             Projectile::IronArrow(iron_arrow) => iron_arrow.stats(),

@@ -2,22 +2,15 @@ use crate::prelude::*;
 
 const WOODEN_BUCKLER_DESCRIPTION: &str = "A simple wooden buckler.";
 const WOODEN_BUCKLER_DISPLAY_NAME: &str = "Wooden buckler";
+const WOODEN_BUCKLER_DEFAULT_STATS: Stats = Stats {
+    armour: Stat::new(StatType::Armour, 6),
+    block_points: Stat::new(StatType::BlockPoints, 30),
+    ..Stats::empty()
+};
 
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct WoodenBuckler {
-    pub stats: Stats,
-}
-
-impl Default for WoodenBuckler {
-    fn default() -> Self {
-        Self {
-            stats: Stats {
-                armour: Stat::new(StatType::Armour, 6),
-                block_points: Stat::new(StatType::BlockPoints, 30),
-                ..Stats::default()
-            },
-        }
-    }
+    pub core: equippables::EquippableCore,
 }
 
 impl Describable for WoodenBuckler {
@@ -33,7 +26,8 @@ impl HasDisplayName for WoodenBuckler {
 }
 
 impl HasStats for WoodenBuckler {
-    fn stats(&self) -> &Stats {
-        &self.stats
+    fn stats(&self) -> Stats {
+        let core_stats = self.core.stats();
+        Stats::add([core_stats, WOODEN_BUCKLER_DEFAULT_STATS])
     }
 }

@@ -23,7 +23,7 @@ impl HasDisplayName for Helmet {
 }
 
 impl HasStats for Helmet {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Helmet::IronSkullcap(iron_skullcap) => iron_skullcap.stats(),
         }

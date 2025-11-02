@@ -24,7 +24,7 @@ impl HasDisplayName for Greatsword {
 }
 
 impl HasStats for Greatsword {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Greatsword::IronGreatsword(iron_greatsword) => iron_greatsword.stats(),
         }

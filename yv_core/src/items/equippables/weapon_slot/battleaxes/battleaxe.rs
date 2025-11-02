@@ -34,7 +34,7 @@ impl HasDisplayName for Battleaxe {
 }
 
 impl HasStats for Battleaxe {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Battleaxe::StoneBattleaxe(stone_battleaxe) => stone_battleaxe.stats(),
             Battleaxe::RustyIronBattleaxe(rusty_iron_battleaxe) => rusty_iron_battleaxe.stats(),

@@ -24,7 +24,7 @@ impl HasDisplayName for Footwear {
 }
 
 impl HasStats for Footwear {
-    fn stats(&self) -> &Stats {
+    fn stats(&self) -> Stats {
         match self {
             Footwear::OldLeatherSandals(old_leather_sandals) => old_leather_sandals.stats(),
         }

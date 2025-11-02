@@ -44,7 +44,7 @@ impl Default for Stats {
 }
 
 impl Stats {
-    /// # New empty
+    /// # Empty
     /// Explicitly creates a new set of stats with all values set to 0.
     pub const fn empty() -> Self {
         Self {

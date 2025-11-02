@@ -35,6 +35,10 @@ pub mod augmentations {
     pub const LIGHT_REINFORCEMENT: &str = "Light reinforcement";
     pub const STRENGTHENED: &str = "Strengthened";
 }
+pub mod enchantments {
+    pub const HASTE: &str = "Haste";
+    pub const MINOR_HARVESTING: &str = "Minor harvesting";
+}
 
 pub mod quests {
     pub const TUTORIAL: &str = "Tutorial";
@@ -60,6 +64,7 @@ pub mod stats {
     pub const RANGED_ACCURACY: &str = "ranged_accuracy";
     pub const RANGED_DAMAGE: &str = "ranged_damage";
     pub const SPEED: &str = "speed";
+    pub const VITALITY: &str = "vitality";
     pub const WARMTH: &str = "warmth";
     pub const WEAPON_SPEED: &str = "weapon_speed";
     pub const WOODCUTTING_POWER: &str = "woodcutting_power";
@@ -73,6 +78,10 @@ pub mod descriptions {
             of a small increase in weight.";
         pub const STRENGTHENED: &str =
             "Strengthened items don't break as easily, but are slightly heavier.";
+    }
+    pub mod enchantments {
+        pub const HASTE: &str = "Substantially increases the wearer's speed.";
+        pub const MINOR_HARVESTING: &str = "Improves the wearer's harvesting skills.";
     }
 
     pub mod quests {
@@ -104,6 +113,7 @@ pub mod descriptions {
         pub const RANGED_DAMAGE: &str =
             "A measure of how much damage an object can deal at a distance.";
         pub const SPEED: &str = "A measure of how fast an object can move.";
+        pub const VITALITY: &str = "A stat that increases the health of its wearer.";
         pub const WARMTH: &str = "A measure of how warm an object is.";
         pub const WEAPON_SPEED: &str = "A measure of how fast an object can attack.";
         pub const WOODCUTTING_POWER: &str =

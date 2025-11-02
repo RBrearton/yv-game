@@ -46,7 +46,7 @@ impl Default for Stats {
 impl Stats {
     /// # New empty
     /// Explicitly creates a new set of stats with all values set to 0.
-    pub fn empty() -> Self {
+    pub const fn empty() -> Self {
         Self {
             armour: Stat::new(StatType::Armour, 0),
             block_points: Stat::new(StatType::BlockPoints, 0),
@@ -92,7 +92,7 @@ impl Stats {
 
     /// # Set stat
     /// Sets the stat with the given type to the given value.
-    pub fn set_stat(&mut self, stat_type: StatType, value: i32) {
+    pub fn set_stat(&mut self, stat_type: StatType, value: i16) {
         match stat_type {
             StatType::Armour => self.armour = Stat::new(StatType::Armour, value),
             StatType::Vitality => self.vitality = Stat::new(StatType::Vitality, value),

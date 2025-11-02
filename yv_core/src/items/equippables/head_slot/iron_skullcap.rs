@@ -32,3 +32,21 @@ impl HasStats for IronSkullcap {
         Stats::add([core_stats, IRON_SKULLCAP_DEFAULT_STATS])
     }
 }
+
+impl Durable for IronSkullcap {
+    fn current_durability(&self) -> u8 {
+        self.core.current_durability()
+    }
+
+    fn max_durability(&self) -> u8 {
+        self.core.max_durability()
+    }
+
+    fn decrease_durability(&mut self) {
+        self.core.decrease_durability()
+    }
+
+    fn restore_durability(&mut self) {
+        self.core.restore_durability()
+    }
+}

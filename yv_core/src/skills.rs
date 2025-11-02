@@ -40,6 +40,12 @@ impl Skills {
         }
     }
 
+    /// # Get skill level
+    /// Gets the level of the skill with the given type.
+    pub fn get_skill_level(&self, skill_type: SkillType) -> i32 {
+        self.get_skill(skill_type).level()
+    }
+
     /// # Add
     /// Adds two skills together.
     /// This works by adding the underlying xp.

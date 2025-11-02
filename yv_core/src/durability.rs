@@ -26,40 +26,22 @@ impl Durability {
             max_durability,
         }
     }
+}
 
-    /// # Get durability
-    /// Returns the durability of the equippable item.
-    pub fn durability(&self) -> u8 {
+impl Durable for Durability {
+    fn current_durability(&self) -> u8 {
         self.durability
     }
 
-    /// # Get max durability
-    /// Returns the max durability of the equippable item.
-    pub fn max_durability(&self) -> u8 {
+    fn max_durability(&self) -> u8 {
         self.max_durability
     }
 
-    /// # Decrease
-    /// Decrements the durability of the equippable item.
-    pub fn decrease(&mut self) {
+    fn decrease_durability(&mut self) {
         self.durability = self.durability.saturating_sub(1);
     }
 
-    /// # Is broken
-    /// Returns true if the durability is 0.
-    pub fn is_broken(&self) -> bool {
-        self.durability == 0
-    }
-
-    /// # Is at max durability
-    /// Returns true if the durability is equal to the max durability.
-    pub fn is_at_max_durability(&self) -> bool {
-        self.durability == self.max_durability
-    }
-
-    /// # Restore
-    /// Restores the durability of the equippable item to the max durability.
-    pub fn restore(&mut self) {
+    fn restore_durability(&mut self) {
         self.durability = self.max_durability;
     }
 }

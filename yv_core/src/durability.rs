@@ -26,22 +26,20 @@ impl Durability {
             max_durability,
         }
     }
-}
 
-impl Durable for Durability {
-    fn current_durability(&self) -> u8 {
+    pub fn current_durability(&self) -> u8 {
         self.durability
     }
 
-    fn max_durability(&self) -> u8 {
+    pub fn max_durability(&self) -> u8 {
         self.max_durability
     }
 
-    fn decrease_durability(&mut self) {
+    pub fn decrease_durability(&mut self) {
         self.durability = self.durability.saturating_sub(1);
     }
 
-    fn restore_durability(&mut self) {
+    pub fn restore_durability(&mut self) {
         self.durability = self.max_durability;
     }
 }

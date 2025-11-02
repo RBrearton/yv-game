@@ -1,6 +1,7 @@
 mod actor_like;
 mod character_like;
 mod describable;
+mod durable;
 mod has_display_name;
 mod has_placement;
 mod has_skills;
@@ -13,6 +14,7 @@ mod spatial_query_engine;
 pub use actor_like::ActorLike;
 pub use character_like::CharacterLike;
 pub use describable::Describable;
+pub use durable::Durable;
 pub use has_display_name::HasDisplayName;
 pub use has_placement::HasPlacement;
 pub use has_skills::HasSkills;

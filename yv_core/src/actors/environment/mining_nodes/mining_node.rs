@@ -5,6 +5,9 @@ use crate::prelude::*;
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, Delegate)]
 #[delegate(HasDisplayName)]
 #[delegate(Describable)]
+#[delegate(ActorLike)]
+#[delegate(Identifiable)]
+#[delegate(HasPlacement)]
 pub enum MiningNode {
     Copper(mining_nodes::CopperNode),
     Iron(mining_nodes::IronNode),

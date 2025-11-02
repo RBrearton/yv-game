@@ -5,6 +5,9 @@ use crate::prelude::*;
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, Delegate)]
 #[delegate(HasDisplayName)]
 #[delegate(Describable)]
+#[delegate(ActorLike)]
+#[delegate(Identifiable)]
+#[delegate(HasPlacement)]
 pub enum Tree {
     Birch(trees::Birch),
     Oak(trees::Oak),

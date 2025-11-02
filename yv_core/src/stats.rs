@@ -5,15 +5,23 @@ use crate::prelude::*;
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Stats {
     pub armour: Stat,
-    pub attack_power: Stat,
     pub block_points: Stat,
-    pub mining_power: Stat,
+
+    pub speed: Stat,
+    pub warmth: Stat,
+
+    pub attack_power: Stat,
+    pub slashing_bonus: Stat,
+    pub stabbing_bonus: Stat,
+    pub crushing_bonus: Stat,
+
+    pub weapon_speed: Stat,
+
     pub precision: Stat,
     pub ranged_accuracy: Stat,
     pub ranged_damage: Stat,
-    pub speed: Stat,
-    pub warmth: Stat,
-    pub weapon_speed: Stat,
+
+    pub mining_power: Stat,
     pub woodcutting_power: Stat,
 }
 
@@ -33,14 +41,17 @@ impl Stats {
     pub fn empty() -> Self {
         Self {
             armour: Stat::new(StatType::Armour, 0),
-            attack_power: Stat::new(StatType::AttackPower, 0),
             block_points: Stat::new(StatType::BlockPoints, 0),
+            speed: Stat::new(StatType::Speed, 0),
+            warmth: Stat::new(StatType::Warmth, 0),
+            attack_power: Stat::new(StatType::AttackPower, 0),
+            slashing_bonus: Stat::new(StatType::SlashingBonus, 0),
+            stabbing_bonus: Stat::new(StatType::StabbingBonus, 0),
+            crushing_bonus: Stat::new(StatType::CrushingBonus, 0),
             mining_power: Stat::new(StatType::MiningPower, 0),
             precision: Stat::new(StatType::Precision, 0),
             ranged_accuracy: Stat::new(StatType::RangedAccuracy, 0),
             ranged_damage: Stat::new(StatType::RangedDamage, 0),
-            speed: Stat::new(StatType::Speed, 0),
-            warmth: Stat::new(StatType::Warmth, 0),
             weapon_speed: Stat::new(StatType::WeaponSpeed, 0),
             woodcutting_power: Stat::new(StatType::WoodcuttingPower, 0),
         }
@@ -61,6 +72,9 @@ impl Stats {
             StatType::Warmth => self.warmth,
             StatType::WeaponSpeed => self.weapon_speed,
             StatType::WoodcuttingPower => self.woodcutting_power,
+            StatType::SlashingBonus => self.slashing_bonus,
+            StatType::StabbingBonus => self.stabbing_bonus,
+            StatType::CrushingBonus => self.crushing_bonus,
         }
     }
 
@@ -82,6 +96,15 @@ impl Stats {
             StatType::WeaponSpeed => self.weapon_speed = Stat::new(StatType::WeaponSpeed, value),
             StatType::WoodcuttingPower => {
                 self.woodcutting_power = Stat::new(StatType::WoodcuttingPower, value)
+            }
+            StatType::SlashingBonus => {
+                self.slashing_bonus = Stat::new(StatType::SlashingBonus, value)
+            }
+            StatType::StabbingBonus => {
+                self.stabbing_bonus = Stat::new(StatType::StabbingBonus, value)
+            }
+            StatType::CrushingBonus => {
+                self.crushing_bonus = Stat::new(StatType::CrushingBonus, value)
             }
         }
     }

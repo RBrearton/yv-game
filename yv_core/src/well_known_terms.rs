@@ -20,6 +20,22 @@ pub const SPATIAL_HASH_GRID_CELL_SIZE: f32 = 50.0;
 pub const IDENTITY_PREFIX_CAPACITY: usize = 8;
 pub const DISPLAY_NAME_CAPACITY: usize = 16;
 
+/// # Inventory size
+/// The size of a character's inventory.
+/// Inspired by runescape.
+/// Runescape gets really interesting when you're working around finite inventory space.
+/// Runescape's inventory is 28 slots - I wanted to make a game that pushes inventory space even
+/// further.
+pub const INVENTORY_SIZE: usize = INVENTORY_ROWS * INVENTORY_COLUMNS;
+pub const INVENTORY_ROWS: usize = 4;
+pub const INVENTORY_COLUMNS: usize = 4;
+
+pub mod augmentations {
+    pub const SHARPENED: &str = "Sharpened";
+    pub const LIGHT_REINFORCEMENT: &str = "Light reinforcement";
+    pub const STRENGTHENED: &str = "Strengthened";
+}
+
 pub mod quests {
     pub const TUTORIAL: &str = "Tutorial";
     pub const EXAMPLE_QUEST: &str = "Example quest";
@@ -35,6 +51,9 @@ pub mod stats {
     pub const ARMOR: &str = "armour";
     pub const ATTACK_POWER: &str = "attack_power";
     pub const BLOCK_POINTS: &str = "block_points";
+    pub const SLASHING_BONUS: &str = "slashing_bonus";
+    pub const STABBING_BONUS: &str = "stabbing_bonus";
+    pub const CRUSHING_BONUS: &str = "crushing_bonus";
     pub const MINING_POWER: &str = "mining_power";
     pub const PRECISION: &str = "precision";
     pub const RANGED_ACCURACY: &str = "ranged_accuracy";
@@ -46,6 +65,15 @@ pub mod stats {
 }
 
 pub mod descriptions {
+    pub mod augmentations {
+        pub const SHARPENED: &str = "Sharpened weapons deal more slashing and stabbing damage.";
+        pub const LIGHT_REINFORCEMENT: &str =
+            "Lightly reinforced armour is slightly more resistant to physical damage, at the cost \
+            of a small increase in weight.";
+        pub const STRENGTHENED: &str =
+            "Strengthened items don't break as easily, but are slightly heavier.";
+    }
+
     pub mod quests {
         pub const TUTORIAL: &str = "The tutorial quest.";
         pub const EXAMPLE_QUEST: &str = "The example quest.";
@@ -62,6 +90,9 @@ pub mod descriptions {
             "The damage reduction applied by an object when the wearer is hit by an attack.";
         pub const ATTACK_POWER: &str =
             "A measure of how much additional damage the wearer will deal when using this object.";
+        pub const SLASHING_BONUS: &str = "Additional attack power applied to slashing attacks.";
+        pub const STABBING_BONUS: &str = "Additional attack power applied to stabbing attacks.";
+        pub const CRUSHING_BONUS: &str = "Additional attack power applied to crushing attacks.";
         pub const BLOCK_POINTS: &str =
             "The damage reduction applied by an object when the wearer blocks an attack.";
         pub const MINING_POWER: &str =

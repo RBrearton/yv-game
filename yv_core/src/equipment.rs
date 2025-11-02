@@ -44,6 +44,12 @@ impl Equipment {
             self.off_hand.map(Equippable::Weapon),
         ]
     }
+
+    /// # Stats array
+    /// A helper method for getting a fixed size array of stats, one for each equippable.
+    pub fn stats_array(&self) -> [Stats; 15] {
+        self.to_array().map(|item| item.stats())
+    }
 }
 
 impl From<Equipment> for [Option<Equippable>; 15] {
@@ -54,12 +60,6 @@ impl From<Equipment> for [Option<Equippable>; 15] {
 
 impl HasStats for Equipment {
     fn stats(&self) -> Stats {
-        let stats = self
-            .to_array()
-            .iter()
-            .filter_map(|item| item.as_ref().map(|item| item.stats()))
-            .collect::<Vec<Stats>>();
-
-        Stats::add(stats)
+        Stats::add(self.stats_array())
     }
 }

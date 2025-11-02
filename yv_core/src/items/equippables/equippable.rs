@@ -40,6 +40,11 @@ impl HasStats for Equippable {
         self.stats().get_stat(stat_type)
     }
 }
+impl HasStats for Option<Equippable> {
+    fn stats(&self) -> Stats {
+        self.map(|item| item.stats()).unwrap_or_default()
+    }
+}
 
 impl Describable for Equippable {
     fn description(&self) -> &str {

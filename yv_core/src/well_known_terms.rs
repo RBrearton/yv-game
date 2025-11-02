@@ -55,6 +55,12 @@ pub mod skills {
     pub const WOODCUTTING: &str = "woodcutting";
 }
 
+pub mod trees {
+    pub const BIRCH: &str = "Birch tree";
+    pub const OAK: &str = "Oak tree";
+    pub const WILLOW: &str = "Willow tree";
+}
+
 pub mod stats {
     pub const ARMOR: &str = "armour";
     pub const ATTACK_POWER: &str = "attack_power";
@@ -90,6 +96,14 @@ pub mod descriptions {
     pub mod imbuements {
         pub const VITALITY: &str = "Increases the wearer's health.";
         pub const WARMTH: &str = "Increases the wearer's warmth.";
+    }
+
+    pub mod trees {
+        pub const BIRCH: &str = "A small birch tree. \
+        Its pale, fine-grained wood is moderately hard, offering a challenge for woodcutters \
+        looking to advance beyond softer woods.";
+        pub const OAK: &str = "A large oak tree with thick, strong wood.";
+        pub const WILLOW: &str = "A tree with soft, lightweight wood that is easy to work with.";
     }
 
     pub mod quests {

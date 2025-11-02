@@ -19,6 +19,7 @@
         "colour",
         "DARKGRAY",
         "DCMAKE",
+        "delegatable",
         "despawn",
         "dylib",
         "egui",

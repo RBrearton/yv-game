@@ -2,6 +2,7 @@ use crate::prelude::*;
 
 /// # Has stats
 /// The trait that must be implemented by anything that has stats.
+#[delegatable_trait]
 pub trait HasStats {
     /// # Stats
     ///

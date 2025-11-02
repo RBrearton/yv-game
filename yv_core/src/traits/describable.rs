@@ -1,5 +1,8 @@
+use crate::prelude::*;
+
 /// # Describable
 /// The trait that must be implemented by anything that can be described.
+#[delegatable_trait]
 pub trait Describable {
     /// # Description
     /// Returns the description of the object.

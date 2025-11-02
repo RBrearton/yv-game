@@ -1,5 +1,8 @@
+use crate::prelude::*;
+
 /// # Has display name
 /// The trait that must be implemented by anything that has a display name.
+#[delegatable_trait]
 pub trait HasDisplayName {
     /// # Display name
     /// Returns the display name of the object.

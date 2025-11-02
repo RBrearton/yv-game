@@ -2,6 +2,7 @@ use crate::prelude::*;
 
 /// # Durable
 /// The trait that must be implemented by anything that has durability.
+#[delegatable_trait]
 pub trait Durable {
     /// # Durability
     /// Returns the durability of the object.

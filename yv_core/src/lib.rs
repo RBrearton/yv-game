@@ -29,6 +29,9 @@ pub mod prelude {
     pub use std::fmt;
     pub use uuid::Uuid;
 
+    // Ambassador makes trait delegation take ~100x less code.
+    pub use ambassador::{delegatable_trait, Delegate};
+
     // I want to use serde Serialize/Deserialize everywhere.
     pub use serde::{Deserialize, Serialize};
 

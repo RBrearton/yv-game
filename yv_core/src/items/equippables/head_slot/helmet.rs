@@ -2,44 +2,11 @@ use crate::prelude::*;
 
 /// # Helmet
 /// An enum containing all helmet slot armour items in the game.
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, Delegate)]
+#[delegate(HasDisplayName)]
+#[delegate(Describable)]
+#[delegate(HasStats)]
+#[delegate(Durable)]
 pub enum Helmet {
     IronSkullcap(equippables::head_slot::IronSkullcap),
-}
-
-impl Describable for Helmet {
-    fn description(&self) -> &str {
-        match self {
-            Helmet::IronSkullcap(iron_skullcap) => iron_skullcap.description(),
-        }
-    }
-}
-impl HasDisplayName for Helmet {
-    fn display_name(&self) -> &str {
-        match self {
-            Helmet::IronSkullcap(iron_skullcap) => iron_skullcap.display_name(),
-        }
-    }
-}
-
-impl HasStats for Helmet {
-    fn stats(&self) -> Stats {
-        match self {
-            Helmet::IronSkullcap(iron_skullcap) => iron_skullcap.stats(),
-        }
-    }
-}
-
-impl Durable for Helmet {
-    fn durability(&self) -> &Durability {
-        match self {
-            Helmet::IronSkullcap(iron_skullcap) => iron_skullcap.durability(),
-        }
-    }
-
-    fn durability_mut(&mut self) -> &mut Durability {
-        match self {
-            Helmet::IronSkullcap(iron_skullcap) => iron_skullcap.durability_mut(),
-        }
-    }
 }

@@ -30,11 +30,12 @@ impl HasStats for GoldRing {
     fn stats(&self) -> Stats {
         let enchantment_1_stats = self.enchantment_1.map(|enchantment| enchantment.stats());
         let enchantment_2_stats = self.enchantment_2.map(|enchantment| enchantment.stats());
-        let stats = Stats::add([
+
+        Stats::add([
             enchantment_1_stats.unwrap_or_default(),
             enchantment_2_stats.unwrap_or_default(),
-        ]);
-        stats
+            GOLD_RING_DEFAULT_STATS,
+        ])
     }
 }
 

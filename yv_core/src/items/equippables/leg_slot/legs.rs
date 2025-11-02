@@ -2,45 +2,11 @@ use crate::prelude::*;
 
 /// # Legs
 /// An enum containing all legs slot armour items in the game.
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, Delegate)]
+#[delegate(HasDisplayName)]
+#[delegate(Describable)]
+#[delegate(HasStats)]
+#[delegate(Durable)]
 pub enum Legs {
     LinenTrousers(equippables::leg_slot::LinenTrousers),
-}
-
-impl Describable for Legs {
-    fn description(&self) -> &str {
-        match self {
-            Legs::LinenTrousers(linen_trousers) => linen_trousers.description(),
-        }
-    }
-}
-
-impl HasDisplayName for Legs {
-    fn display_name(&self) -> &str {
-        match self {
-            Legs::LinenTrousers(linen_trousers) => linen_trousers.display_name(),
-        }
-    }
-}
-
-impl HasStats for Legs {
-    fn stats(&self) -> Stats {
-        match self {
-            Legs::LinenTrousers(linen_trousers) => linen_trousers.stats(),
-        }
-    }
-}
-
-impl Durable for Legs {
-    fn durability(&self) -> &Durability {
-        match self {
-            Legs::LinenTrousers(linen_trousers) => linen_trousers.durability(),
-        }
-    }
-
-    fn durability_mut(&mut self) -> &mut Durability {
-        match self {
-            Legs::LinenTrousers(linen_trousers) => linen_trousers.durability_mut(),
-        }
-    }
 }

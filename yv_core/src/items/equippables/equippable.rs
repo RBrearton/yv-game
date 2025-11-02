@@ -2,7 +2,11 @@ use crate::prelude::*;
 
 /// # Equippable
 /// An enum containing all equippable items in the game.
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, Delegate)]
+#[delegate(HasDisplayName)]
+#[delegate(Describable)]
+#[delegate(HasStats)]
+#[delegate(Durable)]
 pub enum Equippable {
     Helmet(equippables::Helmet),
     Chest(equippables::Chest),
@@ -18,104 +22,8 @@ pub enum Equippable {
     Weapon(equippables::Weapon),
 }
 
-impl HasStats for Equippable {
-    fn stats(&self) -> Stats {
-        match self {
-            Equippable::Helmet(helmet) => helmet.stats(),
-            Equippable::Chest(chest) => chest.stats(),
-            Equippable::Legs(legs) => legs.stats(),
-            Equippable::Footwear(feet) => feet.stats(),
-            Equippable::Cloak(cloak) => cloak.stats(),
-            Equippable::Hands(hands) => hands.stats(),
-            Equippable::Wrists(wrists) => wrists.stats(),
-            Equippable::Belt(belt) => belt.stats(),
-            Equippable::Finger(finger) => finger.stats(),
-            Equippable::Pouch(pouch) => pouch.stats(),
-            Equippable::Projectile(quiver) => quiver.stats(),
-            Equippable::Weapon(weapon) => weapon.stats(),
-        }
-    }
-
-    fn get_stat(&self, stat_type: StatType) -> Stat {
-        self.stats().get_stat(stat_type)
-    }
-}
 impl HasStats for Option<Equippable> {
     fn stats(&self) -> Stats {
         self.map(|item| item.stats()).unwrap_or_default()
-    }
-}
-
-impl Describable for Equippable {
-    fn description(&self) -> &str {
-        match self {
-            Equippable::Helmet(helmet) => helmet.description(),
-            Equippable::Chest(chest) => chest.description(),
-            Equippable::Legs(legs) => legs.description(),
-            Equippable::Footwear(feet) => feet.description(),
-            Equippable::Cloak(cloak) => cloak.description(),
-            Equippable::Hands(hands) => hands.description(),
-            Equippable::Wrists(wrists) => wrists.description(),
-            Equippable::Belt(belt) => belt.description(),
-            Equippable::Finger(finger) => finger.description(),
-            Equippable::Pouch(pouch) => pouch.description(),
-            Equippable::Projectile(quiver) => quiver.description(),
-            Equippable::Weapon(weapon) => weapon.description(),
-        }
-    }
-}
-
-impl HasDisplayName for Equippable {
-    fn display_name(&self) -> &str {
-        match self {
-            Equippable::Helmet(helmet) => helmet.display_name(),
-            Equippable::Chest(chest) => chest.display_name(),
-            Equippable::Legs(legs) => legs.display_name(),
-            Equippable::Footwear(feet) => feet.display_name(),
-            Equippable::Cloak(cloak) => cloak.display_name(),
-            Equippable::Hands(hands) => hands.display_name(),
-            Equippable::Wrists(wrists) => wrists.display_name(),
-            Equippable::Belt(belt) => belt.display_name(),
-            Equippable::Finger(finger) => finger.display_name(),
-            Equippable::Pouch(pouch) => pouch.display_name(),
-            Equippable::Projectile(quiver) => quiver.display_name(),
-            Equippable::Weapon(weapon) => weapon.display_name(),
-        }
-    }
-}
-
-impl Durable for Equippable {
-    fn durability(&self) -> &Durability {
-        match self {
-            Equippable::Helmet(helmet) => helmet.durability(),
-            Equippable::Chest(chest) => chest.durability(),
-            Equippable::Legs(legs) => legs.durability(),
-            Equippable::Footwear(feet) => feet.durability(),
-            Equippable::Cloak(cloak) => cloak.durability(),
-            Equippable::Hands(hands) => hands.durability(),
-            Equippable::Wrists(wrists) => wrists.durability(),
-            Equippable::Belt(belt) => belt.durability(),
-            Equippable::Finger(finger) => finger.durability(),
-            Equippable::Pouch(pouch) => pouch.durability(),
-            Equippable::Projectile(quiver) => quiver.durability(),
-            Equippable::Weapon(weapon) => weapon.durability(),
-        }
-    }
-
-    fn durability_mut(&mut self) -> &mut Durability {
-        match self {
-            Equippable::Helmet(helmet) => helmet.durability_mut(),
-            Equippable::Chest(chest) => chest.durability_mut(),
-            Equippable::Legs(legs) => legs.durability_mut(),
-            Equippable::Footwear(feet) => feet.durability_mut(),
-            Equippable::Cloak(cloak) => cloak.durability_mut(),
-            Equippable::Hands(hands) => hands.durability_mut(),
-            Equippable::Wrists(wrists) => wrists.durability_mut(),
-            Equippable::Belt(belt) => belt.durability_mut(),
-            Equippable::Finger(finger) => finger.durability_mut(),
-            Equippable::Pouch(pouch) => pouch.durability_mut(),
-            Equippable::Projectile(quiver) => quiver.durability_mut(),
-            Equippable::Weapon(weapon) => weapon.durability_mut(),
-        }
     }
 }

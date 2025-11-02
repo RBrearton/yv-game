@@ -15,13 +15,12 @@ impl HasStats for EquippableCore {
         let aug_stats = self.augmentation.map(|augmentation| augmentation.stats());
         let ench_stats = self.enchantment.map(|enchantment| enchantment.stats());
         let imb_stats = self.imbuement.map(|imbuement| imbuement.stats());
-        let stats = Stats::add([
+
+        Stats::add([
             aug_stats.unwrap_or_default(),
             ench_stats.unwrap_or_default(),
             imb_stats.unwrap_or_default(),
-        ]);
-
-        stats
+        ])
     }
 }
 

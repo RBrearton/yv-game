@@ -2,45 +2,11 @@ use crate::prelude::*;
 
 /// # Cloak
 /// An enum containing all cloak slot armour items in the game.
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, Delegate)]
+#[delegate(HasDisplayName)]
+#[delegate(Describable)]
+#[delegate(HasStats)]
+#[delegate(Durable)]
 pub enum Cloak {
     RaggedCloak(equippables::back_slot::RaggedCloak),
-}
-
-impl Describable for Cloak {
-    fn description(&self) -> &str {
-        match self {
-            Cloak::RaggedCloak(ragged_cloak) => ragged_cloak.description(),
-        }
-    }
-}
-
-impl HasDisplayName for Cloak {
-    fn display_name(&self) -> &str {
-        match self {
-            Cloak::RaggedCloak(ragged_cloak) => ragged_cloak.display_name(),
-        }
-    }
-}
-
-impl HasStats for Cloak {
-    fn stats(&self) -> Stats {
-        match self {
-            Cloak::RaggedCloak(ragged_cloak) => ragged_cloak.stats(),
-        }
-    }
-}
-
-impl Durable for Cloak {
-    fn durability(&self) -> &Durability {
-        match self {
-            Cloak::RaggedCloak(ragged_cloak) => ragged_cloak.durability(),
-        }
-    }
-
-    fn durability_mut(&mut self) -> &mut Durability {
-        match self {
-            Cloak::RaggedCloak(ragged_cloak) => ragged_cloak.durability_mut(),
-        }
-    }
 }

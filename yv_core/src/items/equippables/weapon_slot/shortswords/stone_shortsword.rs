@@ -29,11 +29,11 @@ impl HasDisplayName for StoneShortsword {
 impl HasStats for StoneShortsword {
     fn stats(&self) -> Stats {
         let augmentation_stats = self.augmentation.map(|augmentation| augmentation.stats());
-        let stats = Stats::add([
+
+        Stats::add([
             augmentation_stats.unwrap_or_default(),
             STONE_SHORTSWORD_DEFAULT_STATS,
-        ]);
-        stats
+        ])
     }
 }
 

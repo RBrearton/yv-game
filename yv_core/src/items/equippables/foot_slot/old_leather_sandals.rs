@@ -31,11 +31,11 @@ impl HasDisplayName for OldLeatherSandals {
 impl HasStats for OldLeatherSandals {
     fn stats(&self) -> Stats {
         let augmentation_stats = self.augmentation.map(|augmentation| augmentation.stats());
-        let stats = Stats::add([
+
+        Stats::add([
             augmentation_stats.unwrap_or_default(),
             OLD_LEATHER_SANDALS_DEFAULT_STATS,
-        ]);
-        stats
+        ])
     }
 }
 

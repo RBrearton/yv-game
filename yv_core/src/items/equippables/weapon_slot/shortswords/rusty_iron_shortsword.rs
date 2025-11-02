@@ -29,11 +29,11 @@ impl HasDisplayName for RustyIronShortsword {
 impl HasStats for RustyIronShortsword {
     fn stats(&self) -> Stats {
         let augmentation_stats = self.augmentation.map(|augmentation| augmentation.stats());
-        let stats = Stats::add([
+
+        Stats::add([
             augmentation_stats.unwrap_or_default(),
             RUSTY_IRON_SHORTSWORD_DEFAULT_STATS,
-        ]);
-        stats
+        ])
     }
 }
 

@@ -29,11 +29,11 @@ impl HasDisplayName for WoodenDagger {
 impl HasStats for WoodenDagger {
     fn stats(&self) -> Stats {
         let augmentation_stats = self.augmentation.map(|augmentation| augmentation.stats());
-        let stats = Stats::add([
+
+        Stats::add([
             augmentation_stats.unwrap_or_default(),
             WOODEN_DAGGER_DEFAULT_STATS,
-        ]);
-        stats
+        ])
     }
 }
 

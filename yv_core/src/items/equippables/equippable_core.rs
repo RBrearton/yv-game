@@ -26,19 +26,11 @@ impl HasStats for EquippableCore {
 }
 
 impl Durable for EquippableCore {
-    fn current_durability(&self) -> u8 {
-        self.durability.current_durability()
+    fn durability(&self) -> &Durability {
+        &self.durability
     }
 
-    fn max_durability(&self) -> u8 {
-        self.durability.max_durability()
-    }
-
-    fn decrease_durability(&mut self) {
-        self.durability.decrease_durability()
-    }
-
-    fn restore_durability(&mut self) {
-        self.durability.restore_durability()
+    fn durability_mut(&mut self) -> &mut Durability {
+        &mut self.durability
     }
 }

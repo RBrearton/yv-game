@@ -4,23 +4,30 @@ use crate::prelude::*;
 /// A struct that contains all possible stats.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Stats {
+    // Defensive.
     pub armour: Stat,
     pub block_points: Stat,
 
+    // General.
+    pub durability: Stat,
     pub speed: Stat,
     pub warmth: Stat,
 
+    // Melee.
     pub attack_power: Stat,
     pub slashing_bonus: Stat,
     pub stabbing_bonus: Stat,
     pub crushing_bonus: Stat,
 
+    // Melee + ranged.
     pub weapon_speed: Stat,
 
+    // Ranged.
     pub precision: Stat,
     pub ranged_accuracy: Stat,
     pub ranged_damage: Stat,
 
+    // Professions.
     pub mining_power: Stat,
     pub woodcutting_power: Stat,
 }
@@ -44,6 +51,7 @@ impl Stats {
             block_points: Stat::new(StatType::BlockPoints, 0),
             speed: Stat::new(StatType::Speed, 0),
             warmth: Stat::new(StatType::Warmth, 0),
+            durability: Stat::new(StatType::Durability, 0),
             attack_power: Stat::new(StatType::AttackPower, 0),
             slashing_bonus: Stat::new(StatType::SlashingBonus, 0),
             stabbing_bonus: Stat::new(StatType::StabbingBonus, 0),
@@ -62,6 +70,7 @@ impl Stats {
     pub fn get_stat(&self, stat_type: StatType) -> Stat {
         match stat_type {
             StatType::Armour => self.armour,
+            StatType::Durability => self.durability,
             StatType::AttackPower => self.attack_power,
             StatType::BlockPoints => self.block_points,
             StatType::MiningPower => self.mining_power,
@@ -83,6 +92,7 @@ impl Stats {
     pub fn set_stat(&mut self, stat_type: StatType, value: i32) {
         match stat_type {
             StatType::Armour => self.armour = Stat::new(StatType::Armour, value),
+            StatType::Durability => self.durability = Stat::new(StatType::Durability, value),
             StatType::AttackPower => self.attack_power = Stat::new(StatType::AttackPower, value),
             StatType::BlockPoints => self.block_points = Stat::new(StatType::BlockPoints, value),
             StatType::MiningPower => self.mining_power = Stat::new(StatType::MiningPower, value),
@@ -114,17 +124,40 @@ impl Stats {
     pub fn add(stats: impl IntoIterator<Item = Stats>) -> Self {
         let mut total_stats = Self::empty();
         for stat in stats {
-            total_stats.armour.value += stat.armour.value;
-            total_stats.attack_power.value += stat.attack_power.value;
-            total_stats.block_points.value += stat.block_points.value;
-            total_stats.mining_power.value += stat.mining_power.value;
-            total_stats.precision.value += stat.precision.value;
-            total_stats.ranged_accuracy.value += stat.ranged_accuracy.value;
-            total_stats.ranged_damage.value += stat.ranged_damage.value;
-            total_stats.speed.value += stat.speed.value;
-            total_stats.warmth.value += stat.warmth.value;
-            total_stats.weapon_speed.value += stat.weapon_speed.value;
-            total_stats.woodcutting_power.value += stat.woodcutting_power.value;
+            // Destructure to force compile-time completeness checking.
+            let Stats {
+                armour,
+                block_points,
+                durability,
+                speed,
+                warmth,
+                attack_power,
+                slashing_bonus,
+                stabbing_bonus,
+                crushing_bonus,
+                weapon_speed,
+                precision,
+                ranged_accuracy,
+                ranged_damage,
+                mining_power,
+                woodcutting_power,
+            } = stat;
+
+            total_stats.armour.value += armour.value;
+            total_stats.block_points.value += block_points.value;
+            total_stats.durability.value += durability.value;
+            total_stats.speed.value += speed.value;
+            total_stats.warmth.value += warmth.value;
+            total_stats.attack_power.value += attack_power.value;
+            total_stats.slashing_bonus.value += slashing_bonus.value;
+            total_stats.stabbing_bonus.value += stabbing_bonus.value;
+            total_stats.crushing_bonus.value += crushing_bonus.value;
+            total_stats.weapon_speed.value += weapon_speed.value;
+            total_stats.precision.value += precision.value;
+            total_stats.ranged_accuracy.value += ranged_accuracy.value;
+            total_stats.ranged_damage.value += ranged_damage.value;
+            total_stats.mining_power.value += mining_power.value;
+            total_stats.woodcutting_power.value += woodcutting_power.value;
         }
         total_stats
     }

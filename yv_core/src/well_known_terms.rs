@@ -51,6 +51,7 @@ pub mod stats {
     pub const ARMOR: &str = "armour";
     pub const ATTACK_POWER: &str = "attack_power";
     pub const BLOCK_POINTS: &str = "block_points";
+    pub const DURABILITY: &str = "durability";
     pub const SLASHING_BONUS: &str = "slashing_bonus";
     pub const STABBING_BONUS: &str = "stabbing_bonus";
     pub const CRUSHING_BONUS: &str = "crushing_bonus";
@@ -90,6 +91,7 @@ pub mod descriptions {
             "The damage reduction applied by an object when the wearer is hit by an attack.";
         pub const ATTACK_POWER: &str =
             "A measure of how much additional damage the wearer will deal when using this object.";
+        pub const DURABILITY: &str = "A measure of how long an object will last before breaking.";
         pub const SLASHING_BONUS: &str = "Additional attack power applied to slashing attacks.";
         pub const STABBING_BONUS: &str = "Additional attack power applied to stabbing attacks.";
         pub const CRUSHING_BONUS: &str = "Additional attack power applied to crushing attacks.";

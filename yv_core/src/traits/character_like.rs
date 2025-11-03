@@ -4,6 +4,7 @@ use crate::prelude::*;
 /// The trait that needs to be implemented by anything that wants to be treated as a character in
 /// the game.
 /// This includes all player characters, as well as all non-player characters.
+#[delegatable_trait]
 pub trait CharacterLike: ActorLike + HasSkills + HasStats {
     /// # Meets requirements
     /// Returns whether this character meets the given requirements.

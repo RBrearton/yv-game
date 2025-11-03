@@ -2,6 +2,7 @@ use crate::prelude::*;
 
 /// # Has skills
 /// The trait that must be implemented by anything that has skills.
+#[delegatable_trait]
 pub trait HasSkills {
     /// # Skills
     /// Returns a reference to the skills of the object.

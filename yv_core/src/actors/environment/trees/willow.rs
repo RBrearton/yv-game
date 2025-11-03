@@ -22,3 +22,17 @@ impl HasDisplayName for Willow {
 }
 
 impl ActorLike for Willow {}
+
+impl Choppable for Willow {
+    fn woodcutting_difficulty(&self) -> u16 {
+        4
+    }
+
+    fn minimum_woodcutting_level(&self) -> u16 {
+        3
+    }
+
+    fn wood(&self) -> wood::Log {
+        wood::Log::Willow(wood::WillowLog::default())
+    }
+}

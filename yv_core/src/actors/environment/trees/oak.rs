@@ -22,3 +22,17 @@ impl HasDisplayName for Oak {
 }
 
 impl ActorLike for Oak {}
+
+impl Choppable for Oak {
+    fn woodcutting_difficulty(&self) -> u16 {
+        16
+    }
+
+    fn minimum_woodcutting_level(&self) -> u16 {
+        15
+    }
+
+    fn wood(&self) -> wood::Log {
+        wood::Log::Oak(wood::OakLog::default())
+    }
+}

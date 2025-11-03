@@ -8,6 +8,7 @@ use crate::prelude::*;
 #[delegate(ActorLike)]
 #[delegate(Identifiable)]
 #[delegate(HasPlacement)]
+#[delegate(Choppable)]
 pub enum Tree {
     Birch(trees::Birch),
     Oak(trees::Oak),

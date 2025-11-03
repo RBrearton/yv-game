@@ -22,3 +22,17 @@ impl HasDisplayName for Birch {
 }
 
 impl ActorLike for Birch {}
+
+impl Choppable for Birch {
+    fn woodcutting_difficulty(&self) -> u16 {
+        7
+    }
+
+    fn minimum_woodcutting_level(&self) -> u16 {
+        8
+    }
+
+    fn wood(&self) -> wood::Log {
+        wood::Log::Birch(wood::BirchLog::default())
+    }
+}

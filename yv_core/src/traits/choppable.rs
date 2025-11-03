@@ -3,6 +3,7 @@ use crate::prelude::*;
 /// # Choppable
 /// The trait that must be implemented by any tree that can be chopped down as part of the
 /// woodcutting skill.
+#[delegatable_trait]
 pub trait Choppable {
     /// # Woodcutting difficulty
     /// Returns the woodcutting difficulty of the tree.

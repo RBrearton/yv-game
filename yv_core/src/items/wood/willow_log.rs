@@ -2,7 +2,7 @@ use crate::prelude::*;
 
 /// # Willow log
 /// A willow log is a type of wood that can be used to craft items.
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Serialize, Deserialize)]
 pub struct WillowLog {}
 
 impl Describable for WillowLog {

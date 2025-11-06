@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
-/// # Character
-/// This enum contains a variant for every character in the game.
+/// # Humanoid
+/// This enum contains a variant for every humanoid NPC in the game.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, Delegate)]
 #[delegate(Identifiable)]
 #[delegate(HasPlacement)]
@@ -10,7 +10,6 @@ use crate::prelude::*;
 #[delegate(HasSkills)]
 #[delegate(ActorLike)]
 #[delegate(CharacterLike)]
-pub enum Character {
-    Npc(characters::npcs::Npc),
-    Player(characters::Player),
+pub enum Humanoid {
+    MrOrc(characters::npcs::humanoids::MrOrc),
 }

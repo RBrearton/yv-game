@@ -30,6 +30,10 @@ pub const INVENTORY_SIZE: usize = INVENTORY_ROWS * INVENTORY_COLUMNS;
 pub const INVENTORY_ROWS: usize = 4;
 pub const INVENTORY_COLUMNS: usize = 4;
 
+pub mod loot {
+    pub const LOOT_BAG: &str = "Loot bag";
+}
+
 pub mod augmentations {
     pub const SHARPENED: &str = "Sharpened";
     pub const LIGHT_REINFORCEMENT: &str = "Light reinforcement";
@@ -97,6 +101,10 @@ pub mod stats {
 }
 
 pub mod descriptions {
+    pub mod loot {
+        pub const LOOT_BAG: &str = "A bag that looks heavy and full of loot.";
+    }
+
     pub mod augmentations {
         pub const SHARPENED: &str = "Sharpened weapons deal more slashing and stabbing damage.";
         pub const LIGHT_REINFORCEMENT: &str =

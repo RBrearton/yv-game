@@ -42,6 +42,7 @@
         "lengthscales",
         "lerp",
         "lightmapped",
+        "lootable",
         "Mapface",
         "MSVC",
         "npcs",

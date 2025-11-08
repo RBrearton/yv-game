@@ -30,8 +30,17 @@ pub const INVENTORY_SIZE: usize = INVENTORY_ROWS * INVENTORY_COLUMNS;
 pub const INVENTORY_ROWS: usize = 4;
 pub const INVENTORY_COLUMNS: usize = 4;
 
+pub mod distances {
+    pub const MELEE_RANGE: f32 = 1.0;
+    pub const LONG_DISTANCE_ACTION: f32 = 15.0;
+}
+
 pub mod loot {
     pub const LOOT_BAG: &str = "Loot bag";
+}
+
+pub mod actions {
+    pub const ARCANE_BOLT: &str = "Arcane bolt";
 }
 
 pub mod augmentations {
@@ -100,7 +109,23 @@ pub mod stats {
     pub const WOODCUTTING_POWER: &str = "woodcutting_power";
 }
 
+pub mod cooldowns {
+    use std::time::Duration;
+
+    pub const ARCANE_BOLT: Duration = Duration::from_secs(7);
+}
+
+pub mod cast_times {
+    use std::time::Duration;
+
+    pub const ARCANE_BOLT: Duration = Duration::from_millis(3500);
+}
+
 pub mod descriptions {
+    pub mod actions {
+        pub const ARCANE_BOLT: &str = "A simple magical projectile.";
+    }
+
     pub mod loot {
         pub const LOOT_BAG: &str = "A bag that looks heavy and full of loot.";
     }

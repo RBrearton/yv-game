@@ -1,45 +1,44 @@
+use crate::prelude::*;
+
 /// # Environment
 /// The environment consists of interactive objects that can't move.
 /// This includes trees that we can chop down, rocks that we can mine, etc.
-pub struct Environment {}
+pub struct Environment {
+    pub trees: SpatialHashGrid<environment::Tree>,
+    pub mining_nodes: SpatialHashGrid<environment::MiningNode>,
+}
 
 impl Environment {
     /// # New empty
     /// Creates a new empty environment.
     pub fn new_empty() -> Self {
-        Self {}
+        Self {
+            trees: SpatialHashGrid::new_empty(),
+            mining_nodes: SpatialHashGrid::new_empty(),
+        }
     }
 }
-/// # Players
-/// Stores all the players in the game.
-pub struct Players {}
 
-impl Players {
+/// # Characters
+/// The data for all the characters in the game is stored here.
+pub struct Characters {
+    pub players: SpatialHashGrid<characters::Player>,
+    pub npcs: SpatialHashGrid<characters::npcs::Npc>,
+}
+impl Characters {
     /// # New empty
-    /// Creates a new empty players.
+    /// Creates a new empty characters.
     pub fn new_empty() -> Self {
-        Self {}
+        Self {
+            players: SpatialHashGrid::new_empty(),
+            npcs: SpatialHashGrid::new_empty(),
+        }
     }
 }
-/// # NPCs
-/// All NPCs in the game.
-pub struct Npcs {}
 
-impl Npcs {
-    /// # New empty
-    /// Creates a new empty NPCs.
-    pub fn new_empty() -> Self {
-        Self {}
-    }
-}
-/// # World
-/// The world is the main data structure that contains everything in the entire game world.
-/// It holds the full game state.
-/// This is the highest level data structure in the game.
 pub struct World {
-    environment: Environment,
-    players: Players,
-    npcs: Npcs,
+    pub environment: Environment,
+    pub characters: Characters,
 }
 
 impl World {
@@ -48,8 +47,7 @@ impl World {
     pub fn new_empty() -> Self {
         Self {
             environment: Environment::new_empty(),
-            players: Players::new_empty(),
-            npcs: Npcs::new_empty(),
+            characters: Characters::new_empty(),
         }
     }
 }

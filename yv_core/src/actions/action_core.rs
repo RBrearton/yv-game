@@ -8,3 +8,21 @@ pub struct ActionCore {
     pub performer_id: Identity,
     pub target_id: Option<Identity>,
 }
+
+impl Identifiable for ActionCore {
+    fn identity(&self) -> Identity {
+        self.action_id
+    }
+}
+
+impl HasPerformer for ActionCore {
+    fn performer(&self) -> &Identity {
+        &self.performer_id
+    }
+}
+
+impl HasTarget for ActionCore {
+    fn target(&self) -> Option<&Identity> {
+        self.target_id.as_ref()
+    }
+}

@@ -42,3 +42,15 @@ impl IntoIterator for Commands {
         std::iter::once(self.command_0).chain(self.command_1)
     }
 }
+
+impl From<Command> for Commands {
+    fn from(command: Command) -> Self {
+        Self::new_1(command)
+    }
+}
+
+impl From<(Command, Command)> for Commands {
+    fn from((command_0, command_1): (Command, Command)) -> Self {
+        Self::new_2(command_0, command_1)
+    }
+}

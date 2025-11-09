@@ -4,10 +4,10 @@ use crate::prelude::*;
 /// A collection of skills that a character can have.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Skills {
-    strength: Skill,
-    mining: Skill,
-    woodcutting: Skill,
-    magic: Skill,
+    pub strength: Skill,
+    pub mining: Skill,
+    pub woodcutting: Skill,
+    pub magic: Skill,
 }
 
 impl Skills {

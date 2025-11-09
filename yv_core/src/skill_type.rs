@@ -7,6 +7,7 @@ pub enum SkillType {
     Strength,
     Mining,
     Woodcutting,
+    Magic,
 }
 
 impl HasDisplayName for SkillType {
@@ -15,6 +16,7 @@ impl HasDisplayName for SkillType {
             SkillType::Strength => well_known_terms::skills::STRENGTH,
             SkillType::Mining => well_known_terms::skills::MINING,
             SkillType::Woodcutting => well_known_terms::skills::WOODCUTTING,
+            SkillType::Magic => well_known_terms::skills::MAGIC,
         }
     }
 }
@@ -25,6 +27,7 @@ impl Describable for SkillType {
             SkillType::Strength => well_known_terms::descriptions::skills::STRENGTH,
             SkillType::Mining => well_known_terms::descriptions::skills::MINING,
             SkillType::Woodcutting => well_known_terms::descriptions::skills::WOODCUTTING,
+            SkillType::Magic => well_known_terms::descriptions::skills::MAGIC,
         }
     }
 }

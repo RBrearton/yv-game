@@ -17,6 +17,7 @@ mod placement;
 mod quest;
 mod requirements;
 mod skill;
+mod skill_levels;
 mod skill_type;
 mod skills;
 mod spatial_hash_grid;
@@ -45,12 +46,12 @@ pub mod prelude {
     // Every publicly visible type from the crate should be re-exported here.
     pub use crate::{
         accomplishment::Accomplishment, actions, actors::*, augmentation::Augmentation,
-        command::Command, display_name::DisplayName, durability::Durability,
+        command::Command, commands::Commands, display_name::DisplayName, durability::Durability,
         enchantment::Enchantment, equipment::Equipment, identity::Identity,
         identity_prefix::IdentityPrefix, imbuement::Imbuement, inventory::Inventory, items::*,
         placement::Placement, quest::Quest, requirements::Requirements, skill::Skill,
-        skill_type::SkillType, skills::Skills, spatial_hash_grid::SpatialHashGrid, stat::Stat,
-        stat_type::StatType, stats::Stats, traits::*, vector_2::Vector2, well_known_terms,
-        world::World,
+        skill_levels::SkillLevels, skill_type::SkillType, skills::Skills,
+        spatial_hash_grid::SpatialHashGrid, stat::Stat, stat_type::StatType, stats::Stats,
+        traits::*, vector_2::Vector2, well_known_terms, world::World,
     };
 }

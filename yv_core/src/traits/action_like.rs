@@ -3,7 +3,7 @@ use crate::prelude::*;
 /// # Action like
 /// The trait that must be implemented by anything that can be acted upon.
 #[delegatable_trait]
-pub trait ActionLike: Identifiable + Describable {
+pub trait ActionLike: Identifiable + Describable + HasRequirements {
     /// # Range
     /// Returns the range of the action.
     fn range(&self) -> f32;

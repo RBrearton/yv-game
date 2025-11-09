@@ -13,6 +13,16 @@ pub struct Requirements {
 }
 
 impl Requirements {
+    /// # Minimum
+    /// Explicitly creates a new set of requirements with all values set to the minimum values.
+    pub const fn minimum() -> Self {
+        Self {
+            accomplishments: RequiredAccomplishments::empty(),
+            skill_levels: SkillLevels::zeroes(),
+            stats: Stats::empty(),
+        }
+    }
+
     /// # New
     /// Creates a new set of requirements with the given accomplishments, skills, and stats.
     pub const fn new(

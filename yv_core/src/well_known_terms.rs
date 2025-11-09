@@ -32,7 +32,7 @@ pub const INVENTORY_COLUMNS: usize = 4;
 
 pub mod distances {
     pub const MELEE_RANGE: f32 = 1.0;
-    pub const LONG_DISTANCE_ACTION: f32 = 15.0;
+    pub const LONG_DISTANCE_ACTION: f32 = 30.0;
 }
 
 pub mod loot {
@@ -66,6 +66,7 @@ pub mod skills {
     pub const STRENGTH: &str = "strength";
     pub const MINING: &str = "mining";
     pub const WOODCUTTING: &str = "woodcutting";
+    pub const MAGIC: &str = "magic";
 }
 
 pub mod trees {
@@ -119,6 +120,20 @@ pub mod cast_times {
     use std::time::Duration;
 
     pub const ARCANE_BOLT: Duration = Duration::from_millis(3500);
+}
+
+pub mod requirements {
+    use crate::prelude::*;
+
+    pub const MAX_NUM_ACCOMPLISHMENTS: usize = 10;
+
+    pub const ARCANE_BOLT: Requirements = Requirements {
+        skill_levels: SkillLevels {
+            magic: 5,
+            ..SkillLevels::zeroes()
+        },
+        ..Requirements::minimum()
+    };
 }
 
 pub mod descriptions {
@@ -186,6 +201,7 @@ pub mod descriptions {
         pub const STRENGTH: &str = "A measure of a character's physical strength.";
         pub const MINING: &str = "A measure of a character's mining skill.";
         pub const WOODCUTTING: &str = "A measure of a character's woodcutting skill.";
+        pub const MAGIC: &str = "A measure of a character's magical skill.";
     }
 
     pub mod stats {

@@ -48,6 +48,17 @@ impl IntoIterator for SkillLevels {
 }
 
 impl SkillLevels {
+    /// # Zeroes
+    /// Explicitly creates a new set of skill levels with all values set to 0.
+    pub const fn zeroes() -> Self {
+        Self {
+            strength: 0,
+            mining: 0,
+            woodcutting: 0,
+            magic: 0,
+        }
+    }
+
     /// # New
     /// Creates a new set of skill levels with the given levels.
     pub const fn new(strength: u8, mining: u8, woodcutting: u8, magic: u8) -> Self {

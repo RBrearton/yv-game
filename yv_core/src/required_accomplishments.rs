@@ -40,3 +40,14 @@ impl From<(Accomplishment, Accomplishment)> for RequiredAccomplishments {
         }
     }
 }
+
+impl RequiredAccomplishments {
+    /// # Empty
+    /// Explicitly creates a new set of required accomplishments with all values set to None.
+    pub const fn empty() -> Self {
+        Self {
+            accomplishment_0: None,
+            accomplishment_1: None,
+        }
+    }
+}

@@ -11,6 +11,7 @@ pub struct Identity {
     prefix: IdentityPrefix,
     unique_id: Uuid,
 }
+
 impl Identity {
     /// # New identity
     /// Creates a new identity with the given prefix.

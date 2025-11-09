@@ -123,6 +123,45 @@ impl Stats {
         }
     }
 
+    /// # Are all greater than or equal to
+    /// Returns whether all the stats are greater than or equal to the given stats.
+    pub fn are_all_greater_than_or_equal_to(&self, stats: &Stats) -> bool {
+        let Stats {
+            armour,
+            vitality,
+            block_points,
+            durability,
+            speed,
+            warmth,
+            attack_power,
+            slashing_bonus,
+            stabbing_bonus,
+            crushing_bonus,
+            weapon_speed,
+            precision,
+            ranged_accuracy,
+            ranged_damage,
+            mining_power,
+            woodcutting_power,
+        } = stats;
+
+        self.armour.value >= armour.value
+            && self.vitality.value >= vitality.value
+            && self.block_points.value >= block_points.value
+            && self.durability.value >= durability.value
+            && self.speed.value >= speed.value
+            && self.warmth.value >= warmth.value
+            && self.attack_power.value >= attack_power.value
+            && self.slashing_bonus.value >= slashing_bonus.value
+            && self.stabbing_bonus.value >= stabbing_bonus.value
+            && self.crushing_bonus.value >= crushing_bonus.value
+            && self.weapon_speed.value >= weapon_speed.value
+            && self.precision.value >= precision.value
+            && self.ranged_accuracy.value >= ranged_accuracy.value
+            && self.ranged_damage.value >= ranged_damage.value
+            && self.mining_power.value >= mining_power.value
+            && self.woodcutting_power.value >= woodcutting_power.value
+    }
     /// # Add
     /// Adds the given stats together.
     pub fn add(stats: impl IntoIterator<Item = Stats>) -> Self {

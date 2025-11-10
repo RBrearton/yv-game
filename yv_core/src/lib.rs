@@ -46,13 +46,14 @@ pub mod prelude {
 
     // Every publicly visible type from the crate should be re-exported here.
     pub use crate::{
-        accomplishment::Accomplishment, actions, actors::*, augmentation::Augmentation,
-        command::Command, commands::Commands, display_name::DisplayName, durability::Durability,
-        enchantment::Enchantment, equipment::Equipment, identity::Identity,
-        identity_prefix::IdentityPrefix, imbuement::Imbuement, inventory::Inventory, items::*,
-        placement::Placement, quest::Quest, required_accomplishments::RequiredAccomplishments,
-        requirements::Requirements, skill::Skill, skill_levels::SkillLevels, skill_type::SkillType,
-        skills::Skills, spatial_hash_grid::SpatialHashGrid, stat::Stat, stat_type::StatType,
-        stats::Stats, traits::*, vector_2::Vector2, well_known_terms, world::World,
+        accomplishment::Accomplishment, actions, actions::Action, actors::*,
+        augmentation::Augmentation, command::Command, commands::Commands,
+        display_name::DisplayName, durability::Durability, enchantment::Enchantment,
+        equipment::Equipment, identity::Identity, identity_prefix::IdentityPrefix,
+        imbuement::Imbuement, inventory::Inventory, items::*, placement::Placement, quest::Quest,
+        required_accomplishments::RequiredAccomplishments, requirements::Requirements,
+        skill::Skill, skill_levels::SkillLevels, skill_type::SkillType, skills::Skills,
+        spatial_hash_grid::SpatialHashGrid, stat::Stat, stat_type::StatType, stats::Stats,
+        traits::*, vector_2::Vector2, well_known_terms, world::World,
     };
 }

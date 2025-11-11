@@ -11,4 +11,7 @@ pub use serde::{Deserialize, Serialize};
 pub use hashbrown::{HashMap, HashSet};
 
 pub use crate::components;
+pub use crate::well_known_terms;
+
+pub use crate::identity_prefix::IdentityPrefix;
 pub use crate::vector_2::Vector2;

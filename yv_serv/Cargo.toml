@@ -1,0 +1,16 @@
+[package]
+name = "yv_serv"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+yv_core = { path = "../yv_core" }
+bevy = "0.17"
+hashbrown = "0.16"
+serde = { version = "1.0", features = ["derive"] }
+
+# Should be in the standard library...
+uuid = "1"
+
+# All networking is done using the QUIC protocol via bevy_quinnet.
+bevy_quinnet = "0.19"

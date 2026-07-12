@@ -224,7 +224,7 @@ mod tests {
         let id1 = TestActor::test_id();
         let id2 = TestActor::test_id();
 
-        // Actors in different cells (cell size is 50.0)
+        // Actors in different cells (cell size is 50.0).
         let actor1 = TestActor::new(id1, 10.0, 10.0);
         let actor2 = TestActor::new(id2, 100.0, 100.0);
 
@@ -265,7 +265,7 @@ mod tests {
 
         grid.add_actor(&actor);
 
-        // Move within same cell
+        // Move within same cell.
         let new_pos = Vector2 { x: 15.0, y: 15.0 };
         grid.update(id, new_pos);
         let new_grid_pos = grid.id_to_pos[&id];
@@ -358,7 +358,7 @@ mod tests {
 
         grid.get_in_range(10.0, query_pos, &mut ids);
 
-        // Should find id1 and id2, but not id3
+        // Should find id1 and id2, but not id3.
         assert_eq!(ids.len(), 2);
         assert!(ids.contains(&id1));
         assert!(ids.contains(&id2));
@@ -376,7 +376,7 @@ mod tests {
         let mut results = Vec::new();
         let query_pos = Vector2 { x: 0.0, y: 0.0 };
 
-        // Actor is exactly 10.0 units away
+        // Actor is exactly 10.0 units away.
         grid.get_in_range(10.0, query_pos, &mut results);
         assert_eq!(results.len(), 1);
 
@@ -389,22 +389,22 @@ mod tests {
     fn test_get_in_range_across_cell_boundaries() {
         let mut grid = SpatialHashGrid::new_empty();
 
-        // Create actors near cell boundaries
+        // Create actors near cell boundaries.
         // Cell size is 50.0, so boundaries are at 0, 50, 100, etc.
         let id1 = TestActor::test_id();
         let id2 = TestActor::test_id();
         let id3 = TestActor::test_id();
 
-        grid.add_actor(&TestActor::new(id1, 48.0, 48.0)); // Near boundary
-        grid.add_actor(&TestActor::new(id2, 52.0, 52.0)); // Just over boundary
-        grid.add_actor(&TestActor::new(id3, 55.0, 55.0)); // Further in next cell
+        grid.add_actor(&TestActor::new(id1, 48.0, 48.0)); // Near boundary.
+        grid.add_actor(&TestActor::new(id2, 52.0, 52.0)); // Just over boundary.
+        grid.add_actor(&TestActor::new(id3, 55.0, 55.0)); // Further in next cell.
 
         let mut results = Vec::new();
         let query_pos = Vector2 { x: 50.0, y: 50.0 };
 
         grid.get_in_range(10.0, query_pos, &mut results);
 
-        // Should find all three actors as they're all within ~10 units
+        // Should find all three actors as they're all within ~10 units.
         assert_eq!(results.len(), 3);
     }
 
@@ -427,10 +427,10 @@ mod tests {
 
     #[test]
     fn test_cell_index_calculation() {
-        // Test that CellIndex::from_position works correctly
-        // Cell size is 50.0
+        // Test that CellIndex::from_position works correctly.
+        // Cell size is 50.0.
 
-        // Positive coordinates
+        // Positive coordinates.
         assert_eq!(
             CellIndex::from(Vector2 { x: 0.0, y: 0.0 }),
             CellIndex::new(0, 0)
@@ -448,7 +448,7 @@ mod tests {
             CellIndex::new(1, 1)
         );
 
-        // Negative coordinates
+        // Negative coordinates.
         assert_eq!(
             CellIndex::from(Vector2 { x: -1.0, y: -1.0 }),
             CellIndex::new(-1, -1)

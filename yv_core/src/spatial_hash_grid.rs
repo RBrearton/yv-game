@@ -58,11 +58,9 @@ impl SpatialHashGrid {
 
     /// Updates the position of an actor in the spatial hash grid.
     /// You should call this whenever the actor moves.
-    pub fn update(&mut self, id: Identity, new_pos: Vector2) -> Result<(), errors::HashGridError> {
+    pub fn update(&mut self, id: Identity, new_pos: Vector2) {
         self.remove(id);
         self.add(id, new_pos.into());
-
-        Ok(())
     }
 
     /// Get the identities of all entities that are within range of the requested position.

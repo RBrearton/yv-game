@@ -10,6 +10,11 @@ pub struct Vector2 {
 }
 
 impl Vector2 {
+    /// Make a new instance of Vector2.
+    pub fn new(x: f32, y: f32) -> Self {
+        Self { x, y }
+    }
+
     /// # Distance to
     /// Returns the distance between the vector and the given position.
     pub fn distance_to(&self, other: Vector2) -> f32 {

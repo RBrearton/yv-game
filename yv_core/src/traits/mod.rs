@@ -14,7 +14,6 @@ mod lootable;
 mod massive;
 mod mineable;
 mod ownable;
-mod spatial_query_engine;
 mod spawnable;
 
 pub use action_like::*;
@@ -33,5 +32,4 @@ pub use lootable::*;
 pub use massive::*;
 pub use mineable::*;
 pub use ownable::*;
-pub use spatial_query_engine::*;
 pub use spawnable::*;
